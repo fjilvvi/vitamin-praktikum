@@ -2120,7 +2120,7 @@
     <div class="path" id="path"></div>
 
     <div class="freeplay">
-      <div class="sec-head thin"><h2>Свободная тренировка</h2><span class="tagline">без прогресса по пути</span></div>
+      <div class="sec-head thin"><h2>Свободная тренировка</h2><span class="tagline" id="lifetime">без прогресса по пути</span></div>
       <div class="decks" id="decks">
         <button class="deck wide due" data-deck="due" aria-pressed="false" id="deck-due">
           <span class="dname"><svg class="ico"><use href="#i-repeat"/></svg> Повторение</span>
@@ -2765,9 +2765,11 @@ function renderWeakInto(el, limit){
     : '<p class="weak-empty">Пока нет данных — пройдите первый раунд.</p>';
 }
 function renderLifetime(){
-  $("lifetime").textContent = stats.total
+  const el = $("lifetime");
+  if (!el) return;
+  el.textContent = stats.total
     ? `всего ответов ${stats.total} · точность ${Math.round(stats.right / stats.total * 100)}%`
-    : "статистика появится после первого раунда";
+    : "без прогресса по пути";
 }
 function saveStats(){ store.set(TKEY, stats); }
 
@@ -3044,7 +3046,7 @@ function renderAnswerArea(q){
     const check = () => {
       const val = parseFloat(($("num-in").value || "").replace(",", "."));
       if (isNaN(val)) return;
-      finishAnswer(Math.abs(val - q.a) <= Math.max(1, q.a * .02), `Правильный ответ: ${q.a} ${q.unit}`);
+      finishAnswer(Math.abs(val - q.a) <= Math.max(1, q.a * .02), `${q.a} ${q.unit}`);
     };
     $("num-ok").addEventListener("click", check);
     $("num-in").addEventListener("keydown", e => { if (e.key === "Enter"){ e.preventDefault(); check(); } });
@@ -3070,7 +3072,7 @@ function renderAnswerArea(q){
         else if (chosen.includes(i)) b.classList.add("wrong");
       });
       finishAnswer(JSON.stringify(chosen) === JSON.stringify(right),
-        "Верно: " + right.map(i => q.o[i]).join(", "));
+        right.map(i => q.o[i]).join(", "));
     });
     return;
   }
@@ -3097,7 +3099,7 @@ function renderAnswerArea(q){
         sel.classList.add("ok"); b.classList.add("ok");
         sel.classList.remove("sel"); sel = null; left_--;
         sfx("ok");
-        if (!left_) finishAnswer(errs === 0, errs ? "Пары собраны, но с ошибками" : "Все пары верны");
+        if (!left_) finishAnswer(errs === 0, "пары собраны, но с ошибками");
       } else {
         errs++;
         b.classList.add("bad"); sel.classList.add("bad");
@@ -3119,7 +3121,7 @@ function renderAnswerArea(q){
       if (n === q.c){ el.classList.add("correct"); el.querySelector(".key").innerHTML = icon("i-check"); }
       else if (n === i){ el.classList.add("wrong"); el.querySelector(".key").innerHTML = icon("i-x"); }
     });
-    finishAnswer(i === q.c, "Верно: " + q.o[q.c]);
+    finishAnswer(i === q.c, q.o[q.c]);
   }));
 }
 function finishAnswer(ok, correctText){
@@ -3148,7 +3150,9 @@ function finishAnswer(ok, correctText){
   const v = $("verdict");
   v.hidden = false;
   v.className = "verdict " + (ok ? "ok" : "no");
-  $("vhead").innerHTML = ok ? icon("i-check") + " Верно" : icon("i-x") + " " + esc(correctText || "Неверно");
+  $("vhead").innerHTML = ok
+    ? icon("i-check") + " Верно"
+    : icon("i-x") + " Неверно — " + esc(correctText || "");
   $("vexpl").textContent = q.e;
   $("next").focus({ preventScroll:true });
   v.scrollIntoView({ block:"nearest", behavior: reduced() ? "auto" : "smooth" });
