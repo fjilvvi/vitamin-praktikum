@@ -914,6 +914,7 @@
 
   /* ── путь уроков ── */
   .path{display:flex;flex-direction:column;gap:30px;margin-top:28px}
+  .lesson-unit{display:block}
   .unit-head{display:flex;align-items:center;gap:13px;margin-bottom:16px}
   .unit-head .uicon{
     width:40px;height:40px;flex:none;display:grid;place-items:center;border-radius:var(--radius-m);
@@ -947,8 +948,9 @@
     transition:transform var(--dur-2) var(--spring), background var(--dur-2) var(--ease), border-color var(--dur-2) var(--ease);
   }
   .node .ncircle .ico{width:26px;height:26px}
+  .node.open .ncircle .ico{fill:currentColor;stroke-width:1.2}
   .node.open .ncircle{
-    background:linear-gradient(160deg,var(--accent),color-mix(in oklab,var(--accent) 72%,var(--accent-2)));
+    background:linear-gradient(165deg,color-mix(in oklab,var(--accent) 76%,oklch(100% 0 0)),var(--accent));
     border-color:transparent;color:oklch(100% 0 0);
     box-shadow:0 6px 18px -6px color-mix(in oklab,var(--accent) 60%,transparent);
   }
@@ -2977,7 +2979,7 @@ function renderPath(){
   UNITS.forEach(u => {
     const uNodes = NODES.map((n, idx) => ({ n, idx })).filter(x => x.n.unit.id === u.id);
     const doneN = uNodes.filter(x => nodeDone(x.n)).length;
-    html += `<section class="unit">
+    html += `<section class="lesson-unit">
       <div class="unit-head">
         <span class="uicon">${icon(u.icon)}</span>
         <div class="utitle"><b>${esc(u.title)}</b><span>${esc(u.sub)}</span></div>
