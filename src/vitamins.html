@@ -251,15 +251,20 @@
   @supports (backdrop-filter:blur(1px)){
     .tabbar{backdrop-filter:blur(16px) saturate(1.5)}
   }
-  .tabbar ul{display:flex}
-  .tabbar li{flex:1}
+  .tabbar ul{display:flex;width:100%}
+  .tabbar li{flex:1 1 0;min-width:0}
   .tab{
     width:100%;display:flex;flex-direction:column;align-items:center;gap:3px;
-    padding:7px 2px 6px;border-radius:var(--radius-m);color:var(--text-3);position:relative;
+    padding:7px 3px 6px;border-radius:var(--radius-m);color:var(--text-3);position:relative;
+    min-width:0;overflow:hidden;
     transition:color var(--dur-1) var(--ease);
   }
   .tab .ico{width:21px;height:21px;transition:transform var(--dur-2) var(--spring)}
-  .tab span{font-size:10.5px;letter-spacing:.01em;font-weight:500}
+  .tab span{
+    font-size:10.5px;letter-spacing:0;font-weight:500;
+    max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  }
+  @media (max-width:359px){ .tab span{font-size:9.5px} }
   .tab[aria-selected="true"]{color:var(--accent-2-ink)}
   .tab[aria-selected="true"] .ico{transform:translateY(-1px) scale(1.08)}
   .tab[aria-selected="true"]::before{
@@ -276,7 +281,7 @@
   .tab .dot[hidden]{display:none}
 
   .view{display:none}
-  .view.on{display:block;animation:viewin var(--dur-3) var(--ease) both}
+  .view.on{display:block;max-width:100%;overflow-x:clip;animation:viewin var(--dur-3) var(--ease) both}
   @keyframes viewin{from{opacity:0;translate:0 6px}to{opacity:1;translate:0 0}}
   ::view-transition-old(root){animation:vtout .18s var(--ease) both}
   ::view-transition-new(root){animation:vtin .28s var(--ease) both}
@@ -370,7 +375,7 @@
     margin:22px 0;padding:20px;background:var(--surface);border:1px solid var(--border);
     border-radius:var(--radius-l);box-shadow:var(--shadow-1);
   }
-  .figure svg{width:100%;height:auto;overflow:visible}
+  .figure svg{width:100%;height:auto;max-width:100%;overflow:visible}
   .figure figcaption{
     margin-top:14px;font-size:13.5px;color:var(--text-3);text-align:center;
     font-family:var(--font-data);
