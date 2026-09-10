@@ -59,12 +59,12 @@
     --border:      oklch(92% 0.006 250);
     --border-soft: oklch(95% 0.005 250);
 
-    --accent:      oklch(58% 0.105 195);
-    --accent-ink:  oklch(46% 0.105 195);
-    --accent-soft: oklch(95% 0.030 195);
-    --accent-2:      oklch(66% 0.150 35);
-    --accent-2-ink:  oklch(55% 0.150 35);
-    --accent-2-soft: oklch(95% 0.035 35);
+    --accent: oklch(66% 0.150 35);
+    --accent-ink: oklch(55% 0.150 35);
+    --accent-soft: oklch(95% 0.035 35);
+    --accent-2: oklch(58% 0.105 195);
+    --accent-2-ink: oklch(46% 0.105 195);
+    --accent-2-soft: oklch(95% 0.030 195);
 
     --ok:       oklch(58% 0.130 155);
     --ok-soft:  oklch(95% 0.045 155);
@@ -99,12 +99,12 @@
     --text-3:      oklch(65% 0.014 255);
     --border:      oklch(32% 0.020 260);
     --border-soft: oklch(28% 0.018 260);
-    --accent:      oklch(78% 0.105 195);
-    --accent-ink:  oklch(86% 0.090 195);
-    --accent-soft: oklch(30% 0.050 200);
-    --accent-2:      oklch(76% 0.130 40);
-    --accent-2-ink:  oklch(84% 0.110 40);
-    --accent-2-soft: oklch(31% 0.060 35);
+    --accent: oklch(76% 0.130 40);
+    --accent-ink: oklch(84% 0.110 40);
+    --accent-soft: oklch(31% 0.060 35);
+    --accent-2: oklch(78% 0.105 195);
+    --accent-2-ink: oklch(86% 0.090 195);
+    --accent-2-soft: oklch(30% 0.050 200);
     --ok:       oklch(78% 0.130 158);
     --ok-soft:  oklch(29% 0.055 158);
     --warn:     oklch(75% 0.130 30);
@@ -415,8 +415,7 @@
     box-shadow:var(--shadow-1);
     animation:tilein var(--dur-3) var(--ease) both;
   }
-  .cover-art div:nth-child(3n+2){color:var(--accent-ink);background:var(--accent-soft);border-color:color-mix(in oklab,var(--accent) 40%,transparent)}
-  .cover-art div:nth-child(4n+3){background:var(--accent-2-soft);border-color:color-mix(in oklab,var(--accent-2) 35%,transparent)}
+  .cover-art div:nth-child(4n+2){color:var(--accent-ink);background:var(--accent-soft);border-color:color-mix(in oklab,var(--accent) 35%,transparent)}
   .cover-art .ico{width:46%;height:46%}
   @keyframes tilein{from{opacity:0;scale:.9}to{opacity:1;scale:1}}
   .cover-art div:nth-child(1){animation-delay:.02s} .cover-art div:nth-child(2){animation-delay:.05s}
