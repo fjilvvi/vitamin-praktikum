@@ -1210,6 +1210,12 @@
     .scroller td.k{font-size:17px;font-weight:600;padding-top:0}
     .scroller td.num{font-size:15px}
 
+    /* заголовки секций переносятся, а не распирают колонку */
+    .sec-head{flex-wrap:wrap;row-gap:5px}
+    .sec-head .count,.sec-head .tagline{white-space:normal;margin-left:0;flex:1 1 100%}
+    .d-title h3,.qtext,.b-step h2,.sec-head h2{overflow-wrap:break-word}
+    .lifetime{white-space:normal}
+
     /* справочник */
     .toolbar{position:static;margin-top:20px;padding:14px 0}
     .search{flex:1 1 100%}
