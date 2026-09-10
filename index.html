@@ -1,7 +1,7 @@
 <title>Витаминный практикум</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;7..72,500;7..72,600;7..72,700&family=Golos+Text:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,700&family=Golos+Text:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
 
 <style>
 @layer reset, tokens, base, layout, components, skins, mobile;
@@ -9,83 +9,19 @@
 /* ═══════════════ TOKENS ═══════════════ */
 @layer tokens{
   :root{
-    /* скин «Аптекарский журнал», светлая тема — база по умолчанию */
-    --bg:          oklch(96.4% 0.008 110);
-    --bg-2:        oklch(93.2% 0.010 110);
-    --surface:     oklch(98.8% 0.005 110);
-    --surface-2:   oklch(94.2% 0.010 118);
-    --text:        oklch(23% 0.014 130);
-    --text-2:      oklch(41% 0.014 130);
-    --text-3:      oklch(56% 0.012 130);
-    --border:      oklch(87% 0.010 120);
-    --border-soft: oklch(91.5% 0.008 120);
-
-    --accent:      oklch(52% 0.115 62);
-    --accent-ink:  oklch(44% 0.115 62);
-    --accent-soft: oklch(93% 0.035 68);
-    --accent-2:      oklch(48% 0.075 205);
-    --accent-2-ink:  oklch(41% 0.075 205);
-    --accent-2-soft: oklch(93% 0.028 205);
-
-    --ok:       oklch(46% 0.10 150);
-    --ok-soft:  oklch(93% 0.04 150);
-    --warn:     oklch(45% 0.13 32);
-    --warn-soft:oklch(93% 0.04 32);
-
-    --radius-s:4px; --radius-m:7px; --radius-l:10px; --radius-xl:14px; --radius-pill:999px;
-    --shadow-1: 0 1px 0 oklch(100% 0 0 / .7) inset, 0 1px 2px oklch(23% .014 130 / .07);
-    --shadow-2: 0 1px 0 oklch(100% 0 0 / .7) inset, 0 2px 4px oklch(23% .014 130 / .06), 0 14px 34px -22px oklch(23% .014 130 / .5);
-    --ring: 0 0 0 3px oklch(48% 0.075 205 / .3);
-
-    --font-display:"Literata",Georgia,"Times New Roman",serif;
+    /* структура и типографика — не зависят от темы */
+    --radius-pill:999px;
     --font-ui:"Golos Text","Helvetica Neue",Arial,sans-serif;
     --font-data:"IBM Plex Mono","SF Mono",Menlo,Consolas,monospace;
-    --display-weight:700;
-    --display-track:-.015em;
-
     --dur-1:.16s; --dur-2:.26s; --dur-3:.42s;
-    --ease:cubic-bezier(.2,.7,.3,1);
     --spring:linear(0,.29 8.6%,.75 17.4%,.93,1.05,1.09 32.4%,1.06,1.02 42%,.997 52%,1.003 66%,1);
-    --press:.985;
-
     --topbar:56px;
     --tabbar:calc(58px + env(safe-area-inset-bottom,0px));
-    --grain:none;
-    --halo:none;
     --shell:1180px;
-
-    color-scheme:light;
   }
 
-  /* ─── Аптекарский журнал · тёмная ─── */
-  [data-skin="paper"][data-theme="dark"]{
-    --bg:          oklch(20% 0.010 120);
-    --bg-2:        oklch(17% 0.010 120);
-    --surface:     oklch(24% 0.011 120);
-    --surface-2:   oklch(28% 0.012 120);
-    --text:        oklch(93% 0.010 110);
-    --text-2:      oklch(79% 0.010 110);
-    --text-3:      oklch(63% 0.010 110);
-    --border:      oklch(35% 0.012 120);
-    --border-soft: oklch(30% 0.010 120);
-    --accent:      oklch(76% 0.115 68);
-    --accent-ink:  oklch(84% 0.100 70);
-    --accent-soft: oklch(31% 0.048 60);
-    --accent-2:      oklch(76% 0.085 200);
-    --accent-2-ink:  oklch(84% 0.075 200);
-    --accent-2-soft: oklch(30% 0.040 205);
-    --ok:       oklch(76% 0.11 155);
-    --ok-soft:  oklch(29% 0.045 155);
-    --warn:     oklch(75% 0.11 35);
-    --warn-soft:oklch(30% 0.050 32);
-    --shadow-1: 0 1px 0 oklch(100% 0 0 / .04) inset, 0 1px 2px oklch(0% 0 0 / .4);
-    --shadow-2: 0 1px 0 oklch(100% 0 0 / .04) inset, 0 2px 6px oklch(0% 0 0 / .35), 0 18px 40px -26px oklch(0% 0 0 / .9);
-    --ring: 0 0 0 3px oklch(76% .085 200 / .34);
-    color-scheme:dark;
-  }
-
-  /* ─── Мягкий кабинет · светлая ─── */
-  [data-skin="soft"]{
+  /* ─── палитра: светлая (базовая) ─── */
+  :root{
     --bg:          oklch(97.6% 0.004 250);
     --bg-2:        oklch(95% 0.006 250);
     --surface:     oklch(100% 0 0);
@@ -114,19 +50,19 @@
     --ring: 0 0 0 4px oklch(58% .105 195 / .25);
 
     --font-display:"Golos Text","Helvetica Neue",Arial,sans-serif;
+    --font-figure:"Literata",Georgia,serif;
     --display-weight:600;
     --display-track:-.028em;
 
     --ease:var(--spring);
     --press:.965;
-    --grain:none;
     --halo:radial-gradient(60% 55% at 18% 0%, oklch(58% .105 195 / .13), transparent 70%),
            radial-gradient(50% 45% at 92% 8%, oklch(66% .15 35 / .10), transparent 70%);
     color-scheme:light;
   }
 
-  /* ─── Мягкий кабинет · тёмная ─── */
-  [data-skin="soft"][data-theme="dark"]{
+  /* ─── палитра: тёмная ─── */
+  [data-theme="dark"]{
     --bg:          oklch(19% 0.018 260);
     --bg-2:        oklch(16% 0.018 260);
     --surface:     oklch(23.5% 0.020 260);
@@ -184,10 +120,6 @@
     padding-bottom:env(safe-area-inset-bottom,0px);
     overscroll-behavior-y:contain;
   }
-  body::before{
-    content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
-    background-image:var(--grain);background-size:220px 220px;opacity:.5;
-  }
   h1,h2,h3,h4{
     font-family:var(--font-display);
     font-weight:var(--display-weight);
@@ -208,8 +140,7 @@
   }
   .mono{font-family:var(--font-data);font-variant-numeric:tabular-nums}
   .sprite{position:absolute;width:0;height:0;overflow:hidden}
-  .ico{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;flex:none}
-  [data-skin="soft"] .ico{stroke-width:1.8}
+  .ico{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
 }
 
 /* ═══════════════ LAYOUT: шапка, вкладки, виды ═══════════════ */
@@ -346,7 +277,6 @@
 
   .view-head{padding:40px 0 24px;border-bottom:1px solid var(--border);position:relative}
   .view-head h1{font-size:clamp(30px,5.2vw,50px);line-height:1.02;margin:12px 0 14px}
-  [data-skin="paper"] .view-head h1{font-variation-settings:"opsz" 60}
   .view-head::after{
     content:"";position:absolute;inset:-30px -40% auto;height:260px;z-index:-1;
     background:var(--halo);filter:blur(10px);
@@ -381,7 +311,7 @@
   .btn.accent{background:var(--accent-2);border-color:var(--accent-2);color:var(--bg)}
   .btn:disabled{opacity:.4;pointer-events:none}
   .btn .ico{width:15px;height:15px}
-  [data-skin="soft"] .btn{border-radius:var(--radius-pill);box-shadow:var(--shadow-1)}
+  .btn{border-radius:var(--radius-pill);box-shadow:var(--shadow-1)}
 
   .field{display:flex;flex-direction:column;gap:6px}
   .field label{font-family:var(--font-data);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-3)}
@@ -451,7 +381,6 @@
   }
   @media(min-width:860px){.cover{grid-template-columns:1.25fr .75fr}}
   .cover h1{font-size:clamp(32px,5.4vw,54px);line-height:1.01;margin:12px 0 14px}
-  [data-skin="paper"] .cover h1{font-variation-settings:"opsz" 72}
   .cover-art{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
   .cover-art div{
     aspect-ratio:1;display:grid;place-items:center;border-radius:var(--radius-l);
@@ -911,7 +840,7 @@
   .hintkeys{font-family:var(--font-data);font-size:11px;color:var(--text-3);margin-top:14px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 
   .score{display:flex;gap:24px;align-items:flex-end;flex-wrap:wrap;padding-bottom:20px;border-bottom:2px solid var(--text)}
-  .score .big{font-family:var(--font-display);font-size:clamp(48px,9vw,76px);font-weight:700;line-height:.9;font-variant-numeric:tabular-nums}
+  .score .big{font-family:var(--font-figure);font-size:clamp(48px,9vw,76px);font-weight:700;line-height:.9;font-variant-numeric:tabular-nums}
   .score .sub{display:flex;flex-direction:column;gap:3px;padding-bottom:7px}
   .score .sub b{font-size:16px;font-weight:600}
   .score .sub span{font-family:var(--font-data);font-size:12px;color:var(--text-3)}
@@ -940,7 +869,7 @@
   .ring .fgc{fill:none;stroke:url(#ringgrad);stroke-width:11;stroke-linecap:round;transition:stroke-dashoffset 1s var(--ease)}
   .ring .num{
     position:absolute;inset:0;display:grid;place-items:center;
-    font-family:var(--font-display);font-size:30px;font-weight:700;font-variant-numeric:tabular-nums;
+    font-family:var(--font-figure);font-size:30px;font-weight:700;font-variant-numeric:tabular-nums;
   }
   .ringlist{display:flex;flex-direction:column;gap:9px;flex:1 1 200px}
   .ringlist div{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--text-2)}
@@ -952,7 +881,7 @@
     background:var(--surface-2);border-radius:var(--radius-m);padding:14px 16px;
     display:flex;flex-direction:column;gap:2px;
   }
-  .stat .v{font-family:var(--font-display);font-size:26px;font-weight:700;font-variant-numeric:tabular-nums;display:flex;align-items:center;gap:8px}
+  .stat .v{font-family:var(--font-figure);font-size:26px;font-weight:700;font-variant-numeric:tabular-nums;display:flex;align-items:center;gap:8px}
   .stat .v .ico{width:20px;height:20px;color:var(--accent-ink)}
   .stat .l{font-family:var(--font-data);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3)}
   .spark{width:100%;height:66px;margin-top:6px}
@@ -966,7 +895,7 @@
     border:1px solid color-mix(in oklab,var(--accent) 40%,transparent);
     border-radius:var(--radius-l);padding:20px 22px;margin-top:16px;
   }
-  .duecard .n{font-family:var(--font-display);font-size:42px;font-weight:700;line-height:1;color:var(--accent-ink)}
+  .duecard .n{font-family:var(--font-figure);font-size:42px;font-weight:700;line-height:1;color:var(--accent-ink)}
   .duecard .t{flex:1 1 220px}
   .duecard .t b{display:block;font-size:16px;font-weight:600}
   .duecard .t span{font-size:14px;color:var(--text-2)}
@@ -974,25 +903,18 @@
 
 /* ═══════════════ SKINS ═══════════════ */
 @layer skins{
-  [data-skin="paper"]{
-    --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.34'/%3E%3C/svg%3E");
-  }
-  [data-skin="paper"] .qtext,[data-skin="paper"] .cover h1{font-variation-settings:"opsz" 48}
-  [data-skin="paper"] .tile,[data-skin="paper"] .deck,[data-skin="paper"] .card{background-image:linear-gradient(180deg,color-mix(in oklab,var(--surface) 92%,var(--bg)),var(--surface))}
-
-  [data-skin="soft"] body{background:var(--bg)}
-  [data-skin="soft"] .view-head::after{filter:blur(30px)}
-  [data-skin="soft"] .tile::before,[data-skin="soft"] .deck[aria-pressed="true"]::before{border-radius:var(--radius-pill)}
-  [data-skin="soft"] .rule,[data-skin="soft"] .pair,[data-skin="soft"] .analogy{border-radius:var(--radius-l);border-left-width:4px}
-  [data-skin="soft"] .note{border-radius:var(--radius-m)}
-  [data-skin="soft"] .sec-head{border-bottom:1px solid var(--border)}
-  [data-skin="soft"] .score{border-bottom:1px solid var(--border)}
-  [data-skin="soft"] .chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--bg)}
-  [data-skin="soft"] .btn{background:var(--accent);border-color:var(--accent);color:oklch(100% 0 0)}
-  [data-skin="soft"] .btn.ghost{background:var(--surface);color:var(--text);border-color:var(--border)}
-  [data-skin="soft"] .opt{margin:4px 8px;border-radius:var(--radius-m);border-bottom:0}
-  [data-skin="soft"] .opts{padding:4px 0 8px}
-  [data-skin="soft"] .qcard{border-radius:26px}
+  .view-head::after{filter:blur(30px)}
+  .tile::before,.deck[aria-pressed="true"]::before{border-radius:var(--radius-pill)}
+  .rule,.pair,.analogy{border-radius:var(--radius-l);border-left-width:4px}
+  .note{border-radius:var(--radius-m)}
+  .sec-head{border-bottom:1px solid var(--border)}
+  .score{border-bottom:1px solid var(--border)}
+  .chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+  .btn{background:var(--accent);border-color:var(--accent);color:oklch(100% 0 0)}
+  .btn.ghost{background:var(--surface);color:var(--text);border-color:var(--border)}
+  .opt{margin:4px 8px;border-radius:var(--radius-m);border-bottom:0}
+  .opts{padding:4px 0 8px}
+  .qcard{border-radius:26px}
 }
 
 /* ═══════════════ MOBILE ═══════════════ */
@@ -1080,7 +1002,7 @@
     .qhead{padding:16px 18px 0}
     .qtext{padding:12px 18px 16px;font-size:20px}
     .opt{padding:16px 18px;font-size:16px;min-height:62px}
-    [data-skin="soft"] .opt{margin:4px 6px}
+    .opt{margin:4px 6px}
     .verdict{padding:16px 18px}
     .verdict .next-row .btn{flex:1 1 100%}
     .res-actions .btn{flex:1 1 100%}
@@ -1176,10 +1098,6 @@
     </ul>
 
     <div class="bar-tools">
-      <div class="seg" id="skinseg" role="group" aria-label="Вариант оформления">
-        <button data-skin="paper" aria-pressed="true">Журнал</button>
-        <button data-skin="soft" aria-pressed="false">Кабинет</button>
-      </div>
       <button class="icon-btn" id="theme-btn" aria-label="Переключить тему">
         <svg class="ico i-sun"><use href="#i-sun"/></svg>
         <svg class="ico i-moon"><use href="#i-moon"/></svg>
@@ -2075,21 +1993,13 @@ const icon = name => `<svg class="ico"><use href="#${name}"/></svg>`;
 /* ═══════════ ОФОРМЛЕНИЕ: СКИН И ТЕМА ═══════════ */
 const root = document.documentElement;
 const PREF = "vit-pref-v1";
-const pref = Object.assign({ skin:"paper", theme:"light" }, store.get(PREF, {}));
+const pref = { theme: store.get(PREF, {}).theme === "dark" ? "dark" : "light" };
 function applyPref(){
-  root.dataset.skin = pref.skin;
   root.dataset.theme = pref.theme;
-  document.querySelectorAll("#skinseg button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.skin === pref.skin)));
   $("theme-btn").setAttribute("aria-label", pref.theme === "dark" ? "Включить светлую тему" : "Включить тёмную тему");
   store.set(PREF, pref);
 }
 applyPref();
-$("skinseg").addEventListener("click", e => {
-  const b = e.target.closest("button[data-skin]");
-  if (!b) return;
-  pref.skin = b.dataset.skin;
-  applyPref();
-});
 $("theme-btn").addEventListener("click", () => {
   pref.theme = pref.theme === "dark" ? "light" : "dark";
   applyPref();
