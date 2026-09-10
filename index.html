@@ -1,0 +1,2756 @@
+<title>Витаминный практикум</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,400;7..72,500;7..72,600;7..72,700&family=Golos+Text:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+
+<style>
+@layer reset, tokens, base, layout, components, skins, mobile;
+
+/* ═══════════════ TOKENS ═══════════════ */
+@layer tokens{
+  :root{
+    /* скин «Аптекарский журнал», светлая тема — база по умолчанию */
+    --bg:          oklch(96.4% 0.008 110);
+    --bg-2:        oklch(93.2% 0.010 110);
+    --surface:     oklch(98.8% 0.005 110);
+    --surface-2:   oklch(94.2% 0.010 118);
+    --text:        oklch(23% 0.014 130);
+    --text-2:      oklch(41% 0.014 130);
+    --text-3:      oklch(56% 0.012 130);
+    --border:      oklch(87% 0.010 120);
+    --border-soft: oklch(91.5% 0.008 120);
+
+    --accent:      oklch(52% 0.115 62);
+    --accent-ink:  oklch(44% 0.115 62);
+    --accent-soft: oklch(93% 0.035 68);
+    --accent-2:      oklch(48% 0.075 205);
+    --accent-2-ink:  oklch(41% 0.075 205);
+    --accent-2-soft: oklch(93% 0.028 205);
+
+    --ok:       oklch(46% 0.10 150);
+    --ok-soft:  oklch(93% 0.04 150);
+    --warn:     oklch(45% 0.13 32);
+    --warn-soft:oklch(93% 0.04 32);
+
+    --radius-s:4px; --radius-m:7px; --radius-l:10px; --radius-xl:14px; --radius-pill:999px;
+    --shadow-1: 0 1px 0 oklch(100% 0 0 / .7) inset, 0 1px 2px oklch(23% .014 130 / .07);
+    --shadow-2: 0 1px 0 oklch(100% 0 0 / .7) inset, 0 2px 4px oklch(23% .014 130 / .06), 0 14px 34px -22px oklch(23% .014 130 / .5);
+    --ring: 0 0 0 3px oklch(48% 0.075 205 / .3);
+
+    --font-display:"Literata",Georgia,"Times New Roman",serif;
+    --font-ui:"Golos Text","Helvetica Neue",Arial,sans-serif;
+    --font-data:"IBM Plex Mono","SF Mono",Menlo,Consolas,monospace;
+    --display-weight:700;
+    --display-track:-.015em;
+
+    --dur-1:.16s; --dur-2:.26s; --dur-3:.42s;
+    --ease:cubic-bezier(.2,.7,.3,1);
+    --spring:linear(0,.29 8.6%,.75 17.4%,.93,1.05,1.09 32.4%,1.06,1.02 42%,.997 52%,1.003 66%,1);
+    --press:.985;
+
+    --topbar:56px;
+    --tabbar:calc(58px + env(safe-area-inset-bottom,0px));
+    --grain:none;
+    --halo:none;
+    --shell:1180px;
+
+    color-scheme:light;
+  }
+
+  /* ─── Аптекарский журнал · тёмная ─── */
+  [data-skin="paper"][data-theme="dark"]{
+    --bg:          oklch(20% 0.010 120);
+    --bg-2:        oklch(17% 0.010 120);
+    --surface:     oklch(24% 0.011 120);
+    --surface-2:   oklch(28% 0.012 120);
+    --text:        oklch(93% 0.010 110);
+    --text-2:      oklch(79% 0.010 110);
+    --text-3:      oklch(63% 0.010 110);
+    --border:      oklch(35% 0.012 120);
+    --border-soft: oklch(30% 0.010 120);
+    --accent:      oklch(76% 0.115 68);
+    --accent-ink:  oklch(84% 0.100 70);
+    --accent-soft: oklch(31% 0.048 60);
+    --accent-2:      oklch(76% 0.085 200);
+    --accent-2-ink:  oklch(84% 0.075 200);
+    --accent-2-soft: oklch(30% 0.040 205);
+    --ok:       oklch(76% 0.11 155);
+    --ok-soft:  oklch(29% 0.045 155);
+    --warn:     oklch(75% 0.11 35);
+    --warn-soft:oklch(30% 0.050 32);
+    --shadow-1: 0 1px 0 oklch(100% 0 0 / .04) inset, 0 1px 2px oklch(0% 0 0 / .4);
+    --shadow-2: 0 1px 0 oklch(100% 0 0 / .04) inset, 0 2px 6px oklch(0% 0 0 / .35), 0 18px 40px -26px oklch(0% 0 0 / .9);
+    --ring: 0 0 0 3px oklch(76% .085 200 / .34);
+    color-scheme:dark;
+  }
+
+  /* ─── Мягкий кабинет · светлая ─── */
+  [data-skin="soft"]{
+    --bg:          oklch(97.6% 0.004 250);
+    --bg-2:        oklch(95% 0.006 250);
+    --surface:     oklch(100% 0 0);
+    --surface-2:   oklch(97% 0.005 250);
+    --text:        oklch(24% 0.020 260);
+    --text-2:      oklch(45% 0.016 260);
+    --text-3:      oklch(60% 0.014 260);
+    --border:      oklch(92% 0.006 250);
+    --border-soft: oklch(95% 0.005 250);
+
+    --accent:      oklch(58% 0.105 195);
+    --accent-ink:  oklch(46% 0.105 195);
+    --accent-soft: oklch(95% 0.030 195);
+    --accent-2:      oklch(66% 0.150 35);
+    --accent-2-ink:  oklch(55% 0.150 35);
+    --accent-2-soft: oklch(95% 0.035 35);
+
+    --ok:       oklch(58% 0.130 155);
+    --ok-soft:  oklch(95% 0.045 155);
+    --warn:     oklch(58% 0.170 25);
+    --warn-soft:oklch(95% 0.040 25);
+
+    --radius-s:10px; --radius-m:14px; --radius-l:20px; --radius-xl:26px;
+    --shadow-1: 0 1px 2px oklch(24% .02 260 / .06), 0 4px 10px -6px oklch(24% .02 260 / .14);
+    --shadow-2: 0 1px 2px oklch(24% .02 260 / .05), 0 10px 30px -14px oklch(24% .02 260 / .28);
+    --ring: 0 0 0 4px oklch(58% .105 195 / .25);
+
+    --font-display:"Golos Text","Helvetica Neue",Arial,sans-serif;
+    --display-weight:600;
+    --display-track:-.028em;
+
+    --ease:var(--spring);
+    --press:.965;
+    --grain:none;
+    --halo:radial-gradient(60% 55% at 18% 0%, oklch(58% .105 195 / .13), transparent 70%),
+           radial-gradient(50% 45% at 92% 8%, oklch(66% .15 35 / .10), transparent 70%);
+    color-scheme:light;
+  }
+
+  /* ─── Мягкий кабинет · тёмная ─── */
+  [data-skin="soft"][data-theme="dark"]{
+    --bg:          oklch(19% 0.018 260);
+    --bg-2:        oklch(16% 0.018 260);
+    --surface:     oklch(23.5% 0.020 260);
+    --surface-2:   oklch(27% 0.022 260);
+    --text:        oklch(95% 0.008 250);
+    --text-2:      oklch(80% 0.012 250);
+    --text-3:      oklch(65% 0.014 255);
+    --border:      oklch(32% 0.020 260);
+    --border-soft: oklch(28% 0.018 260);
+    --accent:      oklch(78% 0.105 195);
+    --accent-ink:  oklch(86% 0.090 195);
+    --accent-soft: oklch(30% 0.050 200);
+    --accent-2:      oklch(76% 0.130 40);
+    --accent-2-ink:  oklch(84% 0.110 40);
+    --accent-2-soft: oklch(31% 0.060 35);
+    --ok:       oklch(78% 0.130 158);
+    --ok-soft:  oklch(29% 0.055 158);
+    --warn:     oklch(75% 0.130 30);
+    --warn-soft:oklch(30% 0.060 28);
+    --shadow-1: 0 1px 2px oklch(0% 0 0 / .5);
+    --shadow-2: 0 2px 8px oklch(0% 0 0 / .45), 0 20px 44px -24px oklch(0% 0 0 / .95);
+    --ring: 0 0 0 4px oklch(78% .105 195 / .3);
+    --halo:radial-gradient(60% 55% at 18% 0%, oklch(58% .105 195 / .20), transparent 70%),
+           radial-gradient(50% 45% at 92% 8%, oklch(66% .15 35 / .14), transparent 70%);
+    color-scheme:dark;
+  }
+}
+
+/* ═══════════════ RESET ═══════════════ */
+@layer reset{
+  *,*::before,*::after{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0}
+  h1,h2,h3,h4,p,figure{margin:0}
+  ul,ol{margin:0;padding:0;list-style:none}
+  button,input,select{font:inherit;color:inherit}
+  button{background:none;border:0;padding:0;cursor:pointer}
+  img,svg{display:block;max-width:100%}
+  a{color:inherit}
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
+  }
+}
+
+/* ═══════════════ BASE ═══════════════ */
+@layer base{
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--font-ui);
+    font-size:16px;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+    padding-bottom:env(safe-area-inset-bottom,0px);
+    overscroll-behavior-y:contain;
+  }
+  body::before{
+    content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+    background-image:var(--grain);background-size:220px 220px;opacity:.5;
+  }
+  h1,h2,h3,h4{
+    font-family:var(--font-display);
+    font-weight:var(--display-weight);
+    letter-spacing:var(--display-track);
+    font-optical-sizing:auto;
+    text-wrap:balance;
+  }
+  p{text-wrap:pretty}
+  :focus-visible{outline:2px solid var(--accent-2);outline-offset:2px;border-radius:var(--radius-s)}
+  ::selection{background:var(--accent-soft);color:var(--text)}
+
+  .shell{width:100%;max-width:var(--shell);margin-inline:auto;padding-inline:24px;position:relative;z-index:1}
+  .narrow{--shell:940px}
+  .lede{color:var(--text-2);max-width:64ch;font-size:17px}
+  .kicker{
+    font-family:var(--font-data);font-size:11px;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--text-3);
+  }
+  .mono{font-family:var(--font-data);font-variant-numeric:tabular-nums}
+  .sprite{position:absolute;width:0;height:0;overflow:hidden}
+  .ico{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;flex:none}
+  [data-skin="soft"] .ico{stroke-width:1.8}
+}
+
+/* ═══════════════ LAYOUT: шапка, вкладки, виды ═══════════════ */
+@layer layout{
+  .topbar{
+    position:sticky;top:0;z-index:60;
+    background:color-mix(in oklab, var(--bg) 86%, transparent);
+    border-bottom:1px solid var(--border);
+  }
+  @supports (backdrop-filter:blur(1px)){
+    .topbar{backdrop-filter:blur(14px) saturate(1.5)}
+  }
+  .bar{
+    max-width:var(--shell);margin-inline:auto;padding-inline:24px;
+    height:var(--topbar);display:flex;align-items:center;gap:14px;
+  }
+  .brand{display:flex;align-items:center;gap:9px;font-family:var(--font-display);font-weight:var(--display-weight);font-size:16px;letter-spacing:var(--display-track)}
+  .brand .mark{
+    width:26px;height:26px;display:grid;place-items:center;border-radius:var(--radius-s);
+    background:var(--accent-soft);color:var(--accent-ink);
+  }
+  .brand .mark .ico{width:16px;height:16px}
+
+  .menu-btn{
+    display:flex;align-items:center;gap:7px;anchor-name:--menu;
+    font-family:var(--font-data);font-size:12px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--text-2);padding:8px 12px;border-radius:var(--radius-m);
+    border:1px solid transparent;transition:background var(--dur-1) var(--ease), color var(--dur-1) var(--ease);
+  }
+  .menu-btn:hover{background:var(--surface-2);color:var(--text)}
+  .menu-btn .ico{width:11px;height:11px;transition:transform var(--dur-2) var(--ease)}
+  .menu-btn:has(+ #menu:popover-open) .ico,
+  .menu-btn[aria-expanded="true"] .ico{transform:rotate(180deg)}
+
+  #menu{
+    position:fixed;top:calc(var(--topbar) + 6px);left:24px;right:auto;bottom:auto;margin:0;
+    min-width:300px;padding:6px;border:1px solid var(--border);
+    background:var(--surface);border-radius:var(--radius-l);box-shadow:var(--shadow-2);
+    color:var(--text);
+    opacity:0;translate:0 -6px;
+    transition:opacity var(--dur-2) var(--ease), translate var(--dur-2) var(--ease), overlay var(--dur-2) allow-discrete, display var(--dur-2) allow-discrete;
+  }
+  #menu:popover-open{opacity:1;translate:0 0}
+  @starting-style{ #menu:popover-open{opacity:0;translate:0 -6px} }
+  @supports (position-anchor:--menu){
+    #menu{position:absolute;position-anchor:--menu;top:anchor(bottom);left:anchor(left);margin:6px 0 0}
+  }
+  #menu::backdrop{background:transparent}
+  .menu-item{
+    display:flex;align-items:center;gap:12px;width:100%;text-align:left;
+    padding:10px 12px;border-radius:var(--radius-m);
+    transition:background var(--dur-1) var(--ease);
+  }
+  .menu-item:hover{background:var(--surface-2)}
+  .menu-item .ico{width:19px;height:19px;color:var(--accent-2-ink)}
+  .menu-item b{display:block;font-weight:600;font-size:15px}
+  .menu-item span{display:block;font-size:12.5px;color:var(--text-3)}
+  .menu-item[aria-current="true"]{background:var(--accent-2-soft)}
+  .menu-sep{height:1px;background:var(--border-soft);margin:5px 8px}
+
+  .bar-tools{margin-left:auto;display:flex;align-items:center;gap:8px}
+  .seg{display:flex;padding:3px;gap:2px;background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-pill)}
+  .seg button{
+    font-family:var(--font-data);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;
+    padding:5px 11px;border-radius:var(--radius-pill);color:var(--text-3);
+    transition:background var(--dur-1) var(--ease), color var(--dur-1) var(--ease);
+  }
+  .seg button[aria-pressed="true"]{background:var(--surface);color:var(--text);box-shadow:var(--shadow-1)}
+  .icon-btn{
+    width:38px;height:38px;display:grid;place-items:center;border-radius:var(--radius-pill);
+    border:1px solid var(--border);background:var(--surface);color:var(--text-2);
+    transition:transform var(--dur-1) var(--ease), color var(--dur-1) var(--ease);
+  }
+  .icon-btn:hover{color:var(--text)}
+  .icon-btn:active{transform:scale(var(--press))}
+  .icon-btn .ico{width:17px;height:17px}
+  .icon-btn .i-moon{display:none}
+  [data-theme="dark"] .icon-btn .i-moon{display:block}
+  [data-theme="dark"] .icon-btn .i-sun{display:none}
+
+  /* полоса прогресса чтения */
+  .readbar{position:absolute;left:0;right:0;bottom:-1px;height:2px;overflow:hidden}
+  .readbar i{
+    display:block;height:100%;width:100%;transform-origin:0 50%;
+    background:linear-gradient(90deg,var(--accent),var(--accent-2));
+    scale:0 1;
+  }
+  @supports (animation-timeline:scroll()){
+    .readbar i{animation:readgrow linear both;animation-timeline:scroll(root block)}
+  }
+  @keyframes readgrow{from{scale:0 1}to{scale:1 1}}
+
+  /* нижние вкладки */
+  .tabbar{
+    display:none;position:fixed;left:0;right:0;bottom:0;z-index:60;
+    padding:6px 6px env(safe-area-inset-bottom,0px);
+    background:color-mix(in oklab, var(--bg) 88%, transparent);
+    border-top:1px solid var(--border);
+  }
+  @supports (backdrop-filter:blur(1px)){
+    .tabbar{backdrop-filter:blur(16px) saturate(1.5)}
+  }
+  .tabbar ul{display:flex}
+  .tabbar li{flex:1}
+  .tab{
+    width:100%;display:flex;flex-direction:column;align-items:center;gap:3px;
+    padding:7px 2px 6px;border-radius:var(--radius-m);color:var(--text-3);position:relative;
+    transition:color var(--dur-1) var(--ease);
+  }
+  .tab .ico{width:21px;height:21px;transition:transform var(--dur-2) var(--spring)}
+  .tab span{font-size:10.5px;letter-spacing:.01em;font-weight:500}
+  .tab[aria-selected="true"]{color:var(--accent-2-ink)}
+  .tab[aria-selected="true"] .ico{transform:translateY(-1px) scale(1.08)}
+  .tab[aria-selected="true"]::before{
+    content:"";position:absolute;top:0;left:50%;translate:-50% 0;width:22px;height:2.5px;
+    border-radius:var(--radius-pill);background:var(--accent-2);
+  }
+  .tab:active{transform:scale(var(--press))}
+  .tab .dot{
+    position:absolute;top:5px;right:calc(50% - 20px);min-width:17px;height:17px;padding:0 4px;
+    display:grid;place-items:center;border-radius:var(--radius-pill);
+    background:var(--accent-2);color:var(--bg);
+    font-family:var(--font-data);font-size:10px;line-height:1;
+  }
+  .tab .dot[hidden]{display:none}
+
+  .view{display:none}
+  .view.on{display:block;animation:viewin var(--dur-3) var(--ease) both}
+  @keyframes viewin{from{opacity:0;translate:0 6px}to{opacity:1;translate:0 0}}
+  ::view-transition-old(root){animation:vtout .18s var(--ease) both}
+  ::view-transition-new(root){animation:vtin .28s var(--ease) both}
+  @keyframes vtout{to{opacity:0}}
+  @keyframes vtin{from{opacity:0;translate:0 8px}}
+
+  .view-head{padding:40px 0 24px;border-bottom:1px solid var(--border);position:relative}
+  .view-head h1{font-size:clamp(30px,5.2vw,50px);line-height:1.02;margin:12px 0 14px}
+  [data-skin="paper"] .view-head h1{font-variation-settings:"opsz" 60}
+  .view-head::after{
+    content:"";position:absolute;inset:-30px -40% auto;height:260px;z-index:-1;
+    background:var(--halo);filter:blur(10px);
+  }
+  .up{
+    position:fixed;right:16px;bottom:calc(var(--tabbar) + 14px);z-index:50;
+    width:44px;height:44px;border-radius:var(--radius-pill);
+    background:var(--surface);border:1px solid var(--border);box-shadow:var(--shadow-2);
+    color:var(--text-2);display:grid;place-items:center;
+    opacity:0;visibility:hidden;translate:0 8px;
+    transition:opacity var(--dur-2) var(--ease), translate var(--dur-2) var(--ease), visibility var(--dur-2);
+  }
+  .up.show{opacity:1;visibility:visible;translate:0 0}
+  .up .ico{width:19px;height:19px}
+}
+
+/* ═══════════════ COMPONENTS ═══════════════ */
+@layer components{
+
+  /* ── кнопки и поля ── */
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    font-family:var(--font-data);font-size:12.5px;letter-spacing:.09em;text-transform:uppercase;
+    padding:12px 20px;border-radius:var(--radius-m);
+    background:var(--text);color:var(--bg);border:1px solid var(--text);
+    transition:transform var(--dur-1) var(--ease), opacity var(--dur-1) var(--ease), box-shadow var(--dur-1) var(--ease);
+  }
+  .btn:hover{opacity:.9}
+  .btn:active{transform:scale(var(--press))}
+  .btn.ghost{background:transparent;color:var(--text);border-color:var(--border)}
+  .btn.ghost:hover{background:var(--surface-2);opacity:1}
+  .btn.accent{background:var(--accent-2);border-color:var(--accent-2);color:var(--bg)}
+  .btn:disabled{opacity:.4;pointer-events:none}
+  .btn .ico{width:15px;height:15px}
+  [data-skin="soft"] .btn{border-radius:var(--radius-pill);box-shadow:var(--shadow-1)}
+
+  .field{display:flex;flex-direction:column;gap:6px}
+  .field label{font-family:var(--font-data);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-3)}
+  .field select,.field input{
+    font-family:var(--font-data);font-size:14.5px;font-variant-numeric:tabular-nums;
+    background:var(--surface);border:1px solid var(--border);color:var(--text);
+    padding:10px 12px;border-radius:var(--radius-m);
+    transition:border-color var(--dur-1) var(--ease), box-shadow var(--dur-1) var(--ease);
+  }
+  .field select:focus,.field input:focus{outline:none;border-color:var(--accent-2);box-shadow:var(--ring)}
+
+  /* ── таблицы ── */
+  .scroller{overflow-x:auto;border:1px solid var(--border);background:var(--surface);border-radius:var(--radius-l)}
+  table{border-collapse:collapse;width:100%;min-width:520px;font-size:14.5px}
+  th,td{text-align:left;padding:11px 15px;border-bottom:1px solid var(--border-soft);vertical-align:top}
+  thead th{
+    font-family:var(--font-data);font-weight:500;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--text-3);background:var(--surface-2);border-bottom:1px solid var(--border);
+  }
+  tbody tr:last-child td{border-bottom:0}
+  tbody tr{transition:background var(--dur-1) var(--ease)}
+  tbody tr:hover{background:var(--surface-2)}
+  td.k{font-weight:500}
+  td.num{font-family:var(--font-data);font-variant-numeric:tabular-nums;white-space:nowrap}
+  td small{display:block;color:var(--text-3);font-size:12.5px;margin-top:3px}
+
+  /* ── заголовки секций ── */
+  .sec-head{display:flex;align-items:baseline;gap:14px;padding-bottom:11px;border-bottom:2px solid var(--text)}
+  .sec-head.thin{border-bottom:1px solid var(--border)}
+  .sec-head h2{font-size:clamp(22px,3vw,29px)}
+  .sec-head .count,.sec-head .tagline{
+    font-family:var(--font-data);font-size:11px;color:var(--text-3);margin-left:auto;white-space:nowrap;
+    letter-spacing:.08em;text-transform:uppercase;
+  }
+  .note{
+    margin-top:18px;padding:12px 16px;border-left:3px solid var(--accent);
+    background:color-mix(in oklab, var(--accent-soft) 55%, transparent);
+    border-radius:0 var(--radius-m) var(--radius-m) 0;
+    color:var(--text-2);font-size:14.5px;max-width:74ch;
+  }
+  .note b{color:var(--text);font-weight:600}
+  .bullets li{position:relative;padding:6px 0 6px 22px;color:var(--text-2)}
+  .bullets li::before{content:"";position:absolute;left:2px;top:15px;width:8px;height:2px;border-radius:2px;background:var(--accent-2)}
+  .bullets li b{color:var(--text);font-weight:600}
+
+  /* ── иллюстрации ── */
+  .figure{
+    margin:22px 0;padding:20px;background:var(--surface);border:1px solid var(--border);
+    border-radius:var(--radius-l);box-shadow:var(--shadow-1);
+  }
+  .figure svg{width:100%;height:auto;overflow:visible}
+  .figure figcaption{
+    margin-top:14px;font-size:13.5px;color:var(--text-3);text-align:center;
+    font-family:var(--font-data);
+  }
+  .fig-t{font-family:var(--font-ui);font-size:13px;font-weight:600;fill:var(--text)}
+  .fig-s{font-family:var(--font-data);font-size:10.5px;fill:var(--text-3);letter-spacing:.06em;text-transform:uppercase}
+  .fig-b{font-family:var(--font-ui);font-size:12px;fill:var(--text-2)}
+  .fig-line{stroke:var(--border);fill:none;stroke-width:1.5}
+  .fig-oil{fill:var(--accent-soft);stroke:var(--accent);stroke-width:1.5}
+  .fig-aqua{fill:var(--accent-2-soft);stroke:var(--accent-2);stroke-width:1.5}
+
+  /* ═══ СТАРТ С НУЛЯ ═══ */
+  .cover{
+    display:grid;grid-template-columns:1fr;gap:24px;align-items:center;
+    padding:34px 0 26px;border-bottom:1px solid var(--border);
+  }
+  @media(min-width:860px){.cover{grid-template-columns:1.25fr .75fr}}
+  .cover h1{font-size:clamp(32px,5.4vw,54px);line-height:1.01;margin:12px 0 14px}
+  [data-skin="paper"] .cover h1{font-variation-settings:"opsz" 72}
+  .cover-art{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+  .cover-art div{
+    aspect-ratio:1;display:grid;place-items:center;border-radius:var(--radius-l);
+    background:var(--surface);border:1px solid var(--border);color:var(--accent-2-ink);
+    box-shadow:var(--shadow-1);
+    animation:tilein var(--dur-3) var(--ease) both;
+  }
+  .cover-art div:nth-child(3n+2){color:var(--accent-ink);background:var(--accent-soft);border-color:color-mix(in oklab,var(--accent) 40%,transparent)}
+  .cover-art div:nth-child(4n+3){background:var(--accent-2-soft);border-color:color-mix(in oklab,var(--accent-2) 35%,transparent)}
+  .cover-art .ico{width:46%;height:46%}
+  @keyframes tilein{from{opacity:0;scale:.9}to{opacity:1;scale:1}}
+  .cover-art div:nth-child(1){animation-delay:.02s} .cover-art div:nth-child(2){animation-delay:.05s}
+  .cover-art div:nth-child(3){animation-delay:.08s} .cover-art div:nth-child(4){animation-delay:.11s}
+  .cover-art div:nth-child(5){animation-delay:.14s} .cover-art div:nth-child(6){animation-delay:.17s}
+  .cover-art div:nth-child(7){animation-delay:.20s} .cover-art div:nth-child(8){animation-delay:.23s}
+  .cover-art div:nth-child(9){animation-delay:.26s}
+
+  .b-step{padding-top:46px;scroll-margin-top:calc(var(--topbar) + 14px);content-visibility:auto;contain-intrinsic-size:auto 600px}
+  .stepno{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:var(--font-data);font-size:11px;letter-spacing:.14em;color:var(--accent-2-ink);
+    border:1px solid color-mix(in oklab,var(--accent-2) 40%,transparent);
+    background:var(--accent-2-soft);padding:4px 10px;border-radius:var(--radius-pill);
+  }
+  .b-step h2{font-size:clamp(22px,3.1vw,30px);margin:14px 0 12px}
+  .b-step > p{max-width:68ch;color:var(--text-2);margin-bottom:12px}
+  .b-step > p b{color:var(--text);font-weight:600}
+
+  .analogy{
+    background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--accent);
+    border-radius:0 var(--radius-l) var(--radius-l) 0;box-shadow:var(--shadow-1);
+    padding:18px 20px;margin:20px 0;display:flex;flex-direction:column;gap:8px;max-width:74ch;
+  }
+  .analogy .alabel{font-family:var(--font-data);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-ink);display:flex;align-items:center;gap:7px}
+  .analogy .alabel .ico{width:14px;height:14px}
+  .analogy p{font-size:16.5px;color:var(--text)}
+  .analogy p + p{color:var(--text-2);font-size:15px}
+
+  .mnemo{
+    display:inline-flex;align-items:center;gap:16px;flex-wrap:wrap;
+    background:var(--accent-2-soft);border:1px solid color-mix(in oklab,var(--accent-2) 40%,transparent);
+    padding:14px 18px;margin:16px 0;border-radius:var(--radius-l);
+  }
+  .mnemo .big{font-family:var(--font-display);font-size:28px;font-weight:700;letter-spacing:.1em;color:var(--accent-2-ink)}
+  .mnemo .txt{font-size:15px;color:var(--text-2);max-width:48ch}
+
+  .forms3{display:grid;grid-template-columns:1fr;gap:14px;margin-top:20px}
+  @media(min-width:760px){.forms3{grid-template-columns:repeat(3,1fr)}}
+  .f3{
+    background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-l);
+    padding:18px;display:flex;flex-direction:column;gap:9px;box-shadow:var(--shadow-1);
+    position:relative;overflow:hidden;
+  }
+  .f3 .fh{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:var(--font-data);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-3);
+  }
+  .f3 .stage{
+    width:20px;height:20px;border-radius:var(--radius-pill);display:grid;place-items:center;
+    background:var(--accent-2-soft);color:var(--accent-2-ink);font-size:11px;font-weight:600;
+  }
+  .f3 h4{font-size:17.5px}
+  .f3 p{font-size:14.5px;color:var(--text-2)}
+  .f3 .ex{
+    font-family:var(--font-data);font-size:12.5px;color:var(--accent-ink);
+    border-top:1px dashed var(--border);padding-top:10px;margin-top:auto;
+  }
+
+  .map{display:grid;grid-template-columns:repeat(auto-fill,minmax(152px,1fr));gap:10px;margin-top:18px}
+  .tile{
+    background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-l);
+    padding:14px;display:flex;flex-direction:column;gap:5px;position:relative;overflow:hidden;
+    box-shadow:var(--shadow-1);
+    transition:transform var(--dur-2) var(--ease), box-shadow var(--dur-2) var(--ease);
+  }
+  .tile:hover{transform:translateY(-2px);box-shadow:var(--shadow-2)}
+  .tile::before{content:"";position:absolute;inset:0 auto 0 0;width:3px;background:var(--accent-2)}
+  .tile.fat::before{background:var(--accent)}
+  .tile.like::before{background:repeating-linear-gradient(180deg,var(--text-3) 0 4px,transparent 4px 8px)}
+  .tile .top{display:flex;align-items:center;justify-content:space-between;gap:8px}
+  .tile .code{font-family:var(--font-display);font-size:20px;font-weight:700;line-height:1}
+  .tile .ico{width:20px;height:20px;color:var(--accent-2-ink)}
+  .tile.fat .ico{color:var(--accent-ink)}
+  .tile.like .ico{color:var(--text-3)}
+  .tile .nm{font-size:12px;color:var(--text-3);font-family:var(--font-data)}
+  .tile .fn{font-size:14px;color:var(--text-2);margin-top:2px}
+  .tile .hook{font-size:12.5px;color:var(--accent-ink);border-top:1px dashed var(--border);padding-top:8px;margin-top:auto}
+  .tile.wat .hook{color:var(--accent-2-ink)}
+  .maplegend{display:flex;gap:16px;flex-wrap:wrap;margin-top:14px;font-family:var(--font-data);font-size:11px;color:var(--text-3)}
+  .maplegend span{display:flex;align-items:center;gap:7px}
+  .maplegend i{width:16px;height:3px;border-radius:2px;background:var(--accent);display:block}
+  .maplegend i.w{background:var(--accent-2)}
+  .maplegend i.l{background:repeating-linear-gradient(90deg,var(--text-3) 0 3px,transparent 3px 6px)}
+
+  .rules7{display:flex;flex-direction:column;margin-top:18px;border-top:1px solid var(--border)}
+  .r7{display:flex;gap:18px;padding:15px 0;border-bottom:1px solid var(--border-soft);flex-wrap:wrap}
+  .r7 .n{
+    font-family:var(--font-data);font-size:11.5px;color:var(--accent-2-ink);flex:none;
+    width:30px;height:30px;display:grid;place-items:center;border-radius:var(--radius-pill);
+    background:var(--accent-2-soft);
+  }
+  .r7 .t{flex:1 1 280px}
+  .r7 .t b{display:block;font-weight:600;margin-bottom:2px}
+  .r7 .t span{color:var(--text-2);font-size:14.5px}
+
+  .myths{display:grid;grid-template-columns:1fr;gap:14px;margin-top:18px}
+  @media(min-width:760px){.myths{grid-template-columns:1fr 1fr}}
+  .myth{
+    background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-l);
+    padding:16px 18px;display:flex;flex-direction:column;gap:8px;box-shadow:var(--shadow-1);
+  }
+  .myth .no{display:flex;align-items:flex-start;gap:9px;font-size:15px;font-weight:600;color:var(--warn)}
+  .myth .no .ico{width:17px;height:17px;margin-top:2px}
+  .myth .yes{display:flex;align-items:flex-start;gap:9px;font-size:14.5px;color:var(--text-2)}
+  .myth .yes .ico{width:17px;height:17px;margin-top:2px;color:var(--ok)}
+  .myth .yes b{color:var(--text);font-weight:600}
+
+  .route{display:grid;grid-template-columns:1fr;gap:12px;margin-top:18px}
+  @media(min-width:700px){.route{grid-template-columns:repeat(2,1fr)}}
+  .rt{
+    display:flex;flex-direction:column;gap:5px;text-align:left;color:var(--text);
+    background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-l);
+    padding:18px;box-shadow:var(--shadow-1);
+    transition:transform var(--dur-2) var(--ease), border-color var(--dur-2) var(--ease), box-shadow var(--dur-2) var(--ease);
+  }
+  .rt:hover{transform:translateY(-2px);border-color:var(--accent-2);box-shadow:var(--shadow-2)}
+  .rt:active{transform:scale(var(--press))}
+  .rt .rn{display:flex;align-items:center;gap:8px;font-family:var(--font-data);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-3)}
+  .rt .rn .ico{width:15px;height:15px;color:var(--accent-2-ink)}
+  .rt b{font-family:var(--font-display);font-size:18.5px;font-weight:var(--display-weight)}
+  .rt span{font-size:14px;color:var(--text-2)}
+
+  /* ═══ СПРАВОЧНИК ═══ */
+  .rules{display:grid;grid-template-columns:1fr;gap:14px;margin:24px 0 0}
+  @media(min-width:760px){.rules{grid-template-columns:1fr 1fr}}
+  .rule{
+    background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--accent);
+    border-radius:0 var(--radius-l) var(--radius-l) 0;padding:18px 20px;
+    display:flex;flex-direction:column;gap:9px;box-shadow:var(--shadow-1);
+  }
+  .rule.water{border-left-color:var(--accent-2)}
+  .rule h3{font-size:17.5px}
+  .rule .tagline{
+    display:flex;align-items:center;gap:8px;
+    font-family:var(--font-data);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-ink);
+  }
+  .rule .tagline .ico{width:15px;height:15px}
+  .rule.water .tagline{color:var(--accent-2-ink)}
+  .rule p{color:var(--text-2);font-size:14.5px}
+  .rule p b{color:var(--text);font-weight:600}
+
+  .toolbar{
+    position:sticky;top:var(--topbar);z-index:40;padding:12px 0;margin-top:28px;
+    background:color-mix(in oklab, var(--bg) 90%, transparent);border-bottom:1px solid var(--border);
+  }
+  @supports (backdrop-filter:blur(1px)){.toolbar{backdrop-filter:blur(12px)}}
+  .toolbar-in{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+  .search{
+    flex:1 1 230px;min-width:180px;display:flex;align-items:center;gap:9px;
+    background:var(--surface);border:1px solid var(--border);padding:9px 13px;border-radius:var(--radius-pill);
+    transition:border-color var(--dur-1) var(--ease), box-shadow var(--dur-1) var(--ease);
+  }
+  .search:focus-within{border-color:var(--accent-2);box-shadow:var(--ring)}
+  .search input{border:0;background:transparent;font-family:var(--font-ui);font-size:14.5px;width:100%;outline:none}
+  .search .ico{width:16px;height:16px;color:var(--text-3)}
+  .chips{display:flex;gap:7px;flex-wrap:wrap}
+  .chip{
+    font-family:var(--font-data);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;
+    padding:8px 13px;border:1px solid var(--border);background:var(--surface);color:var(--text-2);
+    border-radius:var(--radius-pill);white-space:nowrap;
+    transition:background var(--dur-1) var(--ease), color var(--dur-1) var(--ease), transform var(--dur-1) var(--ease);
+  }
+  .chip:active{transform:scale(var(--press))}
+  .chip[aria-pressed="true"]{background:var(--text);color:var(--bg);border-color:var(--text)}
+  .progress{display:flex;align-items:center;gap:10px;font-family:var(--font-data);font-size:11.5px;color:var(--text-3);white-space:nowrap}
+  .bar-p{width:78px;height:6px;background:var(--surface-2);border-radius:var(--radius-pill);overflow:hidden}
+  .bar-p span{display:block;height:100%;width:0;border-radius:inherit;background:linear-gradient(90deg,var(--accent-2),var(--accent));transition:width var(--dur-3) var(--spring)}
+
+  .grid{display:grid;grid-template-columns:1fr;gap:34px;padding:30px 0 60px;align-items:start}
+  @media(min-width:1000px){.grid{grid-template-columns:206px 1fr;gap:46px}}
+  .rail{display:none}
+  @media(min-width:1000px){.rail{display:block;position:sticky;top:calc(var(--topbar) + 62px)}}
+  .rail h4{font-family:var(--font-data);font-weight:500;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--text-3);margin:0 0 9px}
+  .rail ul{display:flex;flex-direction:column;margin-bottom:22px;gap:1px}
+  .rail a{
+    display:flex;justify-content:space-between;gap:8px;align-items:center;text-decoration:none;
+    color:var(--text-2);font-size:14px;padding:5px 9px;border-radius:var(--radius-s);
+    transition:background var(--dur-1) var(--ease), color var(--dur-1) var(--ease);
+  }
+  .rail a:hover{background:var(--surface-2);color:var(--text)}
+  .rail a .tick{width:14px;height:14px;color:var(--ok);opacity:0;transition:opacity var(--dur-2) var(--ease)}
+  .rail a.done{color:var(--text-3)}
+  .rail a.done .tick{opacity:1}
+
+  .sec{scroll-margin-top:calc(var(--topbar) + 64px)}
+  .sec + .sec{margin-top:52px}
+  .sec-note{color:var(--text-2);font-size:15px;max-width:66ch;margin-top:14px}
+
+  .dossier{
+    border-top:1px solid var(--border);padding:24px 0 28px;container-type:inline-size;
+    content-visibility:auto;contain-intrinsic-size:auto 420px;
+  }
+  .dossier:first-of-type{border-top:0}
+  .dossier.hidden{display:none}
+  .d-head{display:flex;gap:14px;align-items:flex-start;flex-wrap:wrap}
+  .d-mark{
+    width:44px;height:44px;flex:none;display:grid;place-items:center;border-radius:var(--radius-m);
+    background:var(--accent-2-soft);color:var(--accent-2-ink);
+  }
+  .dossier.fat-side .d-mark{background:var(--accent-soft);color:var(--accent-ink)}
+  .dossier.like-side .d-mark{background:var(--surface-2);color:var(--text-3)}
+  .d-mark .ico{width:24px;height:24px}
+  .d-title{display:flex;flex-direction:column;gap:3px;flex:1 1 200px}
+  .d-title h3{font-size:23px;line-height:1.15}
+  .d-title .alt{font-size:13.5px;color:var(--text-3);font-family:var(--font-data)}
+  .solub{
+    font-family:var(--font-data);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;
+    padding:5px 10px;border-radius:var(--radius-pill);align-self:center;white-space:nowrap;
+    border:1px solid var(--accent);color:var(--accent-ink);background:var(--accent-soft);
+  }
+  .solub.water{border-color:var(--accent-2);color:var(--accent-2-ink);background:var(--accent-2-soft)}
+  .solub.like{border-style:dashed;border-color:var(--text-3);color:var(--text-3);background:transparent}
+  .learn{
+    display:flex;align-items:center;gap:9px;cursor:pointer;user-select:none;align-self:center;
+    font-family:var(--font-data);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-3);
+    border:1px solid var(--border);background:var(--surface);padding:7px 13px;border-radius:var(--radius-pill);
+    transition:color var(--dur-2) var(--ease), border-color var(--dur-2) var(--ease), background var(--dur-2) var(--ease);
+  }
+  .learn input{position:absolute;opacity:0;width:0;height:0}
+  .learn .box{
+    width:17px;height:17px;border:1.5px solid var(--border);border-radius:5px;display:grid;place-items:center;
+    transition:background var(--dur-2) var(--ease), border-color var(--dur-2) var(--ease);
+  }
+  .learn .box .ico{width:12px;height:12px;stroke-width:2.4;color:var(--bg);stroke-dasharray:20;stroke-dashoffset:20}
+  .learn:has(input:checked){color:var(--ok);border-color:color-mix(in oklab,var(--ok) 50%,transparent);background:var(--ok-soft)}
+  .learn:has(input:checked) .box{background:var(--ok);border-color:var(--ok)}
+  .learn:has(input:checked) .box .ico{animation:draw .38s var(--ease) forwards}
+  .learn:has(input:focus-visible){outline:2px solid var(--accent-2);outline-offset:2px}
+  @keyframes draw{to{stroke-dashoffset:0}}
+
+  .cols{display:grid;grid-template-columns:1fr;gap:22px;margin-top:18px}
+  @container (min-width:640px){.cols{grid-template-columns:1.15fr 1fr;gap:32px}}
+  .block h4{font-family:var(--font-data);font-weight:500;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--text-3);margin-bottom:10px}
+  .forms li{display:flex;gap:10px;align-items:center;padding:7px 0;border-bottom:1px dashed var(--border-soft);font-size:15px}
+  .forms li:last-child{border-bottom:0}
+  .forms .fname{font-weight:500}
+  .forms .fnote{color:var(--text-3);font-size:13.5px;margin-left:auto;text-align:right}
+  .tag{
+    font-family:var(--font-data);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;
+    padding:3px 8px;border:1px solid var(--border);color:var(--text-3);flex:none;border-radius:var(--radius-pill);
+  }
+  .tag.active{background:var(--accent-2);color:var(--bg);border-color:var(--accent-2)}
+  .tag.rare{border-style:dashed}
+  .funcs li{position:relative;padding:5px 0 5px 22px;font-size:15px;color:var(--text-2)}
+  .funcs li::before{content:"";position:absolute;left:2px;top:14px;width:8px;height:2px;border-radius:2px;background:var(--accent)}
+  .water-side .funcs li::before{background:var(--accent-2)}
+
+  .data{background:var(--surface-2);border:1px solid var(--border);padding:16px 18px;margin-top:20px;border-radius:var(--radius-l)}
+  .data h4{font-family:var(--font-data);font-weight:500;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--text-3);margin-bottom:11px}
+  .dose-rows{display:grid;grid-template-columns:1fr}
+  @container (min-width:560px){.dose-rows{grid-template-columns:1fr 1fr;column-gap:30px}}
+  .dose{display:flex;gap:12px;align-items:baseline;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border-soft)}
+  .dose .who{font-size:14px;color:var(--text-2)}
+  .dose .val{font-family:var(--font-data);font-size:13.5px;font-variant-numeric:tabular-nums;white-space:nowrap;color:var(--text)}
+  .units{display:flex;gap:9px;flex-wrap:wrap;margin-top:12px}
+  .unit{
+    font-family:var(--font-data);font-size:12px;font-variant-numeric:tabular-nums;
+    background:var(--surface);border:1px solid var(--border);padding:5px 11px;color:var(--text-2);border-radius:var(--radius-pill);
+  }
+  .memo{margin-top:16px;padding-left:16px;border-left:2px solid var(--accent);font-size:14.5px;color:var(--text-2);max-width:72ch}
+  .water-side .memo{border-left-color:var(--accent-2)}
+  .memo strong{color:var(--text);font-weight:600}
+  .warnbox{
+    margin-top:14px;background:var(--warn-soft);border:1px solid color-mix(in oklab,var(--warn) 45%,transparent);
+    color:var(--warn);padding:12px 15px;font-size:14px;max-width:74ch;border-radius:var(--radius-m);
+    display:flex;gap:10px;align-items:flex-start;
+  }
+  .warnbox .ico{width:17px;height:17px;flex:none;margin-top:2px}
+  .warnbox b{font-weight:600}
+  .contra{margin-top:12px;font-size:13.5px;color:var(--text-3)}
+
+  .tool{
+    background:var(--surface);border:1px solid var(--border);box-shadow:var(--shadow-2);
+    padding:20px 22px;margin-top:24px;border-radius:var(--radius-l);
+  }
+  .tool h3{font-size:19px;margin-bottom:5px;display:flex;align-items:center;gap:10px}
+  .tool h3 .ico{width:19px;height:19px;color:var(--accent-2-ink)}
+  .tool .hint{font-size:14px;color:var(--text-3);margin-bottom:16px}
+  .conv{display:flex;gap:14px;align-items:flex-end;flex-wrap:wrap}
+  .conv input{width:140px}
+  .eq{font-family:var(--font-display);font-size:22px;color:var(--text-3);padding-bottom:9px}
+  .conv-note{font-family:var(--font-data);font-size:12px;color:var(--text-3);margin-top:14px}
+
+  .combos{display:grid;grid-template-columns:1fr;gap:14px;margin-top:22px}
+  @media(min-width:880px){.combos{grid-template-columns:repeat(3,1fr)}}
+  .combo{
+    background:var(--surface);border:1px solid var(--border);padding:18px 20px;border-radius:var(--radius-l);
+    display:flex;flex-direction:column;gap:12px;box-shadow:var(--shadow-1);
+  }
+  .combo h4{font-family:var(--font-display);font-size:17.5px;font-weight:var(--display-weight)}
+  .combo .stack{display:flex;flex-wrap:wrap;gap:7px}
+  .combo .stack span{
+    font-family:var(--font-data);font-size:12px;padding:5px 10px;border-radius:var(--radius-pill);
+    background:var(--accent-2-soft);border:1px solid color-mix(in oklab,var(--accent-2) 35%,transparent);color:var(--accent-2-ink);
+  }
+  .combo .hint{font-size:14px;color:var(--text-3)}
+  .empty{padding:34px 0;color:var(--text-3);font-size:15px}
+  .empty.hidden{display:none}
+
+  /* ═══ ПРАКТИКА ═══ */
+  .psec{padding-top:46px;scroll-margin-top:calc(var(--topbar) + 14px);content-visibility:auto;contain-intrinsic-size:auto 700px}
+  .intro{color:var(--text-2);max-width:70ch;margin:16px 0 18px}
+  .toc{display:flex;flex-wrap:wrap;gap:8px;margin:24px 0 0}
+  .toc a{
+    font-family:var(--font-data);font-size:11.5px;text-decoration:none;border:1px solid var(--border);
+    background:var(--surface);color:var(--text-2);padding:7px 12px;border-radius:var(--radius-pill);
+    transition:border-color var(--dur-1) var(--ease), color var(--dur-1) var(--ease);
+  }
+  .toc a:hover{border-color:var(--accent-2);color:var(--accent-2-ink)}
+  .pairs{display:grid;grid-template-columns:1fr;gap:14px}
+  @media(min-width:720px){.pairs{grid-template-columns:1fr 1fr}}
+  .pair{
+    background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--ok);
+    border-radius:0 var(--radius-l) var(--radius-l) 0;padding:16px 18px;
+    display:flex;flex-direction:column;gap:7px;box-shadow:var(--shadow-1);
+  }
+  .pair h4{font-size:16.5px}
+  .pair .why{font-size:14px;color:var(--text-2)}
+  .pair .how{font-family:var(--font-data);font-size:12px;color:var(--text-3)}
+  .rflags{display:flex;flex-direction:column;gap:11px}
+  .rflag{
+    display:flex;gap:14px;background:var(--warn-soft);border:1px solid color-mix(in oklab,var(--warn) 40%,transparent);
+    padding:14px 16px;align-items:flex-start;flex-wrap:wrap;border-radius:var(--radius-m);
+  }
+  .rflag .who{font-weight:600;font-size:15px;flex:0 0 190px;color:var(--warn);display:flex;align-items:flex-start;gap:9px}
+  .rflag .who .ico{width:17px;height:17px;flex:none;margin-top:2px}
+  .rflag .what{font-size:14.5px;color:var(--text-2);flex:1 1 260px}
+  .day{display:flex;flex-direction:column;border-top:1px solid var(--border)}
+  .slot{display:flex;gap:18px;padding:15px 0;border-bottom:1px solid var(--border-soft);flex-wrap:wrap}
+  .slot .when{font-family:var(--font-data);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent-ink);flex:0 0 150px;padding-top:2px}
+  .slot .what{flex:1 1 300px}
+  .slot .what b{font-weight:600}
+  .slot .what span{display:block;color:var(--text-3);font-size:13.5px}
+  ol.steps{counter-reset:s;display:flex;flex-direction:column;gap:16px}
+  ol.steps li{counter-increment:s;display:flex;gap:16px}
+  ol.steps li::before{
+    content:counter(s,decimal-leading-zero);font-family:var(--font-data);font-size:12px;color:var(--accent-2-ink);
+    background:var(--accent-2-soft);border-radius:var(--radius-pill);
+    width:32px;height:32px;display:grid;place-items:center;flex:none;
+  }
+  ol.steps b{display:block;font-weight:600;margin-bottom:2px}
+  ol.steps span{color:var(--text-2);font-size:15px}
+
+  /* шкала доз */
+  .dscale{margin-top:10px}
+  .dscale .track2{height:9px;border-radius:var(--radius-pill);overflow:hidden;display:flex;background:var(--surface-2)}
+  .dscale .track2 i{display:block;height:100%}
+  .dscale .z1{background:color-mix(in oklab,var(--ok) 60%,var(--surface))}
+  .dscale .z2{background:color-mix(in oklab,var(--accent) 60%,var(--surface))}
+  .dscale .z3{background:color-mix(in oklab,var(--warn) 65%,var(--surface))}
+  .dscale .labels{display:flex;justify-content:space-between;margin-top:6px;font-family:var(--font-data);font-size:10px;color:var(--text-3);letter-spacing:.06em;text-transform:uppercase}
+
+  /* ═══ ТРЕНАЖЁР ═══ */
+  .tr-top{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;padding:38px 0 18px;border-bottom:1px solid var(--border)}
+  .tr-top h1{font-size:clamp(27px,4.2vw,38px)}
+  .lifetime{margin-left:auto;font-family:var(--font-data);font-size:11.5px;color:var(--text-3);font-variant-numeric:tabular-nums;white-space:nowrap}
+  .screen{display:none;padding-top:26px}
+  .screen.on{display:block;animation:viewin var(--dur-2) var(--ease) both}
+  .decks{display:grid;grid-template-columns:1fr;gap:11px;margin-top:22px}
+  @media(min-width:640px){.decks{grid-template-columns:1fr 1fr}}
+  .deck{
+    display:flex;flex-direction:column;gap:6px;text-align:left;color:var(--text);
+    background:var(--surface);border:1px solid var(--border);padding:17px 19px;border-radius:var(--radius-l);
+    box-shadow:var(--shadow-1);position:relative;overflow:hidden;
+    transition:transform var(--dur-2) var(--ease), border-color var(--dur-2) var(--ease), box-shadow var(--dur-2) var(--ease);
+  }
+  .deck:hover{transform:translateY(-2px);border-color:var(--accent-2);box-shadow:var(--shadow-2)}
+  .deck:active{transform:scale(var(--press))}
+  .deck[aria-pressed="true"]{border-color:var(--accent-2)}
+  .deck[aria-pressed="true"]::before{content:"";position:absolute;inset:0 auto 0 0;width:3px;background:var(--accent-2)}
+  .deck .dname{display:flex;align-items:center;gap:9px;font-family:var(--font-display);font-size:18.5px;font-weight:var(--display-weight)}
+  .deck .dname .ico{width:19px;height:19px;color:var(--accent-2-ink)}
+  .deck .dmeta{font-family:var(--font-data);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-3)}
+  .deck .ddesc{font-size:14px;color:var(--text-2)}
+  .deck.wide{grid-column:1/-1}
+  .deck.due{border-color:color-mix(in oklab,var(--accent) 55%,transparent);background:linear-gradient(180deg,var(--accent-soft),var(--surface) 60%)}
+  .deck.due .dname .ico{color:var(--accent-ink)}
+  .setup{display:flex;gap:14px;align-items:flex-end;flex-wrap:wrap;margin-top:22px;padding-top:22px;border-top:1px solid var(--border)}
+  .weak{margin-top:26px;border-top:1px solid var(--border);padding-top:20px}
+  .weak h3{font-family:var(--font-data);font-weight:500;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--text-3);margin-bottom:12px}
+  .weak-rows{display:flex;flex-direction:column;gap:9px}
+  .weak-row{display:flex;align-items:center;gap:14px;font-size:14px}
+  .weak-row .wname{flex:0 0 auto;min-width:130px}
+  .wbar{flex:1;height:7px;background:var(--surface-2);border-radius:var(--radius-pill);overflow:hidden}
+  .wbar span{display:block;height:100%;border-radius:inherit;background:var(--warn);transition:width var(--dur-3) var(--ease)}
+  .weak-row .wpct{font-family:var(--font-data);font-size:12px;color:var(--text-3);font-variant-numeric:tabular-nums;min-width:56px;text-align:right}
+  .weak-empty{font-size:14px;color:var(--text-3)}
+
+  .hud{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:18px}
+  .hud .pos{font-family:var(--font-data);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);font-variant-numeric:tabular-nums}
+  .track{flex:1;min-width:120px;height:5px;background:var(--surface-2);border-radius:var(--radius-pill);overflow:hidden}
+  .track span{display:block;height:100%;width:0;border-radius:inherit;background:linear-gradient(90deg,var(--accent-2),var(--accent));transition:width var(--dur-2) var(--ease)}
+  .streak{
+    display:flex;align-items:center;gap:7px;font-family:var(--font-data);font-size:11.5px;
+    padding:5px 11px;border:1px solid var(--border);color:var(--text-3);white-space:nowrap;border-radius:var(--radius-pill);
+  }
+  .streak .ico{width:14px;height:14px}
+  .streak.hot{border-color:var(--accent);color:var(--accent-ink);background:var(--accent-soft);animation:pulse .5s var(--ease)}
+  @keyframes pulse{0%{transform:scale(1)}40%{transform:scale(1.09)}100%{transform:scale(1)}}
+
+  .qcard{background:var(--surface);border:1px solid var(--border);box-shadow:var(--shadow-2);border-radius:var(--radius-xl);overflow:hidden}
+  .qcard.shake{animation:shake .3s var(--ease)}
+  @keyframes shake{10%,90%{translate:-2px 0}30%,70%{translate:4px 0}50%{translate:-4px 0}}
+  .qhead{padding:18px 24px 0;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+  .qtype{
+    font-family:var(--font-data);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--accent-2-ink);background:var(--accent-2-soft);
+    border:1px solid color-mix(in oklab,var(--accent-2) 35%,transparent);
+    padding:4px 10px;border-radius:var(--radius-pill);
+  }
+  .qtype.case{color:var(--accent-ink);background:var(--accent-soft);border-color:color-mix(in oklab,var(--accent) 40%,transparent)}
+  .qtext{padding:14px 24px 20px;font-family:var(--font-display);font-size:clamp(19px,2.6vw,24px);font-weight:var(--display-weight);line-height:1.32}
+  .opts{display:flex;flex-direction:column;border-top:1px solid var(--border-soft)}
+  .opt{
+    display:flex;gap:14px;align-items:center;text-align:left;width:100%;
+    border-bottom:1px solid var(--border-soft);padding:16px 24px;color:var(--text);
+    font-size:15.5px;line-height:1.45;
+    transition:background var(--dur-1) var(--ease), transform var(--dur-1) var(--ease);
+  }
+  .opt:last-child{border-bottom:0}
+  .opt:hover:not(:disabled){background:var(--surface-2)}
+  .opt:active:not(:disabled){transform:scale(.995)}
+  .opt:disabled{cursor:default}
+  .opt .key{
+    font-family:var(--font-data);font-size:11px;color:var(--text-3);border:1px solid var(--border);
+    width:26px;height:26px;display:grid;place-items:center;border-radius:var(--radius-s);flex:none;
+    transition:background var(--dur-2) var(--ease), color var(--dur-2) var(--ease), border-color var(--dur-2) var(--ease);
+  }
+  .opt .key .ico{width:14px;height:14px;stroke-width:2.4}
+  .opt.correct .key .ico{stroke-dasharray:22;stroke-dashoffset:22}
+  .opt.correct{background:var(--ok-soft)}
+  .opt.correct .key{background:var(--ok);border-color:var(--ok);color:var(--bg)}
+  .opt.correct .key .ico{animation:draw .4s var(--ease) .05s forwards}
+  .opt.wrong{background:var(--warn-soft)}
+  .opt.wrong .key{background:var(--warn);border-color:var(--warn);color:var(--bg)}
+  .verdict{
+    padding:18px 24px;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:9px;
+    background:var(--surface-2);
+  }
+  .verdict[hidden]{display:none}
+  .verdict .vhead{display:flex;align-items:center;gap:9px;font-family:var(--font-data);font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+  .verdict .vhead .ico{width:16px;height:16px}
+  .verdict.ok .vhead{color:var(--ok)}
+  .verdict.no .vhead{color:var(--warn)}
+  .verdict p{font-size:15px;color:var(--text-2);max-width:70ch}
+  .verdict .next-row{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:6px}
+  .hintkeys{font-family:var(--font-data);font-size:11px;color:var(--text-3);margin-top:14px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+
+  .score{display:flex;gap:24px;align-items:flex-end;flex-wrap:wrap;padding-bottom:20px;border-bottom:2px solid var(--text)}
+  .score .big{font-family:var(--font-display);font-size:clamp(48px,9vw,76px);font-weight:700;line-height:.9;font-variant-numeric:tabular-nums}
+  .score .sub{display:flex;flex-direction:column;gap:3px;padding-bottom:7px}
+  .score .sub b{font-size:16px;font-weight:600}
+  .score .sub span{font-family:var(--font-data);font-size:12px;color:var(--text-3)}
+  .verdict-line{margin-top:18px;font-size:16px;color:var(--text-2);max-width:64ch}
+  .review{margin-top:26px;display:flex;flex-direction:column;gap:16px}
+  .review h3{font-family:var(--font-data);font-weight:500;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--text-3)}
+  .miss{border-left:2px solid var(--warn);padding:3px 0 3px 16px;display:flex;flex-direction:column;gap:5px}
+  .miss .mq{font-weight:500;font-size:15px}
+  .miss .ma{font-size:14.5px;color:var(--text-2)}
+  .miss .ma b{color:var(--ok);font-weight:600}
+  .res-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+
+  /* ═══ ПРОГРЕСС ═══ */
+  .pgrid{display:grid;grid-template-columns:1fr;gap:16px;margin-top:26px}
+  @media(min-width:760px){.pgrid{grid-template-columns:1.1fr .9fr}}
+  .card{
+    background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-l);
+    padding:22px;box-shadow:var(--shadow-1);
+  }
+  .card h3{font-size:17px;margin-bottom:4px}
+  .card .cap{font-family:var(--font-data);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-3);margin-bottom:14px}
+  .ringwrap{display:flex;align-items:center;gap:24px;flex-wrap:wrap}
+  .ring{width:132px;height:132px;flex:none;position:relative}
+  .ring svg{transform:rotate(-90deg)}
+  .ring .bgc{fill:none;stroke:var(--surface-2);stroke-width:11}
+  .ring .fgc{fill:none;stroke:url(#ringgrad);stroke-width:11;stroke-linecap:round;transition:stroke-dashoffset 1s var(--ease)}
+  .ring .num{
+    position:absolute;inset:0;display:grid;place-items:center;
+    font-family:var(--font-display);font-size:30px;font-weight:700;font-variant-numeric:tabular-nums;
+  }
+  .ringlist{display:flex;flex-direction:column;gap:9px;flex:1 1 200px}
+  .ringlist div{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--text-2)}
+  .ringlist b{margin-left:auto;font-family:var(--font-data);font-variant-numeric:tabular-nums;color:var(--text)}
+  .ringlist i{width:9px;height:9px;border-radius:3px;flex:none}
+
+  .stats2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+  .stat{
+    background:var(--surface-2);border-radius:var(--radius-m);padding:14px 16px;
+    display:flex;flex-direction:column;gap:2px;
+  }
+  .stat .v{font-family:var(--font-display);font-size:26px;font-weight:700;font-variant-numeric:tabular-nums;display:flex;align-items:center;gap:8px}
+  .stat .v .ico{width:20px;height:20px;color:var(--accent-ink)}
+  .stat .l{font-family:var(--font-data);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3)}
+  .spark{width:100%;height:66px;margin-top:6px}
+  .spark .line{fill:none;stroke:var(--accent-2);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .spark .area{fill:url(#sparkgrad);stroke:none}
+  .spark .dotend{stroke:var(--accent-2);stroke-width:2;fill:none}
+  .spark .grid2{stroke:var(--border-soft);stroke-width:1}
+  .duecard{
+    display:flex;align-items:center;gap:18px;flex-wrap:wrap;
+    background:linear-gradient(120deg,var(--accent-soft),var(--surface) 70%);
+    border:1px solid color-mix(in oklab,var(--accent) 40%,transparent);
+    border-radius:var(--radius-l);padding:20px 22px;margin-top:16px;
+  }
+  .duecard .n{font-family:var(--font-display);font-size:42px;font-weight:700;line-height:1;color:var(--accent-ink)}
+  .duecard .t{flex:1 1 220px}
+  .duecard .t b{display:block;font-size:16px;font-weight:600}
+  .duecard .t span{font-size:14px;color:var(--text-2)}
+}
+
+/* ═══════════════ SKINS ═══════════════ */
+@layer skins{
+  [data-skin="paper"]{
+    --grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.34'/%3E%3C/svg%3E");
+  }
+  [data-skin="paper"] .qtext,[data-skin="paper"] .cover h1{font-variation-settings:"opsz" 48}
+  [data-skin="paper"] .tile,[data-skin="paper"] .deck,[data-skin="paper"] .card{background-image:linear-gradient(180deg,color-mix(in oklab,var(--surface) 92%,var(--bg)),var(--surface))}
+
+  [data-skin="soft"] body{background:var(--bg)}
+  [data-skin="soft"] .view-head::after{filter:blur(30px)}
+  [data-skin="soft"] .tile::before,[data-skin="soft"] .deck[aria-pressed="true"]::before{border-radius:var(--radius-pill)}
+  [data-skin="soft"] .rule,[data-skin="soft"] .pair,[data-skin="soft"] .analogy{border-radius:var(--radius-l);border-left-width:4px}
+  [data-skin="soft"] .note{border-radius:var(--radius-m)}
+  [data-skin="soft"] .sec-head{border-bottom:1px solid var(--border)}
+  [data-skin="soft"] .score{border-bottom:1px solid var(--border)}
+  [data-skin="soft"] .chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+  [data-skin="soft"] .btn{background:var(--accent);border-color:var(--accent);color:oklch(100% 0 0)}
+  [data-skin="soft"] .btn.ghost{background:var(--surface);color:var(--text);border-color:var(--border)}
+  [data-skin="soft"] .opt{margin:4px 8px;border-radius:var(--radius-m);border-bottom:0}
+  [data-skin="soft"] .opts{padding:4px 0 8px}
+  [data-skin="soft"] .qcard{border-radius:26px}
+}
+
+/* ═══════════════ MOBILE ═══════════════ */
+@layer mobile{
+  @media (max-width:900px){
+    body{padding-bottom:calc(var(--tabbar) + 8px)}
+    .tabbar{display:block}
+    .menu-btn{display:none}
+    .bar{padding-inline:16px;gap:10px}
+    .shell{padding-inline:16px}
+    .up{bottom:calc(var(--tabbar) + 12px)}
+  }
+
+  @media (max-width:760px){
+    .brand span:not(.mark){display:none}
+    .seg button{padding:6px 10px;font-size:10px}
+    .icon-btn{width:36px;height:36px}
+
+    .view-head{padding:26px 0 18px}
+    .cover{padding:24px 0 20px;gap:18px}
+    .cover-art{grid-template-columns:repeat(5,1fr);gap:6px}
+    .cover-art div:nth-child(n+11){display:none}
+    .b-step,.psec{padding-top:36px}
+    .lede{font-size:16px}
+
+    /* таблицы → карточки */
+    .scroller{border:0;background:transparent;overflow-x:visible;border-radius:0}
+    .scroller table{min-width:0;display:block;font-size:15px}
+    .scroller thead{display:none}
+    .scroller tbody{display:block}
+    .scroller tbody tr{
+      display:block;background:var(--surface);border:1px solid var(--border);
+      border-radius:var(--radius-l);padding:14px 16px;margin-bottom:11px;box-shadow:var(--shadow-1);
+    }
+    .scroller tbody tr:hover{background:var(--surface)}
+    .scroller tbody tr:last-child{margin-bottom:0}
+    .scroller td{display:block;border:0;padding:8px 0}
+    .scroller td + td{border-top:1px dashed var(--border-soft)}
+    .scroller td::before{
+      content:attr(data-l);display:block;font-family:var(--font-data);font-size:10px;
+      letter-spacing:.12em;text-transform:uppercase;color:var(--text-3);margin-bottom:4px;
+    }
+    .scroller td.k{font-size:17px;font-weight:600;padding-top:0}
+    .scroller td.num{font-size:15px}
+
+    /* справочник */
+    .toolbar{position:static;margin-top:20px;padding:14px 0}
+    .search{flex:1 1 100%}
+    .search input{font-size:16px}
+    .chips{flex-wrap:nowrap;overflow-x:auto;width:100%;padding-bottom:4px;scrollbar-width:none}
+    .chips::-webkit-scrollbar{display:none}
+    .chip{padding:9px 14px}
+    .progress{width:100%}
+    .bar-p{flex:1;width:auto}
+    .grid{padding:22px 0 40px;gap:26px}
+    .dossier{padding:20px 0 24px}
+    .d-mark{width:38px;height:38px}
+    .d-mark .ico{width:21px;height:21px}
+    .d-title h3{font-size:21px}
+    .data{padding:14px 16px}
+    .tool{padding:18px}
+    .conv .field{flex:1 1 100%}
+    .conv input,.conv select{width:100%;font-size:16px}
+    .eq{display:none}
+
+    /* новичковый раздел */
+    .analogy{padding:16px}
+    .analogy p{font-size:16px}
+    .map{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+    .tile{padding:12px}
+    .r7{gap:12px}
+    .r7 .t{flex:1 1 100%}
+    .slot .when{flex:1 1 100%}
+    .rflag .who{flex:1 1 100%}
+    .figure{padding:14px}
+
+    /* тренажёр */
+    .keys-only{display:none}
+    .tr-top{padding:26px 0 14px}
+    .lifetime{margin-left:0;width:100%}
+    .decks{gap:10px}
+    .deck{padding:16px}
+    .setup .btn,.setup .field{flex:1 1 100%}
+    .setup select{width:100%;font-size:16px}
+    .qhead{padding:16px 18px 0}
+    .qtext{padding:12px 18px 16px;font-size:20px}
+    .opt{padding:16px 18px;font-size:16px;min-height:62px}
+    [data-skin="soft"] .opt{margin:4px 6px}
+    .verdict{padding:16px 18px}
+    .verdict .next-row .btn{flex:1 1 100%}
+    .res-actions .btn{flex:1 1 100%}
+    .btn{padding:14px 20px}
+
+    /* прогресс */
+    .pgrid{gap:12px}
+    .card{padding:18px}
+    .ringwrap{gap:18px}
+    .ring{width:112px;height:112px}
+    .ring .num{font-size:26px}
+    .duecard{padding:18px}
+    .duecard .n{font-size:36px}
+  }
+
+  @media (max-width:400px){
+    .map{grid-template-columns:1fr 1fr;gap:7px}
+    .tile .code{font-size:18px}
+    .tile .fn{font-size:13px}
+    .tile .hook{font-size:11.5px}
+    .stats2{grid-template-columns:1fr}
+  }
+
+  /* печать */
+  @media print{
+    .topbar,.tabbar,.up,.toolbar,.rail,#view-trainer,#view-progress{display:none!important}
+    .view{display:block!important}
+    body{background:#fff;color:#000}
+    .scroller{overflow:visible}
+  }
+}
+</style>
+
+<svg class="sprite" aria-hidden="true" focusable="false"><defs>
+<symbol id="i-flask" viewBox="0 0 24 24"><path d="M9 3h6M10 3v6.2L5.2 17A2.5 2.5 0 0 0 7.4 21h9.2a2.5 2.5 0 0 0 2.2-3.8L14 9.2V3"/><path d="M7.5 15h9"/></symbol>
+<symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M16.5 16.5 21 21"/></symbol>
+<symbol id="i-chev" viewBox="0 0 24 24"><path d="m5 9 7 7 7-7"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><path d="m4 12.5 5.5 5.5L20 6.5"/></symbol>
+<symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+<symbol id="i-up" viewBox="0 0 24 24"><path d="M12 20V5M6 11l6-6 6 6"/></symbol>
+<symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.4M12 19.6V22M4.2 4.2l1.7 1.7M18.1 18.1l1.7 1.7M2 12h2.4M19.6 12H22M4.2 19.8l1.7-1.7M18.1 5.9l1.7-1.7"/></symbol>
+<symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></symbol>
+<symbol id="i-compass" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5z"/></symbol>
+<symbol id="i-book" viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v14.5H6.5A2.5 2.5 0 0 0 4 20z"/><path d="M8 7.5h8M8 11h5"/></symbol>
+<symbol id="i-steth" viewBox="0 0 24 24"><path d="M6 3v5.5a4.5 4.5 0 0 0 9 0V3"/><path d="M4.5 3H7M14 3h2.5"/><path d="M10.5 13v2a5 5 0 0 0 5 5h.5"/><circle cx="18.5" cy="17.5" r="2.5"/></symbol>
+<symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.6"/><circle cx="12" cy="12" r="1.2" fill="currentColor" stroke="none"/></symbol>
+<symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20h16"/><path d="M6.5 20v-6M12 20V5M17.5 20v-9"/></symbol>
+<symbol id="i-repeat" viewBox="0 0 24 24"><path d="M4 11a7 7 0 0 1 7-7h5.5"/><path d="m14 1.5 3 2.5-3 2.5"/><path d="M20 13a7 7 0 0 1-7 7H7.5"/><path d="m10 22.5-3-2.5 3-2.5"/></symbol>
+<symbol id="i-calc" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2.5"/><path d="M8 7.5h8"/><circle cx="8.5" cy="12.5" r=".9" fill="currentColor" stroke="none"/><circle cx="12" cy="12.5" r=".9" fill="currentColor" stroke="none"/><circle cx="15.5" cy="12.5" r=".9" fill="currentColor" stroke="none"/><circle cx="8.5" cy="16.5" r=".9" fill="currentColor" stroke="none"/><circle cx="12" cy="16.5" r=".9" fill="currentColor" stroke="none"/><circle cx="15.5" cy="16.5" r=".9" fill="currentColor" stroke="none"/></symbol>
+<symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9.5 18h5M10 21h4"/><path d="M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.3 1 2.1h5c0-.8.4-1.6 1-2.1A6 6 0 0 0 12 3z"/></symbol>
+<symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 4.5 21 19.5H3z"/><path d="M12 10v4"/><circle cx="12" cy="16.8" r=".9" fill="currentColor" stroke="none"/></symbol>
+<symbol id="i-flame" viewBox="0 0 24 24"><path d="M12 2.5s5.5 4.4 5.5 9.3A5.5 5.5 0 0 1 6.5 12c0-2 .9-3.4 2-4.4 0 1.7 1 2.7 2 2.7 1.4 0 2.2-1.4 1.5-7.8z"/></symbol>
+<symbol id="i-drop" viewBox="0 0 24 24"><path d="M12 3s6.2 6.6 6.2 10.3A6.2 6.2 0 0 1 5.8 13.3C5.8 9.6 12 3 12 3z"/></symbol>
+<symbol id="i-wave" viewBox="0 0 24 24"><path d="M3 9c2.2-2.4 4.4-2.4 6.6 0s4.4 2.4 6.6 0 4.4-2.4 5.8-.6"/><path d="M3 15c2.2-2.4 4.4-2.4 6.6 0s4.4 2.4 6.6 0 4.4-2.4 5.8-.6"/></symbol>
+<symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.5 12S6.3 5.5 12 5.5 21.5 12 21.5 12 17.7 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="2.8"/></symbol>
+<symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3.2 19 6v5.2c0 4.4-3 7.5-7 9.6-4-2.1-7-5.2-7-9.6V6z"/><path d="m9 12 2.2 2.2L15.5 10"/></symbol>
+<symbol id="i-bone" viewBox="0 0 24 24"><rect x="7" y="10.4" width="10" height="3.2" rx="1.6"/><circle cx="5.6" cy="9.8" r="2.5"/><circle cx="5.6" cy="14.2" r="2.5"/><circle cx="18.4" cy="9.8" r="2.5"/><circle cx="18.4" cy="14.2" r="2.5"/></symbol>
+<symbol id="i-citrus" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.6"/><path d="M12 3.4v17.2M4.3 8.2l15.4 7.6M4.3 15.8l15.4-7.6"/></symbol>
+<symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13.5 2.5 5 13.5h5.5L9.5 21.5 19 10.5h-5.8z"/></symbol>
+<symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 2.8 14 9l6.2 2-6.2 2-2 6.2-2-6.2L3.8 11 10 9z"/></symbol>
+<symbol id="i-brain" viewBox="0 0 24 24"><path d="M11.4 4.4C10.2 3 7.9 3.2 7 4.9c-1.9.4-2.9 2.2-2.3 3.9-1 1.6-.4 3.6 1.3 4.4.2 1.9 2 3.2 3.8 2.7.5.8 1.4 1.2 1.6 1.2z"/><path d="M12.6 4.4C13.8 3 16.1 3.2 17 4.9c1.9.4 2.9 2.2 2.3 3.9 1 1.6.4 3.6-1.3 4.4-.2 1.9-2 3.2-3.8 2.7-.5.8-1.4 1.2-1.6 1.2z"/><path d="M12 17v4"/></symbol>
+<symbol id="i-heal" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="4.5"/><path d="M12 8.2v7.6M8.2 12h7.6"/></symbol>
+<symbol id="i-nerve" viewBox="0 0 24 24"><path d="M2.5 12h4l2.2-5.5L12 17.5l2.3-5.5h5.2"/><circle cx="21" cy="12" r="1.4"/></symbol>
+<symbol id="i-hair" viewBox="0 0 24 24"><path d="M7.5 3.5c-2 3 2 4.5 0 7.5s2 4.5 0 7.5"/><path d="M12 3.5c-2 3 2 4.5 0 7.5s2 4.5 0 7.5"/><path d="M16.5 3.5c-2 3 2 4.5 0 7.5s2 4.5 0 7.5"/></symbol>
+<symbol id="i-cycle" viewBox="0 0 24 24"><path d="M20.4 12a8.4 8.4 0 1 1-2.6-6"/><path d="M18.6 2.6v3.6H15"/></symbol>
+<symbol id="i-leaf" viewBox="0 0 24 24"><path d="M20.5 3.5S19.2 16 12 16a6 6 0 0 1-6-6c0-6.5 14.5-6.5 14.5-6.5z"/><path d="M4 20.5c2.6-5.6 7-8.8 11.5-10.5"/></symbol>
+<symbol id="i-contrast" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.6"/><path d="M12 3.4a8.6 8.6 0 0 1 0 17.2z" fill="currentColor" stroke="none"/></symbol>
+<symbol id="i-dumbbell" viewBox="0 0 24 24"><path d="M7 12h10"/><path d="M4.5 9.5v5M7.5 7.5v9M16.5 7.5v9M19.5 9.5v5"/></symbol>
+<symbol id="i-mito" viewBox="0 0 24 24"><ellipse cx="12" cy="12" rx="9" ry="6.2"/><path d="M5.5 12c2-2.6 3.2 2.6 5.2 0s3.2 2.6 5.2 0 1.8 1.8 2.6 0"/></symbol>
+<symbol id="i-methyl" viewBox="0 0 24 24"><circle cx="12" cy="12" r="2.6"/><circle cx="19" cy="7" r="1.8"/><circle cx="5" cy="7" r="1.8"/><circle cx="12" cy="20" r="1.8"/><path d="m13.8 10.2 3.7-2.2M10.2 10.2 6.6 8M12 14.6v3.6"/></symbol>
+</defs></svg>
+
+<header class="topbar">
+  <div class="bar">
+    <button class="brand" data-view="basics" aria-label="На главный раздел">
+      <span class="mark"><svg class="ico"><use href="#i-flask"/></svg></span>
+      <span>Витаминный практикум</span>
+    </button>
+
+    <button class="menu-btn" id="menu-btn" popovertarget="menu">
+      Витамины <svg class="ico"><use href="#i-chev"/></svg>
+    </button>
+    <ul class="menu-list" id="menu" popover>
+      <li><button class="menu-item" data-view="basics"><svg class="ico"><use href="#i-compass"/></svg><span><b>Старт с нуля</b><span>если не знаешь вообще ничего</span></span></button></li>
+      <li class="menu-sep"></li>
+      <li><button class="menu-item" data-view="ref" data-anchor="fat"><svg class="ico"><use href="#i-drop"/></svg><span><b>Жирорастворимые</b><span>А, Е, Д, К — формы и дозы</span></span></button></li>
+      <li><button class="menu-item" data-view="ref" data-anchor="water"><svg class="ico"><use href="#i-wave"/></svg><span><b>Водорастворимые</b><span>С и вся группа B</span></span></button></li>
+      <li><button class="menu-item" data-view="ref" data-anchor="combos"><svg class="ico"><use href="#i-spark"/></svg><span><b>Сочетания</b><span>какие связки работают вместе</span></span></button></li>
+      <li class="menu-sep"></li>
+      <li><button class="menu-item" data-view="practice"><svg class="ico"><use href="#i-steth"/></svg><span><b>Практика консультации</b><span>лекарства, анализы, красные флаги</span></span></button></li>
+      <li><button class="menu-item" data-view="trainer"><svg class="ico"><use href="#i-target"/></svg><span><b>Тренажёр</b><span>вопросы с разбором ошибок</span></span></button></li>
+      <li><button class="menu-item" data-view="progress"><svg class="ico"><use href="#i-chart"/></svg><span><b>Прогресс</b><span>готовность, серия, повторение</span></span></button></li>
+    </ul>
+
+    <div class="bar-tools">
+      <div class="seg" id="skinseg" role="group" aria-label="Вариант оформления">
+        <button data-skin="paper" aria-pressed="true">Журнал</button>
+        <button data-skin="soft" aria-pressed="false">Кабинет</button>
+      </div>
+      <button class="icon-btn" id="theme-btn" aria-label="Переключить тему">
+        <svg class="ico i-sun"><use href="#i-sun"/></svg>
+        <svg class="ico i-moon"><use href="#i-moon"/></svg>
+      </button>
+    </div>
+    <div class="readbar"><i></i></div>
+  </div>
+</header>
+
+<nav class="tabbar" role="tablist" aria-label="Разделы">
+  <ul>
+    <li><button class="tab" role="tab" data-view="basics" aria-selected="true"><svg class="ico"><use href="#i-compass"/></svg><span>Старт</span></button></li>
+    <li><button class="tab" role="tab" data-view="ref" aria-selected="false"><svg class="ico"><use href="#i-book"/></svg><span>Справочник</span></button></li>
+    <li><button class="tab" role="tab" data-view="practice" aria-selected="false"><svg class="ico"><use href="#i-steth"/></svg><span>Практика</span></button></li>
+    <li><button class="tab" role="tab" data-view="trainer" aria-selected="false"><svg class="ico"><use href="#i-target"/></svg><span>Тренажёр</span><b class="dot" id="due-badge" hidden>0</b></button></li>
+    <li><button class="tab" role="tab" data-view="progress" aria-selected="false"><svg class="ico"><use href="#i-chart"/></svg><span>Прогресс</span></button></li>
+  </ul>
+</nav>
+
+<button class="up" id="up-btn" aria-label="Наверх"><svg class="ico"><use href="#i-up"/></svg></button>
+
+<!-- ================= СТАРТ С НУЛЯ ================= -->
+<div class="view on" id="view-basics">
+<div class="shell narrow">
+  <header class="cover">
+    <div>
+      <div class="kicker">Раздел для новичка · 15 минут</div>
+      <h1>Старт с нуля</h1>
+      <p class="lede">Девять шагов, после которых остальные разделы читаются как понятный текст, а не набор незнакомых слов. Заучивать здесь ничего не нужно — нужно понять логику, из которой все формы и дозировки следуют сами.</p>
+    </div>
+    <div class="cover-art" aria-hidden="true">
+      <div><svg class="ico"><use href="#i-eye"/></svg></div>
+      <div><svg class="ico"><use href="#i-sun"/></svg></div>
+      <div><svg class="ico"><use href="#i-bone"/></svg></div>
+      <div><svg class="ico"><use href="#i-citrus"/></svg></div>
+      <div><svg class="ico"><use href="#i-leaf"/></svg></div>
+      <div><svg class="ico"><use href="#i-brain"/></svg></div>
+      <div><svg class="ico"><use href="#i-drop"/></svg></div>
+      <div><svg class="ico"><use href="#i-shield"/></svg></div>
+      <div><svg class="ico"><use href="#i-mito"/></svg></div>
+      <div><svg class="ico"><use href="#i-bolt"/></svg></div>
+    </div>
+  </header>
+
+  <section class="b-step" id="b1">
+    <span class="stepno">Шаг 01</span>
+    <h2>Что такое витамин, если совсем просто</h2>
+    <p>Витамины — это не еда, не топливо и не лекарство. Организму их нужно очень мало, но без них не запускаются конкретные химические реакции.</p>
+    <div class="analogy">
+      <span class="alabel"><svg class="ico"><use href="#i-bulb"/></svg> Аналогия</span>
+      <p>Тело — это цех. Еда — сырьё и топливо. Витамины — <b>ключи от станков</b>: сами по себе они ничего не производят, но без нужного ключа станок стоит.</p>
+      <p>Отсюда сразу два вывода. Первый: витамин не «даёт энергию» — он позволяет извлечь энергию из еды. Второй: ключей нужно по одному, а не ведро; лишние ключи не ускоряют работу цеха.</p>
+    </div>
+    <p>Почти все витамины организм не производит сам — их можно получить только снаружи, с едой или добавками. Исключений три: витамин <b>Д</b> синтезируется в коже под солнцем, а <b>К-2</b> и <b>биотин</b> частично производит кишечная микрофлора. Поэтому длительные антибиотики бьют именно по К-2 и биотину, а зимой в средней полосе почти у всех проседает Д.</p>
+  </section>
+
+  <section class="b-step" id="b2">
+    <span class="stepno">Шаг 02</span>
+    <h2>Одно деление, из которого следует всё остальное</h2>
+    <p>Витамин растворяется либо в жире, либо в воде. Это единственный факт, который нужно запомнить в начале, — из него автоматически следуют правила приёма, риск передозировки и то, курсами пить или постоянно.</p>
+
+    <figure class="figure">
+      <svg viewBox="0 0 640 250" role="img" aria-label="Жирорастворимые витамины накапливаются в запасе, водорастворимые проходят насквозь">
+        <g>
+          <text class="fig-s" x="0" y="14">Жирорастворимые</text>
+          <text class="fig-t" x="0" y="40">A · D · E · K</text>
+          <path class="fig-line" d="M140 52v22" stroke-dasharray="4 4"/>
+          <path class="fig-line" d="m134 68 6 8 6-8" stroke-dasharray="0"/>
+          <path class="fig-oil" d="M20 86h240v92a14 14 0 0 1-14 14H34a14 14 0 0 1-14-14z" fill="none"/>
+          <path class="fig-oil" d="M20 130h240v48a14 14 0 0 1-14 14H34a14 14 0 0 1-14-14z" stroke="none"/>
+          <path class="fig-oil" d="M20 130c40-10 60 10 100 2s60-14 140-4" fill="none"/>
+          <text class="fig-b" x="140" y="166" text-anchor="middle">запас в жировой ткани</text>
+          <text class="fig-s" x="0" y="224">курсами · с жирами</text>
+          <text class="fig-s" x="0" y="242" opacity=".75">возможна передозировка</text>
+        </g>
+        <g transform="translate(340,0)">
+          <text class="fig-s" x="0" y="14">Водорастворимые</text>
+          <text class="fig-t" x="0" y="40">C · группа B</text>
+          <path class="fig-line" d="M140 52v22" stroke-dasharray="4 4"/>
+          <path class="fig-line" d="m134 68 6 8 6-8"/>
+          <path class="fig-aqua" d="M20 110h260" stroke-width="34" stroke-linecap="round" fill="none" opacity=".45"/>
+          <path class="fig-aqua" d="M28 110h244" stroke-width="2" fill="none" stroke-dasharray="6 8"/>
+          <path class="fig-aqua" d="m252 100 14 10-14 10" fill="none"/>
+          <text class="fig-b" x="140" y="166" text-anchor="middle">проходит насквозь</text>
+          <path class="fig-line" d="M60 132v14M110 132v20M160 132v14M210 132v20" stroke-dasharray="3 5"/>
+          <text class="fig-s" x="0" y="224">каждый день понемногу</text>
+          <text class="fig-s" x="0" y="242" opacity=".75">избыток выводится с мочой</text>
+        </g>
+      </svg>
+      <figcaption>Один и тот же приём: слева накапливается, справа проходит транзитом</figcaption>
+    </figure>
+
+    <div class="mnemo">
+      <span class="big">A D E K</span>
+      <span class="txt">Четыре буквы — четыре жирорастворимых витамина. Всё остальное (С и вся группа B) растворяется в воде.</span>
+    </div>
+    <div class="scroller">
+      <table>
+        <thead><tr><th>Признак</th><th>Жирорастворимые A · D · E · K</th><th>Водорастворимые C · группа B</th></tr></thead>
+        <tbody>
+          <tr><td class="k">Где хранятся</td><td>В жировой ткани и печени — организм делает запас</td><td>Нигде: что не использовано, уходит с мочой</td></tr>
+          <tr><td class="k">Как принимать</td><td>Курсами, с перерывами</td><td>Постоянно и понемногу</td></tr>
+          <tr><td class="k">С чем принимать</td><td>С едой, в которой есть жир — иначе не усвоятся</td><td>Можно просто с водой</td></tr>
+          <tr><td class="k">Передозировка</td><td>Возможна: копятся<small>Особенно A и D</small></td><td>Почти невозможна<small>Исключение — B6 при длительном избытке</small></td></tr>
+          <tr><td class="k">Как быстро уходит дефицит</td><td>Медленно: запас расходуется неделями</td><td>Быстро: дефицит развивается за недели без поступления</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note"><b>Бытовой признак.</b> Ярко-жёлтая моча после приёма B-комплекса — это рибофлавин (B2), который вывелся с водой. Не «витамины не усвоились», а нормальная работа водорастворимой группы.</p>
+  </section>
+
+  <section class="b-step" id="b3">
+    <span class="stepno">Шаг 03</span>
+    <h2>Что такое «форма» — главное место, где путаются новички</h2>
+    <p>На банке редко написано «витамин B12». Написано «метилкобаламин» или «цианкобаламин». Это <b>формы</b> одного и того же витамина.</p>
+    <div class="analogy">
+      <span class="alabel"><svg class="ico"><use href="#i-bulb"/></svg> Аналогия</span>
+      <p>Витамин — это <b>фамилия</b>, а формы — <b>родственники</b> с этой фамилией. Работу они делают одну, но с разной скоростью и разной ценой.</p>
+      <p>Или ближе к кухне: мука, готовое тесто и испечённый хлеб — это один продукт на разных стадиях. Чем ближе к готовому, тем меньше работы остаётся организму.</p>
+    </div>
+
+    <figure class="figure">
+      <svg viewBox="0 0 640 190" role="img" aria-label="Три стадии готовности формы витамина">
+        <defs>
+          <linearGradient id="workgrad" x1="0" x2="1">
+            <stop offset="0" stop-color="var(--accent)" stop-opacity=".55"/>
+            <stop offset="1" stop-color="var(--accent-2)" stop-opacity=".18"/>
+          </linearGradient>
+        </defs>
+        <rect x="20" y="150" width="600" height="9" rx="4.5" fill="url(#workgrad)"/>
+        <text class="fig-s" x="20" y="178">много работы организму</text>
+        <text class="fig-s" x="620" y="178" text-anchor="end">почти ничего делать не нужно</text>
+        <g>
+          <circle cx="110" cy="60" r="30" class="fig-oil"/>
+          <text class="fig-t" x="110" y="66" text-anchor="middle" style="font-size:15px">①</text>
+          <text class="fig-t" x="110" y="118" text-anchor="middle">Провитамин</text>
+          <text class="fig-b" x="110" y="136" text-anchor="middle">заготовка</text>
+          <path class="fig-line" d="M110 92v50" stroke-dasharray="3 4"/>
+        </g>
+        <g>
+          <circle cx="320" cy="60" r="30" class="fig-oil"/>
+          <text class="fig-t" x="320" y="66" text-anchor="middle" style="font-size:15px">②</text>
+          <text class="fig-t" x="320" y="118" text-anchor="middle">Классическая</text>
+          <text class="fig-b" x="320" y="136" text-anchor="middle">сырьё, нужна переработка</text>
+          <path class="fig-line" d="M320 92v50" stroke-dasharray="3 4"/>
+        </g>
+        <g>
+          <circle cx="530" cy="60" r="30" class="fig-aqua"/>
+          <text class="fig-t" x="530" y="66" text-anchor="middle" style="font-size:15px">③</text>
+          <text class="fig-t" x="530" y="118" text-anchor="middle">Активная</text>
+          <text class="fig-b" x="530" y="136" text-anchor="middle">готова к работе</text>
+          <path class="fig-line" d="M530 92v50" stroke-dasharray="3 4"/>
+        </g>
+        <path class="fig-line" d="M148 60h134M358 60h134"/>
+        <path class="fig-line" d="m274 54 8 6-8 6M484 54l8 6-8 6"/>
+      </svg>
+      <figcaption>Чем правее форма, тем меньше этапов превращения нужно организму</figcaption>
+    </figure>
+
+    <div class="forms3">
+      <div class="f3">
+        <span class="fh"><span class="stage">②</span> Стадия сырья</span>
+        <h4>Классическая</h4>
+        <p>Дешёвая, самая распространённая. Организму нужно самому её переработать — обычно ферментами печени.</p>
+        <p class="ex">цианкобаламин · фолиевая кислота · пиридоксина гидрохлорид</p>
+      </div>
+      <div class="f3">
+        <span class="fh"><span class="stage">③</span> Стадия готового</span>
+        <h4>Активная</h4>
+        <p>Уже готова к работе. Дороже, но обходит этап переработки — а он и ломается у людей с проблемами ЖКТ, возрастом, генетикой.</p>
+        <p class="ex">метилкобаламин · метилфолат · пиридоксаль-5-фосфат</p>
+      </div>
+      <div class="f3">
+        <span class="fh"><span class="stage">①</span> Стадия заготовки</span>
+        <h4>Провитамин</h4>
+        <p>Организм сам сделает из неё витамин — ровно столько, сколько нужно. Поэтому провитамин безопаснее при передозировке.</p>
+        <p class="ex">бета-каротин → витамин А</p>
+      </div>
+    </div>
+    <p class="note"><b>Правило выбора для новичка.</b> Человек здоров и молод — хватит классической формы. Есть проблемы с ЖКТ, возраст, беременность, нарушения фолатного цикла, приём лекарств — берите активную. Именно поэтому в справочнике у каждого витамина форма подписана: это не список синонимов, а шкала «сколько работы остаётся организму».</p>
+  </section>
+
+  <section class="b-step" id="b4">
+    <span class="stepno">Шаг 04</span>
+    <h2>Мг, мкг и загадочные МЕ</h2>
+    <p><b>Мг и мкг — это масса.</b> 1 мг = 1000 мкг. Здесь всё просто.</p>
+    <p><b>МЕ (международная единица) — это не масса, а количество действия.</b> Так измеряют вещества, у которых важна не тяжесть, а сила эффекта. У каждого вещества свой курс обмена — поэтому единого коэффициента нет.</p>
+    <div class="scroller">
+      <table>
+        <thead><tr><th>Вещество</th><th>Пересчёт</th><th>О чём это говорит</th></tr></thead>
+        <tbody>
+          <tr><td class="k">Витамин Д-3</td><td class="num">1 мкг = 40 МЕ</td><td>Самый «сильный» из четвёрки: микрограмма хватает на много работы</td></tr>
+          <tr><td class="k">Ретинол (вит. А)</td><td class="num">1 мкг = 3,3 МЕ</td><td>Готовая форма витамина А</td></tr>
+          <tr><td class="k">Бета-каротин</td><td class="num">1 мкг = 0,61 МЕ</td><td>Слабее ретинола в 5 раз — это же и делает его безопаснее</td></tr>
+          <tr><td class="k">Витамин Е</td><td class="num">1 мг = 1,23 МЕ</td><td>Здесь пересчёт от миллиграммов, а не микрограммов</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note"><b>Проверьте себя.</b> Клиент купил витамин Д «2000 МЕ». Сколько это микрограммов? 2000 ÷ 40 = <b>50 мкг</b>. Готовый конвертер есть в справочнике, в разделе «Жирорастворимые».</p>
+  </section>
+
+  <section class="b-step" id="b5">
+    <span class="stepno">Шаг 05</span>
+    <h2>Две разные дозы — и их постоянно путают</h2>
+    <div class="forms3" style="grid-template-columns:1fr 1fr">
+      <div class="f3">
+        <span class="fh">Дневная</span>
+        <h4>Поддерживающая доза</h4>
+        <p>Столько нужно, чтобы дефицит не возник. Это «прожиточный минимум» — принимается длительно и безопасна сама по себе.</p>
+        <p class="ex">пример: B-6 — 1,5–3 мг в сутки</p>
+      </div>
+      <div class="f3">
+        <span class="fh">Терапевтическая</span>
+        <h4>Курсовая доза</h4>
+        <p>Столько нужно, чтобы закрыть уже случившийся дефицит или решить задачу. Всегда ограничена по времени и часто требует анализов.</p>
+        <p class="ex">пример: B-6 — от 50 мг курсом</p>
+      </div>
+    </div>
+    <p class="note"><b>Главная мысль.</b> Терапевтическая доза — это не «то же самое, только лучше». Это «временно и по показаниям». Разница между «пропил курс два месяца» и «пью пять лет подряд» — принципиальная, особенно для жирорастворимых, которые копятся.</p>
+  </section>
+
+  <section class="b-step" id="b6">
+    <span class="stepno">Шаг 06</span>
+    <h2>Карта: весь предмет на одном экране</h2>
+    <p>Двадцать позиций, по одному крючку на каждую. Задача этого экрана — не выучить, а перестать пугаться названий: когда вы дойдёте до справочника, все имена уже будут знакомыми.</p>
+    <div class="map" id="map"></div>
+    <div class="maplegend">
+      <span><i></i> жирорастворимые</span>
+      <span><i class="w"></i> водорастворимые</span>
+      <span><i class="l"></i> витаминоподобные — формально не витамины</span>
+    </div>
+    <p class="note"><b>Как читать номера группы B.</b> Нумерация историческая и с дырами: часть «витаминов B» позже оказалась не витаминами (B4, B8, B10, B11) или вовсе не подтвердилась. Поэтому в списке нет B13 и B15, а B17 — спорное соединение. Настоящих витаминов группы B восемь: B1, B2, B3, B5, B6, B7, B9, B12.</p>
+  </section>
+
+  <section class="b-step" id="b7">
+    <span class="stepno">Шаг 07</span>
+    <h2>Семь правил, которые закрывают большинство вопросов</h2>
+    <div class="rules7">
+      <div class="r7"><span class="n">01</span><span class="t"><b>A, D, E, K — только с едой, где есть жир</b><span>Без жира они физически не пройдут через стенку кишечника. Салат с маслом, яйцо, рыба, орехи — достаточно.</span></span></div>
+      <div class="r7"><span class="n">02</span><span class="t"><b>Группа B — в первой половине дня</b><span>Они включены в выработку энергии и у части людей бодрят. Приём на ночь — частая причина «бессонницы от витаминов».</span></span></div>
+      <div class="r7"><span class="n">03</span><span class="t"><b>Железо — с витамином С и отдельно от кальция</b><span>Витамин С усиливает всасывание железа в разы, кальций и чай — блокируют. Разница между «работает» и «не работает».</span></span></div>
+      <div class="r7"><span class="n">04</span><span class="t"><b>Витамин Д — не в одиночку</b><span>Д повышает усвоение кальция, К-2 отправляет этот кальций в кости, а не в сосуды, магний нужен для активации самого Д.</span></span></div>
+      <div class="r7"><span class="n">05</span><span class="t"><b>Вводить по одной добавке раз в 3–5 дней</b><span>Иначе при реакции невозможно понять, что именно её вызвало. Витамины группы B к тому же довольно аллергенны.</span></span></div>
+      <div class="r7"><span class="n">06</span><span class="t"><b>Курс имеет конец</b><span>У любой рекомендации должна быть дата пересмотра. «Пью постоянно, потому что полезно» — это не схема.</span></span></div>
+      <div class="r7"><span class="n">07</span><span class="t"><b>Всегда спрашивать про лекарства</b><span>Варфарин, метформин, омепразол, контрацептивы, статины меняют картину целиком. Это первый вопрос, а не последний.</span></span></div>
+    </div>
+  </section>
+
+  <section class="b-step" id="b8">
+    <span class="stepno">Шаг 08</span>
+    <h2>Пять заблуждений, с которыми приходят клиенты</h2>
+    <div class="myths">
+      <div class="myth">
+        <span class="no"><svg class="ico"><use href="#i-x"/></svg> «Витамины дают энергию»</span>
+        <span class="yes"><svg class="ico"><use href="#i-check"/></svg><span>Энергию даёт еда. Витамины <b>позволяют её извлечь</b>. Если человек не спит и не ест — банка B-комплекса это не починит.</span></span>
+      </div>
+      <div class="myth">
+        <span class="no"><svg class="ico"><use href="#i-x"/></svg> «Натуральное — значит безопасное»</span>
+        <span class="yes"><svg class="ico"><use href="#i-check"/></svg><span>Ретинол абсолютно натурален и при этом <b>тератогенен</b> в высоких дозах. Безопасность определяет доза и форма, а не происхождение.</span></span>
+      </div>
+      <div class="myth">
+        <span class="no"><svg class="ico"><use href="#i-x"/></svg> «Чем больше, тем лучше»</span>
+        <span class="yes"><svg class="ico"><use href="#i-check"/></svg><span>Для водорастворимых лишнее просто выйдет с мочой, для жирорастворимых — <b>накопится</b>. У B6 при годах высоких доз развивается нейропатия.</span></span>
+      </div>
+      <div class="myth">
+        <span class="no"><svg class="ico"><use href="#i-x"/></svg> «Пью комплекс — значит закрыл всё»</span>
+        <span class="yes"><svg class="ico"><use href="#i-check"/></svg><span>В мультикомплексах дозы часто следовые, а формы — самые дешёвые. Смотреть нужно <b>состав и дозы</b>, а не число позиций на этикетке.</span></span>
+      </div>
+      <div class="myth">
+        <span class="no"><svg class="ico"><use href="#i-x"/></svg> «Анализы не нужны, и так понятно»</span>
+        <span class="yes"><svg class="ico"><use href="#i-check"/></svg><span>Уровень витамина Д и запасы железа <b>не видно снаружи</b>. А ферритин при воспалении вообще выглядит нормальным при реальном дефиците.</span></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="b-step" id="b9">
+    <span class="stepno">Шаг 09</span>
+    <h2>Куда идти дальше</h2>
+    <p>Порядок именно такой: сначала понять логику, потом набрать фактуру, потом проверить себя, и только потом — практика с живым человеком.</p>
+    <div class="route">
+      <button class="rt" data-view="ref" data-anchor="fat"><span class="rn"><svg class="ico"><use href="#i-book"/></svg> Шаг второй</span><b>Справочник</b><span>Все витамины: формы, функции, дозировки. Читать по одному разделу, отмечая разобранное.</span></button>
+      <button class="rt" data-view="trainer"><span class="rn"><svg class="ico"><use href="#i-target"/></svg> Шаг третий</span><b>Тренажёр</b><span>Проверка на вопросах с разбором. Показывает, какие витамины у вас слабые.</span></button>
+      <button class="rt" data-view="practice"><span class="rn"><svg class="ico"><use href="#i-steth"/></svg> Шаг четвёртый</span><b>Практика консультации</b><span>Лекарства, анализы, красные флаги — то, что отличает консультанта от знатока таблицы.</span></button>
+      <button class="rt" data-view="progress"><span class="rn"><svg class="ico"><use href="#i-chart"/></svg> Каждый день</span><b>Прогресс</b><span>Кольцо готовности, серия дней и карточки, которые пора повторить.</span></button>
+    </div>
+  </section>
+
+  <footer style="border-top:1px solid var(--border);padding:24px 0 40px;margin-top:46px;color:var(--text-3);font-size:13.5px;max-width:74ch">
+    Учебный материал, не назначение. Дозировки приведены по конспекту курса; официальные верхние пределы и расхождения с ними разобраны в разделе «Практика консультации».
+  </footer>
+</div>
+</div>
+
+<!-- ================= СПРАВОЧНИК ================= -->
+<div class="view" id="view-ref">
+<div class="shell">
+  <header class="view-head">
+    <div class="kicker">Справочник · формы · функции · дозировки</div>
+    <h1>Все витамины по порядку</h1>
+    <p class="lede">Полный конспект: какие бывают формы, чем активная отличается от классической, в чём считается доза и с чем сочетать. Отмечайте разобранное — прогресс сохраняется.</p>
+    <div class="rules">
+      <div class="rule">
+        <span class="tagline"><svg class="ico"><use href="#i-drop"/></svg> Растворяются в жирах</span>
+        <h3>Жирорастворимые: А · Е · Д · К</h3>
+        <p>Накапливаются в жировой ткани — поэтому их принимают <b>курсами</b>, а не постоянно. Пить нужно вместе с жирами: без жиров они не усвоятся.</p>
+      </div>
+      <div class="rule water">
+        <span class="tagline"><svg class="ico"><use href="#i-wave"/></svg> Растворяются в воде</span>
+        <h3>Водорастворимые: С · группа B</h3>
+        <p>Почти не накапливаются, поэтому должны поступать <b>постоянно и понемногу</b> — из еды или БАДов. Излишки выводятся.</p>
+      </div>
+    </div>
+  </header>
+
+  <div class="toolbar">
+    <div class="toolbar-in">
+      <label class="search">
+        <svg class="ico"><use href="#i-search"/></svg>
+        <input id="q" type="search" placeholder="Поиск: метилфолат, гомоцистеин, МК-7…" aria-label="Поиск по витаминам, формам и функциям">
+      </label>
+      <div class="chips" id="chips" role="group" aria-label="Фильтр по группам">
+        <button class="chip" data-filter="all" aria-pressed="true">Все</button>
+        <button class="chip" data-filter="fat" aria-pressed="false">Жирорастворимые</button>
+        <button class="chip" data-filter="water" aria-pressed="false">Водорастворимые</button>
+        <button class="chip" data-filter="like" aria-pressed="false">Витаминоподобные</button>
+      </div>
+      <div class="progress" title="Отмечено как разобранное">
+        <div class="bar-p"><span id="barfill"></span></div>
+        <span id="progtext">0 / 0 разобрано</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid">
+    <nav class="rail" aria-label="Содержание">
+      <h4>Жирорастворимые</h4>
+      <ul id="rail-fat"></ul>
+      <h4>Водорастворимые</h4>
+      <ul id="rail-water"></ul>
+      <h4>Разделы</h4>
+      <ul><li><a href="#combos">Лучшие сочетания</a></li></ul>
+    </nav>
+
+    <main>
+      <p class="empty hidden" id="empty">Ничего не нашлось — попробуйте другое слово или снимите фильтр.</p>
+
+      <section class="sec" id="fat">
+        <div class="sec-head"><h2>Жирорастворимые</h2><span class="count">4 витамина · курсами, с жирами</span></div>
+        <div class="tool">
+          <h3><svg class="ico"><use href="#i-calc"/></svg> Конвертер МЕ ⇄ масса</h3>
+          <p class="hint">Дозировки жирорастворимых пишут в международных единицах. Пересчёт по коэффициентам из конспекта.</p>
+          <div class="conv">
+            <div class="field">
+              <label for="conv-v">Вещество</label>
+              <select id="conv-v">
+                <option value="3.3" data-unit="мкг">Ретинол (витамин А)</option>
+                <option value="0.61" data-unit="мкг">Бета-каротин</option>
+                <option value="40" data-unit="мкг">Витамин Д-3</option>
+                <option value="1.23" data-unit="мг">Витамин Е</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="conv-mass"><span id="conv-mass-label">мкг</span></label>
+              <input id="conv-mass" type="number" min="0" step="any" value="1000">
+            </div>
+            <span class="eq">=</span>
+            <div class="field">
+              <label for="conv-iu">МЕ</label>
+              <input id="conv-iu" type="number" min="0" step="any" value="3300">
+            </div>
+          </div>
+          <p class="conv-note" id="conv-formula">1 мкг ретинола = 3,3 МЕ</p>
+        </div>
+        <div id="list-fat"></div>
+      </section>
+
+      <section class="sec" id="water">
+        <div class="sec-head"><h2>Водорастворимые</h2><span class="count">C и группа B · каждый день</span></div>
+        <p class="sec-note">Группа B — большой набор соединений, участвующих в выработке энергии и работе мозга, поэтому функции у них часто пересекаются. Витамины группы B довольно аллергенны: при рекомендации всегда уточняйте про аллергии.</p>
+        <div id="list-water"></div>
+      </section>
+
+      <section class="sec" id="combos">
+        <div class="sec-head"><h2>Лучшие сочетания</h2><span class="count">что работает в связке</span></div>
+        <div class="combos">
+          <article class="combo">
+            <h4>Снижение гомоцистеина</h4>
+            <div class="stack"><span>Б-2</span><span>Б-6</span><span>Б-9</span><span>Б-12</span><span>ТМГ / бетаин</span></div>
+            <p class="hint">Все пятеро работают в фолатном цикле и метилировании — по отдельности эффект слабее.</p>
+          </article>
+          <article class="combo">
+            <h4>Поддержка выработки энергии</h4>
+            <div class="stack"><span>Б-5</span><span>Б-6</span><span>Б-11</span><span>Б-14</span><span>Коэнзим Q10</span><span>Магний</span></div>
+            <p class="hint">Карнитин везёт жир в митохондрию, PQQ и Q10 работают в дыхательной цепи.</p>
+          </article>
+          <article class="combo">
+            <h4>Репродуктивная функция</h4>
+            <div class="stack"><span>Б-8</span><span>Б-9</span><span>Витамин Е</span></div>
+            <p class="hint">Инозитол по яичникам, фолат по развитию плода, Е как антиоксидант.</p>
+          </article>
+        </div>
+        <p class="note">Больше связок, а также антагонизмы и взаимодействия с лекарствами — в разделе «Практика консультации».</p>
+      </section>
+    </main>
+  </div>
+</div>
+</div>
+<!-- ================= ПРАКТИКА ================= -->
+<div class="view" id="view-practice">
+<div class="shell narrow">
+  <header class="view-head">
+    <div class="kicker">Уровень выше конспекта · практика приёма</div>
+    <h1>Практика консультации</h1>
+    <p class="lede">Формы и дозировки — половина работы. Вторая половина начинается, когда клиент говорит «я ещё пью омепразол», «я на варфарине» или «анализы в норме, а симптомы есть».</p>
+    <nav class="toc">
+      <a href="#sinergy">Синергии</a><a href="#anti">Антагонизмы</a><a href="#drugs">Лекарства</a>
+      <a href="#pflags">Красные флаги</a><a href="#limits">Верхние пределы</a><a href="#timing">Время приёма</a>
+      <a href="#signs">Признаки дефицита</a><a href="#labs">Анализы</a><a href="#label">Этикетка</a>
+      <a href="#risk">Группы риска</a><a href="#protocol">Протокол</a>
+    </nav>
+  </header>
+
+  <section class="psec" id="sinergy">
+    <div class="sec-head thin"><h2>Синергии: что не работает поодиночке</h2><span class="tagline">связки</span></div>
+    <p class="intro">Половина «неработающих» добавок не работает потому, что им не дали партнёра. Эти связки стоит проговаривать клиенту сразу.</p>
+    <div class="pairs">
+      <div class="pair"><h4>Д-3 + К-2 + магний + жиры</h4><p class="why">Д-3 усиливает всасывание кальция, К-2 определяет, куда этот кальций пойдёт — в кость или в стенку сосуда. Магний нужен для превращения витамина Д в активную форму.</p><p class="how">базовая схема при приёме Д-3 дольше месяца</p></div>
+      <div class="pair"><h4>Железо + витамин С</h4><p class="why">Аскорбиновая кислота восстанавливает трёхвалентное железо до двухвалентного — всасывание растёт в разы. Особенно важно для негемового железа из растительной пищи.</p><p class="how">железо натощак + 200–500 мг С, отдельно от кальция</p></div>
+      <div class="pair"><h4>Б-2 + Б-6 + Б-9 + Б-12 + ТМГ</h4><p class="why">Ядро фолатного цикла. Гомоцистеин снижается, только когда работают все звенья: B2 — кофактор MTHFR, B6 — транссульфурация, B9 и B12 — реметилирование, ТМГ — запасной путь.</p><p class="how">базовая схема снижения гомоцистеина</p></div>
+      <div class="pair"><h4>Витамин Е + витамин С</h4><p class="why">Отработавший токоферол сам становится радикалом; витамин С регенерирует его обратно. Поэтому Е в одиночку в высоких дозах — не лучшая идея.</p><p class="how">антиоксидантная связка, физиологичные дозы</p></div>
+      <div class="pair"><h4>PQQ + коэнзим Q10</h4><p class="why">PQQ стимулирует появление новых митохондрий, Q10 обслуживает дыхательную цепь в уже существующих. Отсюда и указание принимать их вместе.</p><p class="how">схема при хронической усталости</p></div>
+      <div class="pair"><h4>Цинк + медь</h4><p class="why">Формально это антагонисты, но именно поэтому их держат в связке: длительный цинк без меди даёт медьдефицитную анемию и нейропатию.</p><p class="how">цинк : медь ≈ 10–15 : 1 при курсах дольше 8 недель</p></div>
+    </div>
+
+    <figure class="figure">
+      <svg viewBox="0 0 640 250" role="img" aria-label="Витамин Д повышает усвоение кальция, а витамин К-2 определяет, куда этот кальций попадёт">
+        <g>
+          <rect x="10" y="98" width="150" height="58" rx="12" class="fig-oil"/>
+          <text class="fig-t" x="85" y="122" text-anchor="middle">Витамин Д-3</text>
+          <text class="fig-b" x="85" y="141" text-anchor="middle">усиливает всасывание</text>
+        </g>
+        <path class="fig-line" d="M166 127h54"/><path class="fig-line" d="m214 121 8 6-8 6"/>
+        <g>
+          <rect x="226" y="98" width="160" height="58" rx="12" class="fig-line" fill="var(--surface-2)"/>
+          <text class="fig-t" x="306" y="122" text-anchor="middle">Кальций в крови</text>
+          <text class="fig-b" x="306" y="141" text-anchor="middle">куда он пойдёт дальше?</text>
+        </g>
+        <path class="fig-line" d="M392 120c30 0 30-60 60-60"/><path class="fig-line" d="m446 54 8 6-8 6"/>
+        <path class="fig-line" d="M392 134c30 0 30 60 60 60" stroke-dasharray="5 5"/><path class="fig-line" d="m446 188 8 6-8 6"/>
+        <g>
+          <rect x="458" y="32" width="172" height="56" rx="12" fill="var(--ok-soft)" stroke="var(--ok)" stroke-width="1.5"/>
+          <text class="fig-t" x="544" y="55" text-anchor="middle">Есть К-2 → в кости</text>
+          <text class="fig-b" x="544" y="74" text-anchor="middle">плотность костей растёт</text>
+        </g>
+        <g>
+          <rect x="458" y="166" width="172" height="56" rx="12" fill="var(--warn-soft)" stroke="var(--warn)" stroke-width="1.5"/>
+          <text class="fig-t" x="544" y="189" text-anchor="middle">Нет К-2 → в сосуды</text>
+          <text class="fig-b" x="544" y="208" text-anchor="middle">кальцификация</text>
+        </g>
+        <text class="fig-s" x="10" y="196">магний нужен, чтобы Д-3 вообще стал активным</text>
+      </svg>
+      <figcaption>Почему Д-3 не назначают в одиночку: кальций надо не только усвоить, но и правильно направить</figcaption>
+    </figure>
+
+    <figure class="figure">
+      <svg viewBox="0 0 640 280" role="img" aria-label="Пять участников фолатного цикла, снижающих гомоцистеин">
+        <ellipse cx="320" cy="140" rx="104" ry="46" fill="var(--accent-2-soft)" stroke="var(--accent-2)" stroke-width="1.5"/>
+        <text class="fig-t" x="320" y="134" text-anchor="middle" style="font-size:15px">Гомоцистеин</text>
+        <text class="fig-b" x="320" y="156" text-anchor="middle">снижается только вместе</text>
+        <g>
+          <rect x="10" y="18" width="196" height="52" rx="12" class="fig-line" fill="var(--surface-2)"/>
+          <text class="fig-t" x="108" y="40" text-anchor="middle">Б-9 + Б-12</text>
+          <text class="fig-b" x="108" y="58" text-anchor="middle">реметилирование в метионин</text>
+          <path class="fig-line" d="M150 74c30 14 50 30 68 44"/><path class="fig-line" d="m208 110 12 4-4-12"/>
+        </g>
+        <g>
+          <rect x="434" y="18" width="196" height="52" rx="12" class="fig-line" fill="var(--surface-2)"/>
+          <text class="fig-t" x="532" y="40" text-anchor="middle">Б-2</text>
+          <text class="fig-b" x="532" y="58" text-anchor="middle">кофактор фермента MTHFR</text>
+          <path class="fig-line" d="M490 74c-30 14-50 30-68 44"/><path class="fig-line" d="m432 110-12 4 4-12"/>
+        </g>
+        <g>
+          <rect x="10" y="210" width="196" height="52" rx="12" class="fig-line" fill="var(--surface-2)"/>
+          <text class="fig-t" x="108" y="232" text-anchor="middle">ТМГ (бетаин)</text>
+          <text class="fig-b" x="108" y="250" text-anchor="middle">запасной путь метилирования</text>
+          <path class="fig-line" d="M150 206c30-14 50-30 68-44"/><path class="fig-line" d="m208 170 12-4-4 12"/>
+        </g>
+        <g>
+          <rect x="434" y="210" width="196" height="52" rx="12" class="fig-line" fill="var(--surface-2)"/>
+          <text class="fig-t" x="532" y="232" text-anchor="middle">Б-6</text>
+          <text class="fig-b" x="532" y="250" text-anchor="middle">транссульфурация в цистеин</text>
+          <path class="fig-line" d="M490 206c-30-14-50-30-68-44"/><path class="fig-line" d="m432 170-12-4 4 12"/>
+        </g>
+      </svg>
+      <figcaption>Убрать одно звено — и схема снижения гомоцистеина перестаёт работать целиком</figcaption>
+    </figure>
+  </section>
+
+  <section class="psec" id="anti">
+    <div class="sec-head thin"><h2>Антагонизмы: что развести по времени</h2><span class="tagline">конкуренция</span></div>
+    <p class="intro">Минералы конкурируют за одни и те же транспортёры в кишечнике. Клиент, ссыпающий всё в один приём, теряет часть купленного.</p>
+    <div class="scroller">
+      <table>
+        <thead><tr><th>Пара</th><th>Что происходит</th><th>Что делать</th></tr></thead>
+        <tbody>
+          <tr><td class="k">Кальций ↔ железо</td><td>Кальций напрямую блокирует всасывание железа</td><td>Развести минимум на 2 часа</td></tr>
+          <tr><td class="k">Кальций ↔ цинк, магний</td><td>Конкуренция за транспорт при высоких дозах</td><td>Кальций вечером, цинк и магний — в другой приём</td></tr>
+          <tr><td class="k">Цинк ↔ медь</td><td>Цинк индуцирует металлотионеин, который связывает медь</td><td>Добавлять медь при курсах цинка дольше 8 недель</td></tr>
+          <tr><td class="k">Цинк ↔ железо</td><td>Взаимное снижение всасывания в высоких дозах</td><td>Разные приёмы пищи</td></tr>
+          <tr><td class="k">Железо ↔ чай, кофе, какао</td><td>Танины и полифенолы связывают железо в кишечнике</td><td>Не запивать; интервал 1–2 часа</td></tr>
+          <tr><td class="k">Железо ↔ отруби, цельные злаки</td><td>Фитаты связывают железо и цинк</td><td>Принимать отдельно от каш и хлеба</td></tr>
+          <tr><td class="k">Фолиевая кислота ↔ Б-12</td><td>Высокие дозы фолата убирают анемию, маскируя дефицит B12, — неврология при этом прогрессирует</td><td>Не давать высокий фолат без оценки B12</td></tr>
+          <tr><td class="k">Витамин Е ↔ витамин К</td><td>Высокие дозы Е ослабляют действие витамина К на свёртываемость</td><td>Осторожно при склонности к кровоточивости</td></tr>
+          <tr><td class="k">Марганец ↔ железо</td><td>Общий транспортёр DMT1</td><td>Не в один приём</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="psec" id="drugs">
+    <div class="sec-head thin"><h2>Лекарства, которые истощают нутриенты</h2><span class="tagline">анамнез</span></div>
+    <p class="intro">Вопрос «что вы принимаете из лекарств?» даёт больше, чем половина остального опроса.</p>
+    <div class="scroller">
+      <table>
+        <thead><tr><th>Препарат</th><th>Что истощает</th><th>Что учитывать</th></tr></thead>
+        <tbody>
+          <tr><td class="k">Метформин</td><td>B12</td><td>Проверять B12 и гомоцистеин при приёме дольше года</td></tr>
+          <tr><td class="k">ИПП (омепразол и др.)</td><td>B12, магний, железо, кальций</td><td>Без соляной кислоты B12 не отщепляется от белка пищи</td></tr>
+          <tr><td class="k">Оральные контрацептивы</td><td>B6, B9, B12, C, магний, цинк, селен</td><td>Стандартный пункт опроса у женщин; часто отсюда «беспричинная» усталость</td></tr>
+          <tr><td class="k">Статины</td><td>Коэнзим Q10</td><td>Мышечные боли — повод обсудить Q10 с врачом, не отменять статин</td></tr>
+          <tr><td class="k">Диуретики</td><td>B1, магний, калий, цинк</td><td>Дефицит тиамина при длительной терапии сердечной недостаточности</td></tr>
+          <tr><td class="k">Кортикостероиды</td><td>Кальций, витамин Д, калий, цинк</td><td>Длительный приём — риск остеопороза</td></tr>
+          <tr><td class="k">Антибиотики широкого спектра</td><td>K-2, биотин, группа B</td><td>Часть K-2 и биотина синтезирует микробиота</td></tr>
+          <tr><td class="k">Противосудорожные</td><td>Витамин Д, фолат, B12, K, биотин</td><td>Ускоряют печёночный метаболизм витамина Д</td></tr>
+          <tr><td class="k">Изониазид, гидралазин, пеницилламин</td><td>B6</td><td>Классическая лекарственная B6-нейропатия</td></tr>
+          <tr><td class="k">Метотрексат</td><td>Фолат</td><td>Прямой антагонист: фолат назначает врач и по схеме</td></tr>
+          <tr><td class="k">Холестирамин, орлистат</td><td>A, D, E, K</td><td>Связывают жиры — вместе с ними уходят жирорастворимые витамины</td></tr>
+          <tr><td class="k">Слабительные длительно</td><td>Жирорастворимые, калий</td><td>Ускоренный транзит не даёт всасыванию состояться</td></tr>
+          <tr><td class="k">Леводопа (без карбидопы)</td><td>—</td><td>Высокие дозы B6 снижают эффект препарата</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="psec" id="pflags">
+    <div class="sec-head thin"><h2>Красные флаги</h2><span class="tagline">стоп-лист</span></div>
+    <p class="intro">Ситуации, где правильный ответ консультанта — «это решает врач». Одна такая ошибка стоит дороже всех удачных рекомендаций.</p>
+    <div class="rflags">
+      <div class="rflag"><span class="who"><svg class="ico"><use href="#i-alert"/></svg>Варфарин и антикоагулянты</span><span class="what">Витамин К — прямой антагонист варфарина, меняет МНО. Высокие дозы Е, рыбьего жира, гинкго усиливают кровоточивость.</span></div>
+      <div class="rflag"><span class="who"><svg class="ico"><use href="#i-alert"/></svg>Беременность</span><span class="what">Ретинол в высоких дозах тератогенен. Все дозировки — только согласованные с ведущим врачом; фолат обязателен, но в дозах по протоколу.</span></div>
+      <div class="rflag"><span class="who"><svg class="ico"><use href="#i-alert"/></svg>Онкология в активном лечении</span><span class="what">Часть химио- и лучевой терапии работает через окислительный стресс. Дозы антиоксидантов определяет онколог.</span></div>
+      <div class="rflag"><span class="who"><svg class="ico"><use href="#i-alert"/></svg>Саркоидоз, туберкулёз, лимфомы</span><span class="what">Гранулёмы сами активируют витамин Д — добавки легко дают гиперкальциемию.</span></div>
+      <div class="rflag"><span class="who"><svg class="ico"><use href="#i-alert"/></svg>Хроническая болезнь почек</span><span class="what">Магний, калий, фосфор и витамин Д — только под контролем нефролога.</span></div>
+      <div class="rflag"><span class="who"><svg class="ico"><use href="#i-alert"/></svg>Гемохроматоз, талассемия</span><span class="what">Железо противопоказано, витамин С в высоких дозах усиливает его всасывание и токсичность.</span></div>
+      <div class="rflag"><span class="who"><svg class="ico"><use href="#i-alert"/></svg>Мочекаменная болезнь</span><span class="what">Витамин С выше 1 000 мг длительно повышает экскрецию оксалатов.</span></div>
+      <div class="rflag"><span class="who"><svg class="ico"><use href="#i-alert"/></svg>Подагра и болезни печени</span><span class="what">Никотиновая кислота в высоких дозах повышает мочевую кислоту и печёночные ферменты.</span></div>
+      <div class="rflag"><span class="who"><svg class="ico"><use href="#i-alert"/></svg>Амигдалин (Б-17)</span><span class="what">Эффективность при онкологии не подтверждена, при распаде выделяется цианид, описаны отравления. Как лекарство не одобрен.</span></div>
+    </div>
+  </section>
+
+  <section class="psec" id="limits">
+    <div class="sec-head thin"><h2>Верхние пределы и передозировка</h2><span class="tagline">безопасность</span></div>
+    <p class="intro">Верхний допустимый уровень (UL) — доза, безопасная при длительном ежедневном приёме без наблюдения. Терапевтические курсовые дозы бывают выше — и именно поэтому они курсовые.</p>
+    <div class="scroller">
+      <table>
+        <thead><tr><th>Нутриент</th><th>UL, взрослые</th><th>Что бывает при избытке</th></tr></thead>
+        <tbody>
+          <tr><td class="k">Витамин А (ретинол)</td><td class="num">≈ 3 000 мкг / 10 000 МЕ</td><td>Головная боль, сухость кожи, выпадение волос, повреждение печени, пороки развития плода<small>Бета-каротин так не работает — избыток даёт лишь оранжевый оттенок кожи</small></td></tr>
+          <tr><td class="k">Витамин Д</td><td class="num">4 000 МЕ без контроля</td><td>Гиперкальциемия: жажда, тошнота, слабость, камни в почках<small>Выше — только по анализам 25(ОН)D и кальция</small></td></tr>
+          <tr><td class="k">Витамин Е</td><td class="num">≈ 1 000 мг / 1 500 МЕ</td><td>Повышенная кровоточивость, особенно с антикоагулянтами</td></tr>
+          <tr><td class="k">Витамин К</td><td class="num">не установлен</td><td>Безопасен, кроме взаимодействия с варфарином</td></tr>
+          <tr><td class="k">Витамин С</td><td class="num">2 000 мг</td><td>Диарея, боль в животе, оксалатные камни у предрасположенных</td></tr>
+          <tr><td class="k">Ниацин (B3)</td><td class="num">35 мг по флашу</td><td>Флаш; при 1–2 г и выше — гепатотоксичность, рост сахара и мочевой кислоты</td></tr>
+          <tr><td class="k">Витамин B6</td><td class="num">≈ 25–100 мг</td><td>Сенсорная нейропатия при длительном приёме высоких доз — единственный витамин группы B с доказанной токсичностью</td></tr>
+          <tr><td class="k">Фолиевая кислота</td><td class="num">1 000 мкг синтетической</td><td>Маскирует дефицит B12<small>Ограничение относится к синтетической форме, не к фолату пищи</small></td></tr>
+          <tr><td class="k">Цинк</td><td class="num">40 мг</td><td>Дефицит меди, тошнота, снижение иммунной функции</td></tr>
+          <tr><td class="k">Селен</td><td class="num">400 мкг</td><td>Ломкость волос и ногтей, чесночный запах изо рта, нейропатия</td></tr>
+          <tr><td class="k">Железо</td><td class="num">45 мг</td><td>Запоры, окислительный стресс, перегрузка при гемохроматозе</td></tr>
+          <tr><td class="k">B1, B2, B5, B7, B12</td><td class="num">не установлен</td><td>Избыток выводится с мочой; ограничение — индивидуальная переносимость</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note"><b>Как это соотносится с конспектом.</b> Часть учебных дозировок (витамин А до 25 000 МЕ, Д до 10 000 МЕ, Е до 1 000 МЕ, биотин 10 000 мкг) выше официальных UL. Это допустимо как терапевтический курс под контролем анализов и ограниченный по времени, но не как «пью постоянно». Разницу клиенту нужно проговаривать явно.</p>
+
+    <figure class="figure">
+      <div style="display:flex;flex-direction:column;gap:18px">
+        <div>
+          <div style="display:flex;justify-content:space-between;font-size:14px"><b>Витамин А</b><span class="mono" style="color:var(--text-3)">UL 10 000 МЕ</span></div>
+          <div class="dscale"><div class="track2"><i class="z1" style="width:22%"></i><i class="z2" style="width:38%"></i><i class="z3" style="width:40%"></i></div>
+          <div class="labels"><span>2 500</span><span>10 000 — предел</span><span>25 000 по конспекту</span></div></div>
+        </div>
+        <div>
+          <div style="display:flex;justify-content:space-between;font-size:14px"><b>Витамин Д</b><span class="mono" style="color:var(--text-3)">UL 4 000 МЕ</span></div>
+          <div class="dscale"><div class="track2"><i class="z1" style="width:20%"></i><i class="z2" style="width:20%"></i><i class="z3" style="width:60%"></i></div>
+          <div class="labels"><span>2 000</span><span>4 000 — предел</span><span>10 000 по конспекту</span></div></div>
+        </div>
+        <div>
+          <div style="display:flex;justify-content:space-between;font-size:14px"><b>Витамин B6</b><span class="mono" style="color:var(--text-3)">UL ≈ 100 мг</span></div>
+          <div class="dscale"><div class="track2"><i class="z1" style="width:14%"></i><i class="z2" style="width:36%"></i><i class="z3" style="width:50%"></i></div>
+          <div class="labels"><span>3 мг</span><span>50–100 мг курсом</span><span>200 мг → нейропатия</span></div></div>
+        </div>
+      </div>
+      <figcaption>Зелёная зона — можно длительно · охра — курс под контролем · красная — только по назначению врача</figcaption>
+    </figure>
+  </section>
+
+  <section class="psec" id="timing">
+    <div class="sec-head thin"><h2>Время и условия приёма</h2><span class="tagline">режим дня</span></div>
+    <p class="intro">Готовая схема, которую можно отдавать клиенту как есть.</p>
+    <div class="day">
+      <div class="slot"><span class="when">Утро, натощак</span><span class="what"><b>Железо + витамин С</b><span>За 30–40 минут до еды, не запивать чаем и кофе, отдельно от кальция</span></span></div>
+      <div class="slot"><span class="when">Завтрак, с жирами</span><span class="what"><b>A, D, E, K, коэнзим Q10, омега-3</b><span>Без жиров жирорастворимые не пройдут в организм</span></span></div>
+      <div class="slot"><span class="when">Завтрак или обед</span><span class="what"><b>Витамины группы B, B-комплекс</b><span>Участвуют в выработке энергии и у части людей бодрят — не на ночь</span></span></div>
+      <div class="slot"><span class="when">До еды или тренировки</span><span class="what"><b>Л-карнитин</b><span>За 30 минут; ацетил-форму — в первой половине дня, она работает по мозгу</span></span></div>
+      <div class="slot"><span class="when">В течение дня, дробно</span><span class="what"><b>Витамин С</b><span>Быстро выводится: 2–3 приёма лучше одного большого</span></span></div>
+      <div class="slot"><span class="when">Обед или ужин</span><span class="what"><b>Цинк, инозитол</b><span>Цинк натощак часто даёт тошноту; отдельно от кальция и железа</span></span></div>
+      <div class="slot"><span class="when">Вечер</span><span class="what"><b>Магний, кальций</b><span>Магний расслабляет и поддерживает сон; кальций не с железом</span></span></div>
+    </div>
+    <p class="note"><b>Правило ввода.</b> Новые добавки вводят по одной каждые 3–5 дней. Если ввести восемь сразу и появится сыпь или тошнота — виновника не найти.</p>
+  </section>
+
+  <section class="psec" id="signs">
+    <div class="sec-head thin"><h2>Признаки дефицита на приёме</h2><span class="tagline">осмотр и опрос</span></div>
+    <p class="intro">Ни один признак сам по себе не диагноз — но он говорит, что проверять. В столбце «первым делом» стоит самая частая причина.</p>
+    <div class="scroller">
+      <table>
+        <thead><tr><th>Что говорит клиент</th><th>Первым делом</th><th>Затем</th></tr></thead>
+        <tbody>
+          <tr><td class="k">Заеды в углах рта, трещины губ</td><td>B2</td><td>B6, железо, цинк</td></tr>
+          <tr><td class="k">Гладкий болезненный язык</td><td>B12</td><td>B9, железо, B2</td></tr>
+          <tr><td class="k">Онемение, покалывание в кистях и стопах</td><td>B12</td><td>B1, B6 (и дефицит, и избыток)</td></tr>
+          <tr><td class="k">Кровоточивость дёсен, синяки</td><td>Витамин С</td><td>Витамин К, тромбоциты</td></tr>
+          <tr><td class="k">Ночная слепота, сухость глаз</td><td>Витамин А</td><td>Цинк — он нужен для работы ретинола</td></tr>
+          <tr><td class="k">«Гусиная кожа» на плечах, сухие локти</td><td>Витамин А</td><td>Омега-3, витамин Е</td></tr>
+          <tr><td class="k">Выпадение волос у женщин</td><td>Ферритин, щитовидная железа</td><td>Витамин Д, цинк, биотин, белок</td></tr>
+          <tr><td class="k">Ломкие слоящиеся ногти</td><td>Железо</td><td>Биотин, цинк, кремний</td></tr>
+          <tr><td class="k">Ночные судороги икр</td><td>Магний</td><td>Витамин Д, калий, B6</td></tr>
+          <tr><td class="k">Апатия, подавленность, туман в голове</td><td>Витамин Д, B12</td><td>Железо, фолат, щитовидная железа</td></tr>
+          <tr><td class="k">Частые ОРВИ</td><td>Витамин Д</td><td>Цинк, витамин С, железо</td></tr>
+          <tr><td class="k">Долго не заживают ранки</td><td>Цинк</td><td>Витамин С, белок, B5</td></tr>
+          <tr><td class="k">Утомляемость при нормальном гемоглобине</td><td>Ферритин — скрытый дефицит железа</td><td>B12, витамин Д, щитовидная железа</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="psec" id="labs">
+    <div class="sec-head thin"><h2>Анализы: что информативно, а что нет</h2><span class="tagline">диагностика</span></div>
+    <p class="intro">Половина ошибок в рекомендациях идёт от неверного анализа.</p>
+    <div class="scroller">
+      <table>
+        <thead><tr><th>Задача</th><th>Что сдавать</th><th>Что обманет</th></tr></thead>
+        <tbody>
+          <tr><td class="k">Статус витамина Д</td><td>25(ОН)D — кальцидиол</td><td>1,25(ОН)₂D: при дефиците бывает нормальным за счёт роста ПТГ</td></tr>
+          <tr><td class="k">Запасы железа</td><td>Ферритин + СРБ, ОЖСС, трансферрин</td><td>Сывороточное железо колеблется в течение суток; гемоглобин падает последним</td></tr>
+          <tr><td class="k">Статус B12</td><td>Гомоцистеин, метилмалоновая кислота, активный B12</td><td>Общий B12 считает и неактивные формы — бывает «норма» при дефиците</td></tr>
+          <tr><td class="k">Фолатный статус</td><td>Фолат эритроцитов, гомоцистеин</td><td>Сывороточный фолат отражает только последние приёмы пищи</td></tr>
+          <tr><td class="k">Метилирование</td><td>Гомоцистеин; при отклонениях — полиморфизмы MTHFR</td><td>Генетика без гомоцистеина: полиморфизм не равен нарушению</td></tr>
+          <tr><td class="k">Магний</td><td>Магний в эритроцитах</td><td>Магний сыворотки — это 1 % запаса, держится нормальным до последнего</td></tr>
+          <tr><td class="k">Дефицит B12 или B9 по ОАК</td><td>MCV: макроцитоз — сигнал</td><td>При сопутствующем дефиците железа MCV может быть нормальным</td></tr>
+          <tr><td class="k">Костный обмен на фоне Д</td><td>Кальций общий и ионизированный, ПТГ, щелочная фосфатаза</td><td>Оценка «по самочувствию» при дозах выше 4 000 МЕ</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note"><b>Важно перед сдачей.</b> Биотин в высоких дозах (5 000–10 000 мкг) искажает лабораторные тесты на биотин-стрептавидиновой платформе — ТТГ, половые гормоны, тропонин. Отменять за 2–3 дня; описаны случаи ложной картины гипертиреоза и ложноположительного тропонина.</p>
+  </section>
+
+  <section class="psec" id="label">
+    <div class="sec-head thin"><h2>Как читать этикетку</h2><span class="tagline">разбор банки</span></div>
+    <p class="intro">Клиент приходит с фотографией банки. За минуту нужно понять, что он купил.</p>
+    <div class="scroller">
+      <table>
+        <thead><tr><th>Нутриент</th><th>Хорошая форма</th><th>Слабая форма</th></tr></thead>
+        <tbody>
+          <tr><td class="k">B-9</td><td>Метилфолат, 5-MTHF, Quatrefolic, Metafolin</td><td>Folic acid — синтетическая фолиевая</td></tr>
+          <tr><td class="k">B-12</td><td>Метилкобаламин, аденозил-, гидроксикобаламин</td><td>Цианкобаламин</td></tr>
+          <tr><td class="k">B-6</td><td>Пиридоксаль-5-фосфат, P-5-P</td><td>Пиридоксина гидрохлорид</td></tr>
+          <tr><td class="k">Витамин Д</td><td>Холекальциферол, D3</td><td>Эргокальциферол, D2</td></tr>
+          <tr><td class="k">Витамин К</td><td>МК-7, MenaQ7</td><td>МК-4 в микродозах, только К-1</td></tr>
+          <tr><td class="k">Витамин Е</td><td>d-alpha + смесь токоферолов и токотриенолов</td><td>dl-alpha — синтетическая, вдвое слабее</td></tr>
+          <tr><td class="k">Магний</td><td>Глицинат, малат, цитрат, треонат</td><td>Оксид — усваивается плохо, работает как слабительное</td></tr>
+          <tr><td class="k">Цинк, железо</td><td>Хелаты: бисглицинат, пиколинат, Albion, Ferrochel</td><td>Оксид, сульфат — раздражают ЖКТ</td></tr>
+          <tr><td class="k">Кальций</td><td>Цитрат, гидроксиапатит</td><td>Карбонат — требует высокой кислотности</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <ul class="bullets" style="margin-top:16px">
+      <li><b>Смотрите размер порции.</b> «2 000 мг» на лицевой стороне часто означает 4 капсулы, а не одну.</li>
+      <li><b>Ищите дозировки внутри «комплекса».</b> «Фирменная смесь» без миллиграммов обычно значит следовые количества активных компонентов.</li>
+      <li><b>Проверяйте, чего не хватает рядом.</b> Д-3 без К-2 и магния, цинк без меди, железо без C — типичные неполные банки.</li>
+      <li><b>Наполнители имеют значение.</b> Диоксид титана, красители, избыток стеаратов — повод выбрать другой бренд при чувствительном ЖКТ.</li>
+    </ul>
+  </section>
+
+  <section class="psec" id="risk">
+    <div class="sec-head thin"><h2>Группы риска</h2><span class="tagline">кому проверять заранее</span></div>
+    <div class="scroller">
+      <table>
+        <thead><tr><th>Кто</th><th>Что проверять в первую очередь</th></tr></thead>
+        <tbody>
+          <tr><td class="k">Веганы и вегетарианцы</td><td>B12, железо и ферритин, цинк, омега-3, витамин Д, йод</td></tr>
+          <tr><td class="k">Беременные и планирующие</td><td>Фолат, B12, железо, витамин Д, йод, омега-3</td></tr>
+          <tr><td class="k">Пожилые</td><td>B12 (атрофический гастрит), витамин Д, кальций, белок</td></tr>
+          <tr><td class="k">После бариатрической операции</td><td>Все жирорастворимые, B12, железо, кальций — пожизненный контроль</td></tr>
+          <tr><td class="k">Целиакия, ВЗК, СИБР</td><td>Жирорастворимые, железо, B12, магний — мальабсорбция</td></tr>
+          <tr><td class="k">Обильные менструации</td><td>Ферритин, гемоглобин, B12</td></tr>
+          <tr><td class="k">Спортсмены на нагрузках</td><td>Железо, магний, витамин Д, группа B, электролиты</td></tr>
+          <tr><td class="k">Мало солнца</td><td>Витамин Д — 25(ОН)D дважды в год</td></tr>
+          <tr><td class="k">Курящие</td><td>Витамин С; высокие дозы бета-каротина противопоказаны</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="psec" id="protocol">
+    <div class="sec-head thin"><h2>Протокол консультации</h2><span class="tagline">порядок шагов</span></div>
+    <p class="intro">Здесь порядок действительно важен: пропущенный второй шаг обесценивает всё остальное.</p>
+    <ol class="steps">
+      <li><span><b>Запрос и ожидания</b>С чем пришли, что уже пробовали, чего ждут и в какой срок.</span></li>
+      <li><span><b>Лекарства и диагнозы</b>Полный список препаратов, хронические заболевания, беременность и лактация, аллергии. Здесь всплывают все красные флаги — до подбора, а не после.</span></li>
+      <li><span><b>Что уже принимает</b>Все текущие добавки с формами и дозами: половина «дефицитов» оказывается передозировкой или дублем одного и того же в трёх банках.</span></li>
+      <li><span><b>Симптомы и образ жизни</b>Сон, стресс, питание, солнце, ЖКТ, цикл. Витамины не чинят режим — сначала базовые вещи.</span></li>
+      <li><span><b>Анализы</b>Что есть на руках, что имеет смысл досдать. Без анализов рекомендуются только физиологические поддерживающие дозы.</span></li>
+      <li><span><b>Схема</b>Форма, доза, время приёма, с чем сочетать, что развести, длительность курса. Обязательно — дата пересмотра.</span></li>
+      <li><span><b>Контроль</b>Повторная оценка через 2–3 месяца: самочувствие плюс контрольные анализы. Жирорастворимые — курсами, а не бессрочно.</span></li>
+    </ol>
+    <p class="note"><b>Границы роли.</b> Консультант не ставит диагноз, не отменяет и не корректирует назначения врача и не лечит заболевания. Фраза «это стоит обсудить с вашим врачом» — не слабость, а профессиональный уровень.</p>
+  </section>
+
+  <footer>Верхние допустимые уровни приведены по нормам EFSA и NAM и могут отличаться от учебных терапевтических дозировок — расхождения отмечены в тексте.</footer>
+</div>
+</div>
+
+
+<!-- ================= ТРЕНАЖЁР ================= -->
+<div class="view" id="view-trainer">
+<div class="shell narrow">
+  <header class="tr-top">
+    <div>
+      <div class="kicker">Дриллинг · формы · дозы · клиника</div>
+      <h1>Тренажёр</h1>
+    </div>
+    <div class="lifetime" id="lifetime"></div>
+  </header>
+
+  <section class="screen on" id="scr-start">
+    <p class="lede" style="margin:22px 0">Выберите блок. Вопрос — четыре варианта — сразу разбор, почему так. Ошибки возвращаются по расписанию повторения, пока не осядут в памяти.</p>
+    <div class="decks" id="decks">
+      <button class="deck wide due" data-deck="due" aria-pressed="false" id="deck-due">
+        <span class="dname"><svg class="ico"><use href="#i-repeat"/></svg> Повторение</span>
+        <span class="dmeta" id="due-meta">на сегодня ничего</span>
+        <span class="ddesc">Вопросы, которые пора повторить: те, где вы ошибались, возвращаются через день, три дня, неделю и три недели.</span>
+      </button>
+      <button class="deck" data-deck="forms" aria-pressed="false"><span class="dname"><svg class="ico"><use href="#i-flask"/></svg> Формы</span><span class="dmeta" data-count="forms"></span><span class="ddesc">Чья это форма, классическая или активная, к какой группе относится витамин.</span></button>
+      <button class="deck" data-deck="dose" aria-pressed="false"><span class="dname"><svg class="ico"><use href="#i-calc"/></svg> Дозировки и МЕ</span><span class="dmeta" data-count="dose"></span><span class="ddesc">Взрослые, дети, беременность, пересчёт единиц.</span></button>
+      <button class="deck" data-deck="signs" aria-pressed="false"><span class="dname"><svg class="ico"><use href="#i-eye"/></svg> Функции и дефициты</span><span class="dmeta" data-count="signs"></span><span class="ddesc">Симптом на приёме — какой витамин за ним стоит.</span></button>
+      <button class="deck" data-deck="case" aria-pressed="false"><span class="dname"><svg class="ico"><use href="#i-steth"/></svg> Кейсы и взаимодействия</span><span class="dmeta" data-count="case"></span><span class="ddesc">Лекарства, противопоказания, красные флаги. Самое важное на практике.</span></button>
+      <button class="deck wide" data-deck="all" aria-pressed="true"><span class="dname"><svg class="ico"><use href="#i-target"/></svg> Всё вперемешку</span><span class="dmeta" data-count="all"></span><span class="ddesc">Режим экзамена: вопросы из всех блоков в случайном порядке.</span></button>
+    </div>
+    <div class="setup">
+      <div class="field">
+        <label for="len">Длина раунда</label>
+        <select id="len"><option value="10">10 вопросов</option><option value="15" selected>15 вопросов</option><option value="25">25 вопросов</option><option value="0">Весь блок</option></select>
+      </div>
+      <button class="btn" id="go">Начать раунд</button>
+    </div>
+    <div class="weak">
+      <h3>Слабые места по вашей статистике</h3>
+      <div class="weak-rows" id="weak-rows"><p class="weak-empty">Пока нет данных — пройдите первый раунд.</p></div>
+    </div>
+  </section>
+
+  <section class="screen" id="scr-play">
+    <div class="hud">
+      <span class="pos" id="pos">01 / 15</span>
+      <div class="track"><span id="track-fill"></span></div>
+      <span class="streak" id="streak"><svg class="ico"><use href="#i-flame"/></svg> серия 0</span>
+    </div>
+    <div class="qcard" id="qcard">
+      <div class="qhead"><span class="qtype" id="qtype"></span></div>
+      <p class="qtext" id="qtext"></p>
+      <div class="opts" id="opts"></div>
+      <div class="verdict" id="verdict" hidden>
+        <span class="vhead" id="vhead"></span>
+        <p id="vexpl"></p>
+        <div class="next-row"><button class="btn" id="next">Дальше</button><span class="hintkeys keys-only">Enter</span></div>
+      </div>
+    </div>
+    <p class="hintkeys"><span class="keys-only">Клавиши 1–4 — ответ, Enter — дальше.</span> <button class="btn ghost" id="quit" style="padding:7px 14px;font-size:11px">Прервать</button></p>
+  </section>
+
+  <section class="screen" id="scr-done">
+    <div class="score">
+      <span class="big" id="pct">0%</span>
+      <div class="sub"><b id="score-line"></b><span id="streak-line"></span></div>
+    </div>
+    <p class="verdict-line" id="grade"></p>
+    <div class="review" id="review"></div>
+    <div class="res-actions">
+      <button class="btn" id="again">Ещё раунд</button>
+      <button class="btn ghost" id="redo-miss">Только ошибки</button>
+      <button class="btn ghost" id="back">К выбору блока</button>
+    </div>
+  </section>
+</div>
+</div>
+
+<!-- ================= ПРОГРЕСС ================= -->
+<div class="view" id="view-progress">
+<div class="shell narrow">
+  <header class="view-head">
+    <div class="kicker">Личная статистика · всё считается на вашем устройстве</div>
+    <h1>Прогресс</h1>
+    <p class="lede">Готовность собирается из трёх вещей: сколько витаминов разобрано в справочнике, с какой точностью вы отвечаете и сколько тем вообще затронуто.</p>
+  </header>
+
+  <div class="pgrid">
+    <div class="card">
+      <h3>Готовность</h3>
+      <p class="cap">взвешенная оценка</p>
+      <div class="ringwrap">
+        <div class="ring">
+          <svg viewBox="0 0 120 120" width="100%" height="100%">
+            <defs><linearGradient id="ringgrad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="var(--accent-2)"/><stop offset="1" stop-color="var(--accent)"/>
+            </linearGradient></defs>
+            <circle class="bgc" cx="60" cy="60" r="50"/>
+            <circle class="fgc" id="ring-fg" cx="60" cy="60" r="50" stroke-dasharray="314.16" stroke-dashoffset="314.16"/>
+          </svg>
+          <span class="num" id="ring-num">0%</span>
+        </div>
+        <div class="ringlist">
+          <div><i style="background:var(--accent-2)"></i> Разобрано в справочнике <b id="r-learn">0 / 20</b></div>
+          <div><i style="background:var(--accent)"></i> Точность ответов <b id="r-acc">—</b></div>
+          <div><i style="background:var(--text-3)"></i> Покрытие тем <b id="r-cov">0 %</b></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Регулярность</h3>
+      <p class="cap">занятия и динамика</p>
+      <div class="stats2">
+        <div class="stat"><span class="v"><svg class="ico"><use href="#i-flame"/></svg><span id="s-streak">0</span></span><span class="l">дней подряд</span></div>
+        <div class="stat"><span class="v" id="s-total">0</span><span class="l">всего ответов</span></div>
+      </div>
+      <p class="cap" style="margin:18px 0 0">Точность по последним раундам</p>
+      <svg class="spark" id="spark" viewBox="0 0 300 66" preserveAspectRatio="none" role="img" aria-label="График точности по последним раундам">
+        <defs><linearGradient id="sparkgrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="var(--accent-2)" stop-opacity=".28"/>
+          <stop offset="1" stop-color="var(--accent-2)" stop-opacity="0"/>
+        </linearGradient></defs>
+      </svg>
+      <p class="cap" id="spark-note" style="margin-top:4px">пока нет завершённых раундов</p>
+    </div>
+  </div>
+
+  <div class="duecard">
+    <span class="n" id="due-n">0</span>
+    <span class="t"><b>Карточек к повторению сегодня</b><span id="due-text">Ошибки возвращаются через день, три дня, неделю и три недели — так материал закрепляется надолго.</span></span>
+    <button class="btn accent" id="due-go">Повторить</button>
+  </div>
+
+  <div class="card" style="margin-top:16px">
+    <h3>Что подтянуть</h3>
+    <p class="cap">темы с точностью ниже остальных</p>
+    <div class="weak-rows" id="weak-rows-2"><p class="weak-empty">Данные появятся после первого раунда в тренажёре.</p></div>
+    <div class="res-actions" style="margin-top:20px">
+      <button class="btn" id="train-weak">Тренировать слабое</button>
+      <button class="btn ghost" id="reset-all">Сбросить прогресс</button>
+    </div>
+  </div>
+
+  <footer style="border-top:1px solid var(--border);padding:24px 0 40px;margin-top:40px;color:var(--text-3);font-size:13.5px;max-width:74ch">
+    Статистика хранится только в этом браузере и никуда не передаётся. Очистка данных сайта её удалит.
+  </footer>
+</div>
+</div>
+
+<script>
+"use strict";
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const shuffled = a => { const b = a.slice(); for (let i = b.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [b[i], b[j]] = [b[j], b[i]]; } return b; };
+const $ = id => document.getElementById(id);
+const store = {
+  get(k, def){ try{ const v = JSON.parse(localStorage.getItem(k)); return v == null ? def : v; }catch(e){ return def; } },
+  set(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} },
+  del(k){ try{ localStorage.removeItem(k); }catch(e){} }
+};
+const reduced = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const icon = name => `<svg class="ico"><use href="#${name}"/></svg>`;
+
+/* ═══════════ ОФОРМЛЕНИЕ: СКИН И ТЕМА ═══════════ */
+const root = document.documentElement;
+const PREF = "vit-pref-v1";
+const pref = Object.assign({ skin:"paper", theme:"light" }, store.get(PREF, {}));
+function applyPref(){
+  root.dataset.skin = pref.skin;
+  root.dataset.theme = pref.theme;
+  document.querySelectorAll("#skinseg button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.skin === pref.skin)));
+  $("theme-btn").setAttribute("aria-label", pref.theme === "dark" ? "Включить светлую тему" : "Включить тёмную тему");
+  store.set(PREF, pref);
+}
+applyPref();
+$("skinseg").addEventListener("click", e => {
+  const b = e.target.closest("button[data-skin]");
+  if (!b) return;
+  pref.skin = b.dataset.skin;
+  applyPref();
+});
+$("theme-btn").addEventListener("click", () => {
+  pref.theme = pref.theme === "dark" ? "light" : "dark";
+  applyPref();
+});
+
+/* ═══════════ РОУТЕР ═══════════ */
+const VIEW_NAME = { basics:"Старт с нуля", ref:"Справочник", practice:"Практика консультации", trainer:"Тренажёр", progress:"Прогресс" };
+let currentView = "basics";
+
+function go(view, anchor){
+  const apply = () => {
+    currentView = view;
+    document.querySelectorAll(".view").forEach(v => v.classList.toggle("on", v.id === "view-" + view));
+    document.querySelectorAll(".tab").forEach(t => t.setAttribute("aria-selected", String(t.dataset.view === view)));
+    document.querySelectorAll(".menu-item").forEach(m => m.setAttribute("aria-current", String(m.dataset.view === view)));
+    if (view === "progress") renderProgress();
+    if (anchor){
+      const t = $(anchor);
+      if (t){ t.scrollIntoView({ block:"start" }); return; }
+    }
+    window.scrollTo(0, 0);
+  };
+  try { $("menu").hidePopover(); } catch(e){}
+  if (document.startViewTransition && !reduced()) document.startViewTransition(apply);
+  else apply();
+}
+document.addEventListener("click", e => {
+  const b = e.target.closest("[data-view]");
+  if (!b) return;
+  e.preventDefault();
+  go(b.dataset.view, b.dataset.anchor);
+});
+
+/* кнопка «наверх» */
+const upBtn = $("up-btn");
+upBtn.addEventListener("click", () => window.scrollTo({ top:0, behavior: reduced() ? "auto" : "smooth" }));
+let ticking = false;
+window.addEventListener("scroll", () => {
+  if (ticking) return;
+  ticking = true;
+  requestAnimationFrame(() => {
+    upBtn.classList.toggle("show", window.scrollY > window.innerHeight * 1.5);
+    ticking = false;
+  });
+}, { passive:true });
+
+/* подписи колонок для мобильного режима таблиц */
+function labelTables(){
+  document.querySelectorAll(".scroller table").forEach(t => {
+    const heads = [...t.querySelectorAll("thead th")].map(th => th.textContent.trim());
+    t.querySelectorAll("tbody tr").forEach(tr => {
+      [...tr.children].forEach((td, i) => { if (heads[i]) td.setAttribute("data-l", heads[i]); });
+    });
+  });
+}
+
+/* ═══════════ ДАННЫЕ ═══════════ */
+const DATA = [
+  { id:"a", group:"fat", name:"Витамин А", alt:"ретиноиды", code:"A", hook:"«Аппарат зрения»: A — глаза и кожа", short:"зрение, кожа, антиоксидант",
+    forms:[{n:"Ретинол ацетат",tag:"классическая",note:"низкая биодоступность"},{n:"Ретинол пальмитат",tag:"классическая",note:"хорошая биодоступность"},{n:"Бета-каротин",tag:"провитамин",note:"содержится в пище"}],
+    funcs:["Поддерживает здоровье глаз","Улучшает состояние кожи, волос, ногтей","Антиоксидант"],
+    units:["1 мкг ретинола = 3,3 МЕ","1 мкг бета-каротина = 0,61 МЕ"],
+    doses:[{who:"Взрослым",v:"5 000–25 000 МЕ"},{who:"Кормящим мамам",v:"10 000 МЕ"},{who:"Дети 12–30 кг",v:"2 500 МЕ"},{who:"Дети 31–45 кг",v:"3 000–4 000 МЕ"},{who:"Дети 46–75 кг",v:"5 000 МЕ"}],
+    flag:"Единственный из четвёрки с реальным риском передозировки при накоплении: высокие дозы ретинола противопоказаны при беременности (тератогенность). Бета-каротин такого риска не несёт." },
+  { id:"e", group:"fat", name:"Витамин Е", alt:"токоферолы и токотриенолы", code:"E", hook:"«Ева»: кожа, фертильность, антиоксидант", short:"кожа, антиоксидант, онкопротектор",
+    forms:[{n:"Токоферолы",tag:"классическая",note:"4 изомера"},{n:"Токотриенолы",tag:"активная",note:"сильнее как онкопротектор"}],
+    funcs:["Поддерживает здоровье кожи","Онкопротектор","Мощный антиоксидант"],
+    units:["1 мг = 1,23 МЕ"],
+    doses:[{who:"Взрослым",v:"200–1 000 МЕ"},{who:"Дети 12–30 кг",v:"200 МЕ"},{who:"Дети 31–45 кг",v:"400 МЕ"},{who:"Дети 46–75 кг",v:"400–800 МЕ"}],
+    memo:"У каждой из двух форм по 4 изомера — альфа, бета, гамма, дельта. <strong>Токотриенолы</strong> снижают уровень холестерина и как онкопротекторы сильнее токоферолов." },
+  { id:"d", group:"fat", name:"Витамин Д", alt:"кальциферолы", code:"D", hook:"«Дневной свет»: солнце, кости, иммунитет", short:"иммунитет, кости, настроение",
+    forms:[{n:"Д-2 / эргокальциферол",tag:"классическая",note:"растения и грибы, низкая эффективность"},{n:"Д-3 / холекальциферол",tag:"активная",note:"синтезируется в коже, высокая эффективность"}],
+    funcs:["Укрепляет иммунную систему","Поддерживает крепость и упругость костей","Предотвращает развитие депрессии"],
+    units:["1 мкг Д-3 = 40 МЕ"],
+    doses:[{who:"Взрослым",v:"2 000–10 000 МЕ"},{who:"Дети до 1 года",v:"400–1 000 МЕ"},{who:"Дети 1–3 года",v:"1 500–2 500 МЕ"},{who:"Дети 4–7 лет",v:"1 500–3 000 МЕ"},{who:"Дети 8–18 лет",v:"1 500–5 000 МЕ"}],
+    memo:"В организме превращается в гормон <strong>кальцитриол</strong>, который регулирует более 200 функций. Работает в паре с К-2: витамин К уводит кальций из сосудов в кости." },
+  { id:"k", group:"fat", name:"Витамин К", alt:"филлохинон и менахиноны", code:"K", hook:"«Коагуляция»: К-1 кровь, К-2 кости", short:"свёртываемость, кости, сосуды",
+    forms:[{n:"К-1 / филлохинон",tag:"классическая",note:"регулирует свёртываемость крови"},{n:"К-2 / менахинон",tag:"активная",note:"повышает прочность костей"},{n:"МК-4 / менахинон-4",tag:"подтип К-2",note:"короткое действие"},{n:"МК-7 / менахинон-7",tag:"подтип К-2",note:"активнее, дольше в кровотоке"}],
+    funcs:["Укрепляет костную ткань, предотвращает остеопороз","Поддерживает здоровье сердечно-сосудистой системы","Предотвращает кальцификацию — отложение кальция в сосудах и органах"],
+    doses:[{who:"Взрослым",v:"100–300 мкг"},{who:"Детям (по весу)",v:"25–100 мкг"}],
+    memo:"Цифра в названии — количество <strong>изопренильных звеньев</strong> в боковой цепи. Чем длиннее цепь, тем дольше форма держится в крови: МК-7 активнее МК-4. Повышает эффективность витамина Д-3." },
+  { id:"c", group:"water", name:"Витамин С", alt:"аскорбиновая кислота", code:"C", hook:"«Сосуды и Сопротивляемость»", short:"иммунитет, коллаген, сосуды",
+    forms:[{n:"Аскорбиновая кислота",tag:"классическая",note:"натуральная"},{n:"Аскорбаты Na, Ca, Mg",tag:"гашёные",note:"мягкие для желудка"},{n:"Аскорбилпальмитат",tag:"особая",note:"жирорастворимая"},{n:"Ester-C",tag:"активная",note:"с флавоноидами"}],
+    funcs:["Укрепление иммунной системы","Антиоксидант","Поддержка выработки коллагена"],
+    doses:[{who:"Взрослым",v:"250–1 000 мг"},{who:"Детям (по весу)",v:"100–800 мг"}],
+    memo:"<strong>Гашёные формы</strong> не повышают кислотность желудка — их берут при гастритах и язвах. <strong>Ester-C</strong> самый эффективный вариант: содержит флавоноиды, без которых витамин С в природе не встречается." },
+  { id:"b1", group:"water", name:"Витамин Б-1", alt:"тиамин", code:"B1", hook:"«Тонус нервов»: тиамин — нервы и энергия", short:"нервы, энергия, сердце",
+    forms:[{n:"Тиамина гидрохлорид",tag:"классическая",note:""},{n:"Кокарбоксилаза",tag:"активная",note:"водорастворимая"},{n:"Бенфотиамин",tag:"активная",note:"жирорастворимая"}],
+    funcs:["Участвует в работе нервной системы и передаче нервного импульса","Участвует в выработке энергии","Поддерживает сердечно-сосудистую систему, помогает при аритмии"],
+    doses:[{who:"Взрослым, дневная",v:"1,5–3 мг"},{who:"Взрослым, терапевтическая",v:"от 50 мг"},{who:"Детям, дневная",v:"1,5–3 мг"},{who:"Детям, терапевтическая",v:"от 20 мг"}] },
+  { id:"b2", group:"water", name:"Витамин Б-2", alt:"рибофлавин", code:"B2", hook:"Красит мочу в жёлтый — «флавин» от лат. жёлтый", short:"энергия, глаза, гомоцистеин",
+    forms:[{n:"Рибофлавин",tag:"классическая",note:""},{n:"Рибофлавин-5-фосфат",tag:"активная",note:""}],
+    funcs:["Участвует в выработке энергии","Поддерживает здоровье глаз","Снижение гомоцистеина"],
+    doses:[{who:"Взрослым, дневная",v:"1,5–3 мг"},{who:"Взрослым, терапевтическая",v:"от 50 мг"},{who:"Детям, дневная",v:"1,5–3 мг"},{who:"Детям, терапевтическая",v:"от 20 мг"}] },
+  { id:"b3", group:"water", name:"Витамин Б-3", alt:"ниацин", code:"B3", hook:"«Нагревает»: ниацин даёт прилив жара", short:"энергия, кровообращение, холестерин",
+    forms:[{n:"Ниацин / никотиновая к-та",tag:"классическая",note:""},{n:"Ниацинамид",tag:"активная",note:"без покраснения"},{n:"НАДН",tag:"редкая",note:"коферментная форма"}],
+    funcs:["Участвует в выработке энергии","Улучшает кровообращение (особенно ниацин)","Снижает уровень холестерина"],
+    doses:[{who:"Взрослым, дневная",v:"15–30 мг"},{who:"Взрослым, терапевтическая",v:"300–500 мг"},{who:"Детям, дневная",v:"10–20 мг"},{who:"Детям, терапевтическая",v:"до 300 мг"}],
+    memo:"Особенно важен для выработки энергии — от него зависит масса биохимических процессов. <strong>Ниацин может вызывать покраснение кожи</strong> (флаш); если это мешает — берут ниацинамид." },
+  { id:"b4", group:"water", name:"Витамин Б-4", alt:"холин", code:"B4", hook:"«Холин — Хорошая память»", short:"память, печень, холестерин",
+    forms:[{n:"Холина цитрат / битартрат",tag:"классическая",note:""},{n:"Фосфатидилхолин",tag:"классическая",note:"из лецитина"},{n:"Альфа-ГФХ",tag:"активная",note:"альфа-глицерилфосфорилхолин"},{n:"Цитиколин / CDP-холин",tag:"активная",note:"ноотропная"}],
+    funcs:["Улучшает концентрацию внимания и память","Поддерживает здоровье печени (особенно фосфатидилхолин)","Снижает уровень холестерина"],
+    doses:[{who:"Взрослым, дневная",v:"300–500 мг"},{who:"Взрослым, терапевтическая",v:"до 2 000 мг"},{who:"Детям, дневная",v:"70–500 мг"},{who:"Детям, терапевтическая",v:"до 1 500 мг"}] },
+  { id:"b5", group:"water", name:"Витамин Б-5", alt:"пантотеновая кислота", code:"B5", hook:"«Панто» — по-гречески «всюду»: он везде", short:"энергия, надпочечники, раны",
+    forms:[{n:"Пантотеновая кислота",tag:"классическая",note:""},{n:"Пантетин",tag:"активная",note:""}],
+    funcs:["Участвует в выработке энергии","Ускоряет заживление ран и ожогов","Поддерживает здоровье надпочечников"],
+    doses:[{who:"Взрослым, дневная",v:"10–20 мг"},{who:"Взрослым, терапевтическая",v:"300–600 мг"},{who:"Детям, дневная",v:"3–7 мг"},{who:"Детям, терапевтическая",v:"до 400 мг"}] },
+  { id:"b6", group:"water", name:"Витамин Б-6", alt:"пиридоксин", code:"B6", hook:"Главный по нервам и гомоцистеину", short:"нервы, энергия, гомоцистеин",
+    forms:[{n:"Пиридоксина гидрохлорид",tag:"классическая",note:""},{n:"Пиридоксаль-5-фосфат",tag:"активная",note:"П-5-Ф"}],
+    funcs:["Регулирует работу нервной системы","Участвует в выработке энергии","Снижает гомоцистеин"],
+    doses:[{who:"Взрослым, дневная",v:"1,5–3 мг"},{who:"Взрослым, терапевтическая",v:"от 50 мг"},{who:"Детям, дневная",v:"0,5–2 мг"},{who:"Детям, терапевтическая",v:"до 100 мг"}],
+    memo:"Один из самых важных и востребованных витаминов в организме — кофермент сотен реакций аминокислотного обмена." },
+  { id:"b7", group:"water", name:"Витамин Б-7", alt:"биотин", code:"B7", hook:"«Био-красота»: волосы, кожа, ногти", short:"волосы, ногти, кожа",
+    forms:[],
+    funcs:["Укрепляет и утолщает волосы","Поддерживает здоровье кожи и ногтей","Участвует в выработке энергии"],
+    doses:[{who:"Взрослым",v:"5 000–10 000 мкг"},{who:"Детям (по весу)",v:"до 5 000 мкг"}],
+    memo:"Высокие дозы биотина искажают лабораторные тесты (ТТГ, тропонин) — отменять за 2–3 дня до анализов." },
+  { id:"b8", group:"water", name:"Витамин Б-8", alt:"инозитол", code:"B8", hook:"«Инсулин и яичники»", short:"инсулин, яичники, холестерин",
+    forms:[{n:"Инозитол / инозит",tag:"классическая",note:""},{n:"Мио-инозитол",tag:"активная",note:"стабильная"},{n:"Д-хиро-инозитол",tag:"активная",note:"стабильная"}],
+    funcs:["Снижает холестерин","Улучшает углеводный обмен и чувствительность к инсулину","Поддерживает здоровье яичников (назначают при СПКЯ)"],
+    doses:[{who:"Взрослым",v:"750–8 000/9 000 мг"},{who:"Детям (по весу)",v:"до 1 500 мг"}],
+    memo:"Разница форм: <strong>мио-инозитол</strong> эффективнее для яичников, <strong>Д-хиро-инозитол</strong> — для чувствительности к инсулину и при диабете." },
+  { id:"b9", group:"water", name:"Витамин Б-9", alt:"фолиевая кислота", code:"B9", hook:"От лат. folium — лист: зелень и беременность", short:"плод, кровь, гомоцистеин",
+    forms:[{n:"Фолат",tag:"классическая",note:"натуральная"},{n:"Фолиевая кислота",tag:"классическая",note:"искусственная"},{n:"Фолиновая кислота",tag:"редкая",note:"активная"},{n:"Метилфолат",tag:"активная",note:"усваивается легче всего"}],
+    funcs:["Участвует в развитии плода и поддерживает репродуктивную функцию","Участвует в накоплении и обмене железа","Поддерживает функции нервной системы","Снижает уровень гомоцистеина"],
+    doses:[{who:"Взрослым, дневная",v:"до 400 мкг"},{who:"Взрослым, терапевтическая",v:"400–800 мкг"},{who:"При беременности",v:"до 1 500 мкг"},{who:"Детям, дневная",v:"до 200 мкг"},{who:"Детям, терапевтическая",v:"до 400 мкг"}],
+    memo:"Жизненно необходим при развитии плода: повышает шанс забеременеть и снижает риск выкидыша. <strong>Метилфолат</strong> — предпочтительная форма; при нарушениях фолатного цикла — <strong>фолиновая кислота</strong>." },
+  { id:"b10", group:"water", name:"Витамин Б-10", alt:"ПАБА, парааминобензойная кислота", code:"B10", hook:"«Против седины»", short:"пигментация, источник фолата",
+    forms:[],
+    funcs:["Выступает источником фолиевой кислоты","Предотвращает развитие седины, поддерживает пигментацию кожи и волос"],
+    doses:[{who:"Взрослым",v:"500–1 500 мг"},{who:"Детям",v:"обычно не назначается"}] },
+  { id:"b11", group:"water", name:"Витамин Б-11", alt:"Л-карнитин, левокарнитин", code:"B11", hook:"От лат. carnis — мясо: возит жир в печку", short:"липолиз, энергия, мозг",
+    forms:[{n:"Л-карнитин",tag:"классическая",note:""},{n:"Ацетил-Л-карнитин",tag:"активная",note:"проходит в мозг"}],
+    funcs:["Запускает липолиз","Участвует в выработке энергии","Улучшает работу головного мозга (активная форма)"],
+    doses:[{who:"Взрослым",v:"500–3 000 мг"},{who:"Детям (по возрасту)",v:"200–1 000 мг"}] },
+  { id:"b12", group:"water", name:"Витамин Б-12", alt:"кобаламин", code:"B12", hook:"Только из животного: кровь и мозг", short:"нервы, кровь, гомоцистеин",
+    forms:[{n:"Цианкобаламин",tag:"классическая",note:"худшая форма"},{n:"Метилкобаламин",tag:"активная",note:"работает лучше"},{n:"Аденозилкобаламин",tag:"редкая",note:"активная"},{n:"Гидроксикобаламин",tag:"редкая",note:"активная"}],
+    funcs:["Поддерживает функции нервной системы","Участвует в накоплении и обмене железа","Снижает уровень гомоцистеина"],
+    doses:[{who:"Взрослым",v:"500–1 500 мкг"},{who:"Детям (по возрасту)",v:"100–300 мкг"}],
+    memo:"Очень важен для мозга: дефицит ведёт к депрессии, нарушению памяти, болезни Альцгеймера. Часто в дефиците у веганов — содержится только в животных продуктах. <strong>Аденозил- и гидроксикобаламин</strong> подходят при нарушениях фолатного цикла." },
+  { id:"b14", group:"like", name:"Витамин Б-14 (PQQ)", alt:"пирролохинолинхинон", code:"B14", hook:"Строит новые митохондрии, дружит с Q10", short:"энергия, усталость, клетки",
+    forms:[],
+    funcs:["Участвует в выработке энергии","Помогает при синдроме хронической усталости","Останавливает старение клеток и развитие дегенеративных заболеваний"],
+    doses:[{who:"Взрослым",v:"10–40 мг"},{who:"Детям",v:"обычно не назначается"}],
+    memo:"По сути не витамин, а <strong>витаминоподобное соединение</strong>; лучше всего работает вместе с коэнзимом Q10.",
+    contra:"Индивидуальная непереносимость, нарушение функции печени и почек." },
+  { id:"dmg", group:"like", name:"ДМГ и ТМГ", alt:"диметилглицин · триметилглицин (бетаин)", code:"ТМГ", hook:"Донатор метильных групп для фолатного цикла", short:"печень, метилирование, гомоцистеин",
+    forms:[{n:"ТМГ / бетаин",tag:"активная",note:"эффективнее для метилирования"},{n:"ДМГ",tag:"классическая",note:"ТМГ превращается в ДМГ в организме"}],
+    funcs:["Поддерживают здоровье печени","Выступают донаторами метильных групп","Снижают уровень гомоцистеина"],
+    doses:[{who:"Взрослым",v:"до 1 500 мг"},{who:"Детям",v:"обычно не назначается"}],
+    memo:"Витаминоподобные соединения, участвующие в фолатном цикле. У <strong>ТМГ (бетаина)</strong> — способность расщеплять белки и поддержка работы ЖКТ.",
+    contra:"Индивидуальная непереносимость, гиперметилированность, нарушение функции печени и почек." },
+  { id:"b17", group:"like", name:"Витамин Б-17", alt:"лаетрил, амигдалин", code:"B17", hook:"Спорное соединение — витамином не является", short:"спорный онкопротектор",
+    forms:[],
+    funcs:["Заявляется как мощный онкопротектор","Заявляется поддержка иммунной системы"],
+    doses:[{who:"Взрослым",v:"от 500 мг"},{who:"Детям",v:"обычно не назначается"}],
+    flag:"Витамином не является, эффективность при онкологии в клинических исследованиях не подтверждена, а в организме амигдалин распадается с выделением цианида — описаны случаи отравления. В США и ЕС как лекарство не одобрен.",
+    contra:"Индивидуальная непереносимость, нарушение функции печени и почек." }
+];
+
+
+/* ═══════════ ПИКТОГРАММЫ ═══════════ */
+const ICONS = {
+  a:"i-eye", e:"i-shield", d:"i-sun", k:"i-bone", c:"i-citrus",
+  b1:"i-bolt", b2:"i-spark", b3:"i-flame", b4:"i-brain", b5:"i-heal",
+  b6:"i-nerve", b7:"i-hair", b8:"i-cycle", b9:"i-leaf", b10:"i-contrast",
+  b11:"i-dumbbell", b12:"i-drop", b14:"i-mito", dmg:"i-methyl", b17:"i-alert"
+};
+
+/* ═══════════ КАРТА ДЛЯ НОВИЧКА ═══════════ */
+$("map").innerHTML = DATA.map(v => `
+  <div class="tile ${v.group === "fat" ? "fat" : v.group === "like" ? "like" : "wat"}">
+    <span class="top">
+      <span class="code">${esc(v.code)}</span>
+      ${icon(ICONS[v.id] || "i-spark")}
+    </span>
+    <span class="nm">${esc(v.alt.split(",")[0].split("·")[0].trim())}</span>
+    <span class="fn">${esc(v.short)}</span>
+    <span class="hook">${esc(v.hook)}</span>
+  </div>`).join("");
+
+/* ═══════════ СПРАВОЧНИК ═══════════ */
+const solubLabel = { fat:"жирорастворимый", water:"водорастворимый", like:"витаминоподобное" };
+const tagClass = t => t === "активная" ? "tag active" : t === "редкая" ? "tag rare" : "tag";
+
+function dossierHTML(v){
+  const side = v.group === "fat" ? " fat-side" : v.group === "like" ? " like-side water-side" : " water-side";
+  const formsHTML = v.forms.length ? `
+    <div class="block"><h4>Формы</h4><ul class="forms">
+      ${v.forms.map(f => `<li><span class="fname">${esc(f.n)}</span><span class="${tagClass(f.tag)}">${esc(f.tag)}</span>${f.note ? `<span class="fnote">${esc(f.note)}</span>` : ""}</li>`).join("")}
+    </ul></div>`
+    : `<div class="block"><h4>Формы</h4><p style="font-size:15px;color:var(--text-3)">Одна форма — делить не на что.</p></div>`;
+  const searchText = (v.name + " " + v.alt + " " + v.forms.map(f => f.n + " " + f.note).join(" ") + " " + v.funcs.join(" ") + " " + (v.memo || "")).toLowerCase().replace(/<[^>]+>/g, "");
+  return `
+  <article class="dossier${side}" id="v-${v.id}" data-group="${v.group}" data-search="${esc(searchText)}">
+    <div class="d-head">
+      <span class="d-mark">${icon(ICONS[v.id] || "i-spark")}</span>
+      <div class="d-title"><h3>${esc(v.name)}</h3><span class="alt">${esc(v.alt)}</span></div>
+      <span class="solub ${v.group === "fat" ? "" : v.group}">${solubLabel[v.group]}</span>
+      <label class="learn">
+        <input type="checkbox" data-check="${v.id}">
+        <span class="box">${icon("i-check")}</span> выучено
+      </label>
+    </div>
+    <div class="cols">
+      ${formsHTML}
+      <div class="block"><h4>Основные функции</h4><ul class="funcs">${v.funcs.map(f => `<li>${esc(f)}</li>`).join("")}</ul></div>
+    </div>
+    <div class="data">
+      <h4>Дозировки</h4>
+      <div class="dose-rows">${v.doses.map(d => `<div class="dose"><span class="who">${esc(d.who)}</span><span class="val">${esc(d.v)}</span></div>`).join("")}</div>
+      ${v.units ? `<div class="units">${v.units.map(u => `<span class="unit">${esc(u)}</span>`).join("")}</div>` : ""}
+    </div>
+    ${v.memo ? `<p class="memo">${v.memo}</p>` : ""}
+    ${v.flag ? `<p class="warnbox">${icon("i-alert")}<span><b>Осторожно.</b> ${esc(v.flag)}</span></p>` : ""}
+    ${v.contra ? `<p class="contra"><b>Противопоказания:</b> ${esc(v.contra)}</p>` : ""}
+  </article>`;
+}
+
+const fatList = DATA.filter(v => v.group === "fat");
+const waterList = DATA.filter(v => v.group !== "fat");
+$("list-fat").innerHTML = fatList.map(dossierHTML).join("");
+$("list-water").innerHTML = waterList.map(dossierHTML).join("");
+const railLink = v => `<li><a href="#v-${v.id}" data-rail="${v.id}">${esc(v.name)}<svg class="ico tick"><use href="#i-check"/></svg></a></li>`;
+$("rail-fat").innerHTML = fatList.map(railLink).join("");
+$("rail-water").innerHTML = waterList.map(railLink).join("");
+labelTables();
+
+const LKEY = "vit-learned-v1";
+let learned = store.get(LKEY, {}) || {};
+function paintLearned(){
+  let done = 0;
+  DATA.forEach(v => {
+    const on = !!learned[v.id];
+    if (on) done++;
+    const box = document.querySelector(`[data-check="${v.id}"]`);
+    if (box) box.checked = on;
+    const rail = document.querySelector(`[data-rail="${v.id}"]`);
+    if (rail) rail.classList.toggle("done", on);
+  });
+  $("progtext").textContent = `${done} / ${DATA.length} разобрано`;
+  $("barfill").style.width = (done / DATA.length * 100) + "%";
+  return done;
+}
+document.addEventListener("change", e => {
+  const id = e.target.dataset ? e.target.dataset.check : null;
+  if (!id) return;
+  learned[id] = e.target.checked;
+  store.set(LKEY, learned);
+  paintLearned();
+});
+paintLearned();
+
+let filter = "all";
+const qInput = $("q");
+function applyFilter(){
+  const term = qInput.value.trim().toLowerCase();
+  let visible = 0;
+  document.querySelectorAll(".dossier").forEach(el => {
+    const show = (filter === "all" || el.dataset.group === filter) && (!term || el.dataset.search.includes(term));
+    el.classList.toggle("hidden", !show);
+    if (show) visible++;
+  });
+  document.querySelectorAll("#view-ref .sec").forEach(sec => {
+    if (sec.id === "combos"){ sec.style.display = term ? "none" : ""; return; }
+    sec.style.display = sec.querySelector(".dossier:not(.hidden)") ? "" : "none";
+  });
+  $("empty").classList.toggle("hidden", visible > 0);
+}
+qInput.addEventListener("input", applyFilter);
+$("chips").addEventListener("click", e => {
+  const btn = e.target.closest(".chip");
+  if (!btn) return;
+  filter = btn.dataset.filter;
+  document.querySelectorAll(".chip").forEach(c => c.setAttribute("aria-pressed", String(c === btn)));
+  applyFilter();
+});
+
+const selV = $("conv-v"), mass = $("conv-mass"), iu = $("conv-iu");
+const CONV_NAMES = { "3.3":"ретинола", "0.61":"бета-каротина", "40":"витамина Д-3", "1.23":"витамина Е" };
+const round2 = n => Math.round(n * 100) / 100;
+function fromMass(){ const k = parseFloat(selV.value); iu.value = mass.value === "" ? "" : round2(parseFloat(mass.value) * k); }
+function syncConv(){
+  const opt = selV.options[selV.selectedIndex];
+  $("conv-mass-label").textContent = opt.dataset.unit;
+  $("conv-formula").textContent = `1 ${opt.dataset.unit} ${CONV_NAMES[selV.value]} = ${selV.value.replace(".", ",")} МЕ`;
+  fromMass();
+}
+selV.addEventListener("change", syncConv);
+mass.addEventListener("input", fromMass);
+iu.addEventListener("input", () => { const k = parseFloat(selV.value); mass.value = iu.value === "" ? "" : round2(parseFloat(iu.value) / k); });
+syncConv();
+
+/* ═══════════ ВОПРОСЫ ТРЕНАЖЁРА ═══════════ */
+const SIGNS = [
+  {q:"Клиентка жалуется на заеды в углах рта и трещины на губах. Дефицит какого витамина проверяем первым?", o:["Витамин Б-2","Витамин Б-12","Витамин К","Витамин Е"], c:0, e:"Ангулярный хейлит (заеды) — классический признак дефицита рибофлавина. Часто идёт вместе с воспалением языка и светобоязнью."},
+  {q:"Ночная слепота и сухость глаз — чего не хватает?", o:["Витамина А","Витамина Д","Витамина Б-5","Витамина Б-8"], c:0, e:"Ретинол входит в состав родопсина — зрительного пигмента сетчатки. Куриная слепота и сухость роговицы — учебный признак дефицита А."},
+  {q:"Кровоточивость дёсен, синяки от лёгких прикосновений, плохо заживают ранки. Первый кандидат?", o:["Витамин С","Витамин Б-1","Витамин Б-7","Витамин Б-10"], c:0, e:"Без витамина С не синтезируется коллаген — страдают стенки сосудов и дёсны. Это ранняя стадия того же процесса, что и цинга."},
+  {q:"Онемение и покалывание в пальцах, шаткость походки, проблемы с памятью у вегана со стажем. Что в первую очередь?", o:["Витамин Б-12","Витамин Б-3","Витамин Е","Витамин К-2"], c:0, e:"B12 есть только в животных продуктах. Его дефицит бьёт по миелиновой оболочке нервов: парестезии, атаксия, ухудшение памяти вплоть до деменции."},
+  {q:"Какой витамин предотвращает кальцификацию — отложение кальция в сосудах и органах?", o:["Витамин К-2","Витамин Б-6","Витамин С","Витамин Б-9"], c:0, e:"К-2 активирует матриксный Gla-белок, который убирает кальций из мягких тканей и направляет его в кость. Поэтому его дают в паре с Д-3."},
+  {q:"Какой витамин превращается в организме в гормон, регулирующий более 200 функций?", o:["Витамин Д","Витамин А","Витамин Б-4","Витамин Е"], c:0, e:"Холекальциферол превращается в кальцитриол — по сути стероидный гормон с рецепторами почти во всех тканях."},
+  {q:"Клиент хочет «что-то для жиросжигания». Какой из витаминоподобных запускает липолиз?", o:["Б-11 (Л-карнитин)","Б-10 (ПАБА)","Б-2 (рибофлавин)","Б-7 (биотин)"], c:0, e:"Карнитин переносит жирные кислоты через мембрану митохондрии — без него жир не идёт в энергию. Ацетил-Л-карнитин дополнительно работает по мозгу."},
+  {q:"Какая пара витаминов группы B отвечает за накопление и обмен железа?", o:["Б-9 и Б-12","Б-1 и Б-5","Б-3 и Б-7","Б-8 и Б-10"], c:0, e:"Фолат и кобаламин нужны для созревания эритроцитов. Их дефицит даёт мегалобластную анемию, которую легко спутать с железодефицитной."},
+  {q:"Клиент просит поддержать надпочечники при хроническом стрессе. Какой витамин группы B профильный?", o:["Б-5 (пантотеновая кислота)","Б-10 (ПАБА)","Б-17","Б-2"], c:0, e:"Пантотеновая кислота — предшественник коэнзима А и участник синтеза стероидных гормонов надпочечников. Плюс ускоряет заживление ран и ожогов."},
+  {q:"Какой витамин назначают при СПКЯ для нормализации работы яичников?", o:["Б-8, мио-инозитол","Б-8, Д-хиро-инозитол","Б-10, ПАБА","Б-14, PQQ"], c:0, e:"Именно мио-инозитол эффективнее по яичникам. Д-хиро-инозитол сильнее работает по чувствительности к инсулину и при диабете — это две разные задачи."},
+  {q:"Клиент 45 лет жалуется на раннюю седину. Какое соединение работает с пигментацией волос?", o:["Б-10 (ПАБА)","Б-1 (тиамин)","Б-14 (PQQ)","Витамин К-1"], c:0, e:"ПАБА поддерживает пигментацию кожи и волос и служит источником фолиевой кислоты. Детям обычно не назначается."},
+  {q:"Синдром хронической усталости, нужна поддержка митохондрий. Что профильно и с чем сочетать?", o:["PQQ вместе с коэнзимом Q10","Биотин вместе с витамином К","ПАБА вместе с витамином А","Токоферолы вместе с Д-2"], c:0, e:"PQQ — витаминоподобное соединение, кофермент в синтезе энергии; в паре с Q10 работает по дыхательной цепи митохондрий."},
+  {q:"Какой из витаминов группы B помогает при аритмии и поддерживает сердечно-сосудистую систему?", o:["Б-1 (тиамин)","Б-7 (биотин)","Б-10 (ПАБА)","Б-4 (холин)"], c:0, e:"Тяжёлый дефицит тиамина даёт бери-бери с сердечной формой. Тиамин участвует в передаче нервного импульса и работе миокарда."},
+  {q:"Клиент хочет улучшить память. Какая форма холина профильная как ноотроп?", o:["Цитиколин (CDP-холин)","Холина битартрат","Фосфатидилхолин","ПАБА"], c:0, e:"Цитиколин и альфа-ГФХ — активные ноотропные формы. Фосфатидилхолин сильнее по печени, битартрат — базовая дешёвая форма."},
+  {q:"Какой витамин, кроме токоферолов, заявлен как онкопротектор и антиоксидант одновременно?", o:["Витамин Е (токотриенолы)","Витамин Б-5","Витамин К-1","Витамин Б-1"], c:0, e:"Токотриенолы — более мощные онкопротекторы, чем токоферолы, и дополнительно снижают холестерин."},
+  {q:"Ломкие ногти, тусклые тонкие волосы, шелушение кожи. Какой витамин группы B профильный?", o:["Б-7 (биотин)","Б-9 (фолат)","Б-12 (кобаламин)","Б-3 (ниацин)"], c:0, e:"Биотин — кофермент карбоксилаз, работает по кератину: волосы, кожа, ногти. Дозы высокие — 5 000–10 000 мкг."},
+  {q:"Какие четыре витамина группы B в связке снижают гомоцистеин?", o:["Б-2, Б-6, Б-9, Б-12","Б-1, Б-3, Б-5, Б-7","Б-4, Б-8, Б-10, Б-11","Б-5, Б-7, Б-10, Б-14"], c:0, e:"Это ядро фолатного цикла. К ним добавляют ТМГ (бетаин) как донатор метильных групп — классическая схема снижения гомоцистеина."},
+  {q:"Витамины какой группы лучше принимать в первой половине дня?", o:["Группа B","Жирорастворимые A и D","Магний и кальций","Витамин К-2"], c:0, e:"Группа B участвует в выработке энергии и у части людей бодрит — приём на ночь мешает сну."}
+];
+
+const CASES = [
+  {q:"Клиентка на варфарине просит подобрать К-2 для костей. Ваши действия?", o:["Не рекомендовать без согласования с врачом: витамин К — прямой антагонист варфарина","Дать МК-7, он безопаснее МК-4","Дать К-2 в детской дозировке","Дать К-1 вместо К-2"], c:0, e:"Варфарин работает именно через блокаду витамин-К-зависимых факторов свёртывания. Любой витамин К меняет МНО и риск тромбоза или кровотечения. Только врач."},
+  {q:"Клиент принимает метформин 3 года. Дефицит какого витамина проверить в первую очередь?", o:["Б-12","Витамин К-1","Б-10","Витамин Е"], c:0, e:"Метформин нарушает кальций-зависимое всасывание комплекса B12 в подвздошной кишке. Проверяют B12 и гомоцистеин."},
+  {q:"Клиент годами пьёт омепразол. Что страдает?", o:["B12, магний и железо — им нужна кислая среда","Только жирорастворимые витамины","Только витамин С","Ничего, ИПП на витамины не влияют"], c:0, e:"Ингибиторы протонной помпы снижают кислотность, а без неё B12 не отщепляется от белка пищи, железо и магний хуже всасываются."},
+  {q:"У клиента гастрит, но нужен витамин С в дозе 1 000 мг. Какую форму выбрать?", o:["Аскорбат кальция или магния (гашёная форма)","Аскорбиновую кислоту натощак","Ester-C натощак в двойной дозе","Аскорбилпальмитат вместо всего"], c:0, e:"Гашёные формы не повышают кислотность желудка — их и берут при гастритах и язвах."},
+  {q:"Веган со слабостью и парестезиями, в анализах макроцитарная анемия. Что опасно сделать?", o:["Назначить высокие дозы фолиевой кислоты без B12","Проверить B12 и гомоцистеин","Дать метилкобаламин","Проверить ферритин"], c:0, e:"Фолиевая кислота уберёт анемию в анализах, но не остановит поражение нервной системы — неврология будет тихо прогрессировать."},
+  {q:"Клиент-курильщик просит бета-каротин в высокой дозе «для лёгких». Что отвечаете?", o:["Высокие дозы бета-каротина курильщикам не рекомендуют — в исследованиях они повышали риск рака лёгкого","Бета-каротин безопаснее ретинола, доза любая","Заменить на 50 000 МЕ ретинола","Дать вместе с витамином К"], c:0, e:"Исследования CARET и ATBC показали рост заболеваемости раком лёгкого у курильщиков на высоких дозах бета-каротина."},
+  {q:"Беременная просит витамин А 25 000 МЕ «для кожи и волос». Ваши действия?", o:["Отказать: высокие дозы ретинола тератогенны, предложить бета-каротин и пищевые источники","Дать, это верхняя граница нормы взрослого","Дать 10 000 МЕ, как кормящим","Дать ретинол ацетат — он безопаснее"], c:0, e:"Ретинол в высоких дозах вызывает пороки развития плода. Бета-каротин так не работает: организм превращает его в ретинол по потребности."},
+  {q:"Клиент принимает Д-3 10 000 МЕ полгода без анализов. Что делаете?", o:["Отправляете сдать 25(ОН)D и кальций крови, добавляете К-2 и магний","Ничего, это безопасная доза навсегда","Поднимаете дозу до 20 000 МЕ","Меняете на Д-2"], c:0, e:"Витамин Д накапливается; длительный приём высоких доз без контроля даёт гиперкальциемию. Статус оценивают по 25(ОН)D."},
+  {q:"Клиент пьёт железо и кальций в один приём. Что сказать?", o:["Разнести на 2 часа: кальций конкурирует с железом за всасывание","Всё верно, они усиливают друг друга","Добавить к ним цинк в тот же приём","Запивать чаем для лучшего усвоения"], c:0, e:"Кальций, цинк и железо конкурируют за одни транспортёры. Железо лучше давать с витамином С; чай и кофе блокируют его танинами."},
+  {q:"Клиент принимает цинк 50 мг ежедневно уже год, отдельно ничего. Чем это грозит?", o:["Дефицитом меди: анемия, нейропатия","Ничем, цинк не накапливается","Избытком железа","Дефицитом витамина К"], c:0, e:"Цинк и медь конкурируют за всасывание. При длительных высоких дозах цинка медь добавляют в соотношении примерно 10–15:1."},
+  {q:"Клиент на статинах жалуется на мышечные боли и слабость. Что уместно предложить?", o:["Обсудить с врачом коэнзим Q10 — статины подавляют его синтез","Самостоятельно отменить статин","Дать высокие дозы ниацина","Дать витамин К-1"], c:0, e:"Статины блокируют мевалонатный путь, общий для холестерина и Q10. Отменять препарат нутрициолог не вправе."},
+  {q:"Клиент год принимал B6 в дозе 200 мг, появилось онемение в стопах. Что происходит?", o:["Сенсорная нейропатия от передозировки B6 — снизить дозу и к врачу","Дефицит B6 усилился — поднять дозу","Это нормальная реакция, продолжать","Это флаш от ниацина"], c:0, e:"Единственный витамин группы B с доказанной токсичностью при длительном избытке. Терапевтические дозы дают курсами, а не годами."},
+  {q:"После первой капсулы никотиновой кислоты клиента бросило в жар, покраснели лицо и грудь. Это что?", o:["Ниациновый флаш — ожидаемая реакция; альтернатива ниацинамид","Анафилаксия, вызвать скорую","Признак передозировки витамина Д","Аллергия на витамин С"], c:0, e:"Флаш — расширение сосудов кожи, проходит за 20–30 минут. Если мешает: малые дозы, приём с едой или ниацинамид."},
+  {q:"Клиентка сдаёт кровь на ТТГ и пьёт биотин 10 000 мкг. О чём предупредить?", o:["Отменить биотин за 2–3 дня: он искажает результаты иммуноанализов","Ничего, биотин на анализы не влияет","Удвоить дозу перед сдачей","Сдавать анализ сразу после приёма"], c:0, e:"Высокие дозы биотина мешают тестам на биотин-стрептавидиновой платформе — ТТГ, гормоны, тропонин. Бывают ложные картины гипертиреоза."},
+  {q:"Какой анализ показывает статус витамина Д?", o:["25(ОН)D — кальцидиол","1,25(ОН)2D — кальцитриол","Кальций общий","Щелочная фосфатаза"], c:0, e:"Запасную форму отражает именно 25(ОН)D. Кальцитриол при дефиците бывает нормальным за счёт компенсаторного роста ПТГ."},
+  {q:"Клиентка с выпадением волос просит биотин. Что сделать до назначения?", o:["Проверить ферритин и щитовидную железу","Сразу дать 10 000 мкг биотина","Дать витамин К-2","Дать ПАБА от седины"], c:0, e:"Дефицит железа и патология щитовидной железы дают выпадение куда чаще, чем дефицит биотина."},
+  {q:"Клиент на антибиотиках две недели. Что учесть по витаминам?", o:["Микробиота синтезирует К-2 и биотин — поддержать её восстановление","Ничего, антибиотики на витамины не влияют","Отменить все жирорастворимые навсегда","Удвоить дозу витамина А"], c:0, e:"Часть витамина К-2 и биотина мы получаем от кишечных бактерий. Длительная антибиотикотерапия этот источник обнуляет."},
+  {q:"Клиент с нарушением фолатного цикла (полиморфизмы MTHFR). Какие формы предпочтительнее?", o:["Метилфолат и метилкобаламин; при плохой переносимости — фолиновая кислота и гидроксикобаламин","Фолиевая кислота и цианкобаламин","ПАБА и биотин","Д-2 и токоферолы"], c:0, e:"Синтетическая фолиевая кислота требует превращения, которое у таких людей идёт хуже. Активные формы обходят этот этап."},
+  {q:"Клиент решил начать сразу восемь новых добавок в один день. Что посоветовать?", o:["Вводить по одной каждые 3–5 дней, чтобы отследить реакцию","Начать всё сразу — быстрее эффект","Начать всё сразу, но в половинных дозах","Начать с самых дорогих"], c:0, e:"При одномоментном старте невозможно понять, что дало эффект, а что сыпь. Витамины группы B к тому же довольно аллергенны."},
+  {q:"Когда лучше принимать витамины A, D, E, K?", o:["С едой, содержащей жиры","Строго натощак утром","На ночь, запивая водой","В любое время, это не важно"], c:0, e:"Без жиров жирорастворимые витамины не проникнут в организм. Это же причина, по которой их пьют курсами: они накапливаются."},
+  {q:"Клиент пьёт B-комплекс перед сном и жалуется на бессонницу. Что менять?", o:["Перенести приём на утро","Удвоить дозу","Добавить ниацин на ночь","Отменить навсегда"], c:0, e:"Витамины группы B включены в энергообмен и у части людей бодрят. Стандартная рекомендация — первая половина дня, с едой."},
+  {q:"Женщина принимает комбинированные оральные контрацептивы. Что чаще всего просаживается?", o:["B6, B9, B12, магний, цинк","Только витамин К","Только жирорастворимые","Только витамин А"], c:0, e:"КОК повышают потребность в витаминах группы B (особенно B6 и фолате) и в магнии с цинком. Стандартный пункт анамнеза."},
+  {q:"Онкопациент на химиотерапии просит «мощные антиоксиданты в больших дозах». Ваши действия?", o:["Только по согласованию с онкологом","Дать максимальные дозы Е и С — это онкопротекторы","Дать амигдалин (Б-17)","Дать ретинол 25 000 МЕ"], c:0, e:"Часть терапии работает через окислительный стресс, поэтому дозы антиоксидантов решает врач. Амигдалин — отдельный красный флаг."},
+  {q:"У клиента саркоидоз. Какой витамин требует особой осторожности?", o:["Витамин Д — риск гиперкальциемии","Витамин Б-2","Витамин Б-10","Витамин С"], c:0, e:"При саркоидозе гранулёмы сами превращают витамин Д в активную форму, и добавки легко дают гиперкальциемию."},
+  {q:"Что сдать, чтобы оценить запасы железа, если у клиента есть воспаление?", o:["Ферритин вместе с СРБ","Только сывороточное железо","Только гемоглобин","Только витамин B12"], c:0, e:"Ферритин — белок острой фазы: при воспалении он растёт и маскирует дефицит. Поэтому его читают в паре с СРБ."},
+  {q:"Клиент принимает метотрексат и хочет добавить фолиевую кислоту. Что верно?", o:["Только по схеме лечащего врача — метотрексат работает как антагонист фолата","Дать 800 мкг метилфолата ежедневно","Фолиевая при метотрексате бесполезна","Заменить фолиевую на ПАБА"], c:0, e:"Механизм действия метотрексата — блокада фолатного обмена. Фолат при нём назначают по конкретной схеме и в определённые дни."},
+  {q:"Как оценить дефицит B12, если сывороточный B12 «в норме», а симптомы есть?", o:["Проверить гомоцистеин и метилмалоновую кислоту","Ничего не делать, норма есть норма","Сразу назначить 5 000 мкг цианкобаламина","Проверить только ферритин"], c:0, e:"Сывороточный B12 считает и неактивные формы. Функциональный дефицит показывают гомоцистеин и метилмалоновая кислота."}
+];
+
+
+function hashId(s){ let h = 0; for (let i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) | 0; return (h >>> 0).toString(36); }
+function make(type, topic, q, correct, distractors, e){
+  const uniq = [...new Set(distractors)].filter(d => d !== correct);
+  const opts = shuffled([correct, ...shuffled(uniq).slice(0, 3)]);
+  return { id: type + "-" + hashId(q), type, topic, q, o: opts, c: opts.indexOf(correct), e };
+}
+
+const QUESTIONS = [];
+const allNames = DATA.map(v => v.name);
+DATA.forEach(v => {
+  v.forms.forEach(f => {
+    QUESTIONS.push(make("forms", v.name, `«${f.n}» — форма какого витамина?`, v.name, allNames,
+      `${f.n} — ${f.tag} форма${f.note ? " (" + f.note + ")" : ""}: ${v.name}.`));
+    if (v.forms.length > 1)
+      QUESTIONS.push(make("forms", v.name, `${v.name}: какая по статусу форма «${f.n}»?`, f.tag,
+        ["классическая","активная","редкая","провитамин","гашёные","подтип К-2","особая"],
+        `${f.n} — ${f.tag} форма${f.note ? ": " + f.note : ""}.`));
+  });
+  const label = v.group === "fat" ? "Жирорастворимый" : v.group === "water" ? "Водорастворимый" : "Витаминоподобное соединение";
+  QUESTIONS.push(make("forms", v.name, `${v.name} — к какой группе относится?`, label,
+    ["Жирорастворимый","Водорастворимый","Витаминоподобное соединение"],
+    v.group === "fat" ? "Жирорастворимые (A, E, D, K) накапливаются в жировой ткани — курсами и с жирами."
+    : v.group === "water" ? "Водорастворимые (C и группа B) почти не накапливаются — нужны постоянно и понемногу."
+    : "Формально не витамин, а витаминоподобное соединение."));
+});
+const unitOf = s => s.trim().split(/\s+/).pop();
+const dosePool = {};
+DATA.forEach(v => v.doses.forEach(d => { const u = unitOf(d.v); (dosePool[u] = dosePool[u] || []).push(d.v); }));
+DATA.forEach(v => v.doses.forEach(d => {
+  if (d.v.indexOf("не назначается") > -1) return;
+  QUESTIONS.push(make("dose", v.name, `${v.name} — дозировка, ${d.who.toLowerCase()}?`, d.v, dosePool[unitOf(d.v)] || [], `${d.who}: ${d.v}.`));
+}));
+DATA.filter(v => v.units).forEach(v => v.units.forEach(u => {
+  const [left, rightPart] = u.split("=").map(s => s.trim());
+  QUESTIONS.push(make("dose", v.name, `${left} — сколько это МЕ?`, rightPart,
+    ["3,3 МЕ","0,61 МЕ","40 МЕ","1,23 МЕ","100 МЕ"], `${u}. Коэффициент свой у каждого вещества.`));
+}));
+SIGNS.forEach(s => {
+  const o = shuffled(s.o);
+  QUESTIONS.push({ id:"signs-" + hashId(s.q), type:"signs", topic:"Функции и дефициты", q:s.q, o, c:o.indexOf(s.o[s.c]), e:s.e });
+});
+CASES.forEach(s => {
+  const o = shuffled(s.o);
+  QUESTIONS.push({ id:"case-" + hashId(s.q), type:"case", topic:"Кейсы и взаимодействия", q:s.q, o, c:o.indexOf(s.o[s.c]), e:s.e });
+});
+const BY_ID = Object.fromEntries(QUESTIONS.map(q => [q.id, q]));
+
+const TYPE_LABEL = { forms:"формы", dose:"дозировки", signs:"дефициты", case:"клинический кейс" };
+function plural(n, one, few, many){
+  const d = n % 10, h = n % 100;
+  if (d === 1 && h !== 11) return one;
+  if (d >= 2 && d <= 4 && (h < 10 || h > 20)) return few;
+  return many;
+}
+const counts = { all: QUESTIONS.length };
+["forms","dose","signs","case"].forEach(t => counts[t] = QUESTIONS.filter(q => q.type === t).length);
+document.querySelectorAll("[data-count]").forEach(el => {
+  const n = counts[el.dataset.count];
+  el.textContent = n + " " + plural(n, "вопрос", "вопроса", "вопросов");
+});
+
+/* ═══════════ ПАМЯТЬ: СТАТИСТИКА, ПОВТОРЕНИЕ, СЕРИЯ ═══════════ */
+const TKEY = "vit-trainer-v1", SKEY = "vit-srs-v1", DKEY = "vit-days-v1", HKEY = "vit-hist-v1";
+let stats = Object.assign({ total:0, right:0, topics:{} }, store.get(TKEY, {}));
+if (!stats.topics) stats.topics = {};
+let srs = store.get(SKEY, {}) || {};
+let hist = store.get(HKEY, []) || [];
+const INTERVALS = [0, 1, 3, 7, 21];
+const today = () => Math.floor(Date.now() / 864e5);
+
+let days = store.get(DKEY, { last:null, streak:0 });
+(function touchDay(){
+  const t = today();
+  if (days.last === t) return;
+  days.streak = days.last === t - 1 ? (days.streak || 0) + 1 : 1;
+  days.last = t;
+  store.set(DKEY, days);
+})();
+
+function gradeCard(id, ok){
+  const cur = srs[id] || { box:0 };
+  cur.box = ok ? Math.min((cur.box || 0) + 1, INTERVALS.length - 1) : 0;
+  cur.due = today() + INTERVALS[cur.box];
+  srs[id] = cur;
+  store.set(SKEY, srs);
+}
+function dueList(){
+  const t = today();
+  return Object.keys(srs).filter(id => srs[id].due <= t && BY_ID[id]).map(id => BY_ID[id]);
+}
+function refreshDue(){
+  const n = dueList().length;
+  const badge = $("due-badge");
+  badge.textContent = n;
+  badge.hidden = n === 0;
+  $("due-meta").textContent = n ? `${n} ${plural(n, "карточка", "карточки", "карточек")} на сегодня` : "на сегодня ничего";
+  $("deck-due").disabled = n === 0;
+  $("deck-due").style.opacity = n ? "1" : ".55";
+  $("due-n").textContent = n;
+  $("due-go").disabled = n === 0;
+  return n;
+}
+
+function weakRows(){
+  return Object.entries(stats.topics).filter(([, t]) => t.n >= 2)
+    .map(([name, t]) => ({ name, pct: Math.round(t.r / t.n * 100), n: t.n }))
+    .sort((a, b) => a.pct - b.pct);
+}
+function renderWeakInto(el, limit){
+  const rows = weakRows().slice(0, limit);
+  el.innerHTML = rows.length
+    ? rows.map(r => `<div class="weak-row"><span class="wname">${esc(r.name)}</span><div class="wbar"><span style="width:${100 - r.pct}%"></span></div><span class="wpct">${r.pct}% · ${r.n}</span></div>`).join("")
+    : '<p class="weak-empty">Пока нет данных — пройдите первый раунд.</p>';
+}
+function renderLifetime(){
+  $("lifetime").textContent = stats.total
+    ? `всего ответов ${stats.total} · точность ${Math.round(stats.right / stats.total * 100)}%`
+    : "статистика появится после первого раунда";
+}
+function saveStats(){ store.set(TKEY, stats); }
+
+/* ═══════════ ТРЕНАЖЁР ═══════════ */
+let deck = "all", queue = [], idx = 0, rightN = 0, streak = 0, best = 0, misses = [], answered = false;
+
+$("decks").addEventListener("click", e => {
+  const b = e.target.closest(".deck");
+  if (!b || b.disabled) return;
+  deck = b.dataset.deck;
+  document.querySelectorAll(".deck").forEach(d => d.setAttribute("aria-pressed", String(d === b)));
+});
+function showScreen(id){
+  document.querySelectorAll(".screen").forEach(s => s.classList.toggle("on", s.id === id));
+  window.scrollTo(0, 0);
+}
+function startRound(list){
+  if (!list.length) return;
+  queue = list; idx = 0; rightN = 0; streak = 0; best = 0; misses = []; answered = false;
+  showScreen("scr-play");
+  renderQ();
+}
+function buildPool(){
+  if (deck === "due") return shuffled(dueList());
+  if (deck === "weak"){
+    const weak = new Set(weakRows().filter(r => r.pct < 70).map(r => r.name));
+    const pool = QUESTIONS.filter(q => weak.has(q.topic));
+    return shuffled(pool.length ? pool : QUESTIONS);
+  }
+  return shuffled(deck === "all" ? QUESTIONS.slice() : QUESTIONS.filter(q => q.type === deck));
+}
+$("go").addEventListener("click", () => {
+  const len = parseInt($("len").value, 10);
+  const pool = buildPool();
+  startRound(len ? pool.slice(0, len) : pool);
+});
+function renderQ(){
+  answered = false;
+  const q = queue[idx];
+  $("qtype").textContent = TYPE_LABEL[q.type];
+  $("qtype").className = "qtype" + (q.type === "case" ? " case" : "");
+  $("qtext").textContent = q.q;
+  $("pos").textContent = `${String(idx + 1).padStart(2,"0")} / ${queue.length}`;
+  $("track-fill").style.width = (idx / queue.length * 100) + "%";
+  const st = $("streak");
+  st.innerHTML = icon("i-flame") + " серия " + streak;
+  st.classList.toggle("hot", streak >= 3);
+  $("verdict").hidden = true;
+  $("opts").innerHTML = q.o.map((o, i) =>
+    `<button class="opt" data-i="${i}"><span class="key">${i + 1}</span><span>${esc(o)}</span></button>`).join("");
+}
+$("opts").addEventListener("click", e => {
+  const b = e.target.closest(".opt");
+  if (b && !answered) answer(parseInt(b.dataset.i, 10));
+});
+function answer(i){
+  if (answered) return;
+  answered = true;
+  const q = queue[idx];
+  const ok = i === q.c;
+  document.querySelectorAll("#opts .opt").forEach((el, n) => {
+    el.disabled = true;
+    if (n === q.c){ el.classList.add("correct"); el.querySelector(".key").innerHTML = icon("i-check"); }
+    else if (n === i){ el.classList.add("wrong"); el.querySelector(".key").innerHTML = icon("i-x"); }
+  });
+  if (ok){ rightN++; streak++; best = Math.max(best, streak); }
+  else {
+    streak = 0; misses.push(q);
+    if (!reduced()){
+      const card = $("qcard");
+      card.classList.remove("shake"); void card.offsetWidth; card.classList.add("shake");
+    }
+    if (navigator.vibrate) try{ navigator.vibrate(14); }catch(e){}
+  }
+  stats.total++; if (ok) stats.right++;
+  const t = stats.topics[q.topic] = stats.topics[q.topic] || { n:0, r:0 };
+  t.n++; if (ok) t.r++;
+  saveStats();
+  gradeCard(q.id, ok);
+  refreshDue();
+  const v = $("verdict");
+  v.hidden = false;
+  v.className = "verdict " + (ok ? "ok" : "no");
+  $("vhead").innerHTML = ok
+    ? icon("i-check") + " Верно"
+    : icon("i-x") + " Неверно — " + esc(q.o[q.c]);
+  $("vexpl").textContent = q.e;
+  const st = $("streak");
+  st.innerHTML = icon("i-flame") + " серия " + streak;
+  st.classList.toggle("hot", streak >= 3);
+  $("next").focus({ preventScroll:true });
+  v.scrollIntoView({ block:"nearest", behavior: reduced() ? "auto" : "smooth" });
+}
+function nextQ(){
+  if (!answered) return;
+  idx++;
+  if (idx >= queue.length) finish(); else renderQ();
+}
+$("next").addEventListener("click", nextQ);
+$("quit").addEventListener("click", () => { showScreen("scr-start"); renderLifetime(); renderWeakInto($("weak-rows"), 5); });
+document.addEventListener("keydown", e => {
+  if (currentView !== "trainer" || !$("scr-play").classList.contains("on")) return;
+  if (/^(INPUT|SELECT|TEXTAREA)$/.test(e.target.tagName)) return;
+  if (e.key >= "1" && e.key <= "4" && !answered){
+    if (document.querySelector(`#opts .opt[data-i="${+e.key - 1}"]`)) answer(+e.key - 1);
+  }
+  if ((e.key === "Enter" || e.key === " ") && answered){ e.preventDefault(); nextQ(); }
+});
+function finish(){
+  const pct = Math.round(rightN / queue.length * 100);
+  $("pct").textContent = pct + "%";
+  $("score-line").textContent = `${rightN} из ${queue.length} верно`;
+  $("streak-line").textContent = `лучшая серия — ${best}`;
+  $("grade").textContent = pct === 100 ? "Идеально. Берите блок посложнее — кейсы и взаимодействия."
+    : pct >= 85 ? "Уверенный уровень. Осталось добить точечные пробелы ниже."
+    : pct >= 65 ? "База есть, но на клиенте такие пробелы вылезут. Прогоните ошибки ещё раз."
+    : "Рано консультировать по этому блоку — вернитесь к справочнику и повторите раунд.";
+  $("review").innerHTML = misses.length
+    ? `<h3>Работа над ошибками — ${misses.length}</h3>` + misses.map(m =>
+        `<div class="miss"><span class="mq">${esc(m.q)}</span><span class="ma"><b>${esc(m.o[m.c])}</b> — ${esc(m.e)}</span></div>`).join("")
+    : `<h3>Ошибок нет</h3>`;
+  $("redo-miss").disabled = !misses.length;
+  $("track-fill").style.width = "100%";
+  hist.push({ d: today(), pct });
+  hist = hist.slice(-20);
+  store.set(HKEY, hist);
+  renderLifetime();
+  renderWeakInto($("weak-rows"), 5);
+  refreshDue();
+  showScreen("scr-done");
+}
+$("again").addEventListener("click", () => $("go").click());
+$("redo-miss").addEventListener("click", () => { if (misses.length) startRound(shuffled(misses)); });
+$("back").addEventListener("click", () => showScreen("scr-start"));
+
+/* ═══════════ ЭКРАН ПРОГРЕССА ═══════════ */
+function renderProgress(){
+  const learnedN = Object.values(learned).filter(Boolean).length;
+  const acc = stats.total ? stats.right / stats.total : 0;
+  const topicsTouched = Object.keys(stats.topics).length;
+  const topicsAll = new Set(QUESTIONS.map(q => q.topic)).size;
+  const coverage = topicsAll ? Math.min(1, topicsTouched / topicsAll) : 0;
+  const readiness = Math.round((learnedN / DATA.length * .4 + acc * .4 + coverage * .2) * 100);
+
+  const C = 2 * Math.PI * 50;
+  const fg = $("ring-fg");
+  fg.style.strokeDasharray = C.toFixed(2);
+  fg.style.strokeDashoffset = C.toFixed(2);
+  requestAnimationFrame(() => { fg.style.strokeDashoffset = (C * (1 - readiness / 100)).toFixed(2); });
+  $("ring-num").textContent = readiness + "%";
+  $("r-learn").textContent = `${learnedN} / ${DATA.length}`;
+  $("r-acc").textContent = stats.total ? Math.round(acc * 100) + " %" : "—";
+  $("r-cov").textContent = Math.round(coverage * 100) + " %";
+  $("s-streak").textContent = days.streak || 0;
+  $("s-total").textContent = stats.total;
+
+  const spark = $("spark");
+  spark.querySelectorAll(".dyn").forEach(n => n.remove());
+  const pts = hist.slice(-12);
+  if (pts.length > 1){
+    const W = 300, H = 66, pad = 4;
+    const xy = pts.map((p, i) => [pad + i * (W - pad * 2) / (pts.length - 1), H - pad - (p.pct / 100) * (H - pad * 2)]);
+    const line = xy.map(p => p[0].toFixed(1) + "," + p[1].toFixed(1)).join(" ");
+    const area = `M${xy[0][0].toFixed(1)},${H} L` + line.replace(/ /g, " L") + ` L${xy[xy.length-1][0].toFixed(1)},${H} Z`;
+    spark.insertAdjacentHTML("beforeend",
+      `<path class="area dyn" d="${area}"/>` +
+      `<polyline class="line dyn" points="${line}" vector-effect="non-scaling-stroke"/>` +
+      `<line class="dotend dyn" x1="${xy[xy.length-1][0].toFixed(1)}" y1="${xy[xy.length-1][1].toFixed(1)}" x2="${xy[xy.length-1][0].toFixed(1)}" y2="62" vector-effect="non-scaling-stroke"/>`);
+    $("spark-note").textContent = `последние ${pts.length} ${plural(pts.length, "раунд", "раунда", "раундов")} · сейчас ${pts[pts.length-1].pct}%`;
+  } else {
+    $("spark-note").textContent = "график появится после двух раундов";
+  }
+  renderWeakInto($("weak-rows-2"), 6);
+  refreshDue();
+}
+$("due-go").addEventListener("click", () => {
+  deck = "due";
+  go("trainer");
+  const pool = buildPool();
+  startRound(pool.slice(0, 20));
+});
+$("train-weak").addEventListener("click", () => {
+  deck = "weak";
+  go("trainer");
+  startRound(buildPool().slice(0, 15));
+});
+$("reset-all").addEventListener("click", () => {
+  if (!confirm("Сбросить весь прогресс: отметки «выучено», статистику, серию дней и расписание повторений?")) return;
+  [LKEY, TKEY, SKEY, DKEY, HKEY].forEach(store.del);
+  learned = {}; stats = { total:0, right:0, topics:{} }; srs = {}; hist = []; days = { last:today(), streak:1 };
+  store.set(DKEY, days);
+  paintLearned(); renderLifetime(); renderWeakInto($("weak-rows"), 5); renderProgress();
+});
+
+/* ═══════════ СТАРТ ═══════════ */
+renderLifetime();
+renderWeakInto($("weak-rows"), 5);
+refreshDue();
+go("basics");
+</script>
