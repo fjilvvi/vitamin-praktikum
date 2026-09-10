@@ -2918,8 +2918,17 @@ const UNITS = [
 const LESSON_SIZE = 8;
 const used = new Set();
 UNITS.forEach(u => {
-  u.pool = QUESTIONS.filter(q => !used.has(q.id) && u.pick(q)).sort((a, b) => a.id.localeCompare(b.id));
-  u.pool.forEach(q => used.add(q.id));
+  const raw = QUESTIONS.filter(q => !used.has(q.id) && u.pick(q));
+  raw.forEach(q => used.add(q.id));
+  // раскладываем типы по кругу, чтобы в каждом уроке был микс, а не блок однотипных
+  const byType = {};
+  raw.sort((a, b) => a.id.localeCompare(b.id)).forEach(q => (byType[q.type] = byType[q.type] || []).push(q));
+  const kinds = Object.keys(byType).sort((a, b) => byType[b].length - byType[a].length || a.localeCompare(b));
+  u.pool = [];
+  for (let more = true; more; ){
+    more = false;
+    kinds.forEach(k => { if (byType[k].length){ u.pool.push(byType[k].shift()); more = true; } });
+  }
   u.lessons = [];
   for (let i = 0; i < u.pool.length; i += LESSON_SIZE){
     const chunk = u.pool.slice(i, i + LESSON_SIZE);
