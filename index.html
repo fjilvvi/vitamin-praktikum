@@ -471,7 +471,7 @@
   .cover-art div:nth-child(7){animation-delay:.20s} .cover-art div:nth-child(8){animation-delay:.23s}
   .cover-art div:nth-child(9){animation-delay:.26s}
 
-  .b-step{padding-top:46px;scroll-margin-top:calc(var(--topbar) + 14px);content-visibility:auto;contain-intrinsic-size:auto 600px}
+  .b-step{padding-top:46px;scroll-margin-top:calc(var(--topbar) + 14px);content-visibility:auto;contain-intrinsic-size:auto 900px}
   .stepno{
     display:inline-flex;align-items:center;gap:8px;
     font-family:var(--font-data);font-size:var(--t-cap);letter-spacing:.14em;color:var(--brand-ink);
@@ -656,7 +656,7 @@
 
   .dossier{
     border-top:1px solid var(--border);padding:24px 0 28px;container-type:inline-size;min-width:0;
-    content-visibility:auto;contain-intrinsic-size:auto 420px;
+    content-visibility:auto;contain-intrinsic-size:auto 620px;
   }
   .dossier:first-of-type{border-top:0}
   .dossier.hidden{display:none}
@@ -769,7 +769,7 @@
   .empty.hidden{display:none}
 
   /* ═══ ПРАКТИКА ═══ */
-  .psec{padding-top:46px;scroll-margin-top:calc(var(--topbar) + 14px);content-visibility:auto;contain-intrinsic-size:auto 700px}
+  .psec{padding-top:46px;scroll-margin-top:calc(var(--topbar) + 14px);content-visibility:auto;contain-intrinsic-size:auto 1400px}
   .intro{color:var(--text-2);max-width:66ch;margin:16px 0 18px}
   .toc{display:flex;flex-wrap:wrap;gap:8px;margin:24px 0 0}
   .toc a{
@@ -2484,7 +2484,15 @@ function go(view, anchor){
     if (view === "progress") renderProgress();
     if (anchor){
       const t = $(anchor);
-      if (t){ t.scrollIntoView({ block:"start" }); return; }
+      if (t){
+        // секции с content-visibility сообщают высоту не сразу — доводим прокрутку в два прохода
+        t.scrollIntoView({ block:"start" });
+        requestAnimationFrame(() => {
+          t.scrollIntoView({ block:"start" });
+          setTimeout(() => t.scrollIntoView({ block:"start" }), 160);
+        });
+        return;
+      }
     }
     window.scrollTo(0, 0);
   };
