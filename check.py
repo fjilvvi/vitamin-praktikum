@@ -6,7 +6,7 @@ s = p.read_text(encoding='utf-8')
 html = s[:s.rindex('<script>')]
 ok = True
 
-for tag in ('div', 'main', 'section', 'article', 'figure', 'nav', 'header', 'footer', 'ul', 'table'):
+for tag in ('div', 'main', 'section', 'article', 'figure', 'nav', 'header', 'footer', 'ul', 'table', 'details', 'summary'):
     o = len(re.findall(r'<%s[\s>]' % tag, html))
     c = len(re.findall(r'</%s>' % tag, html))
     if o != c:
