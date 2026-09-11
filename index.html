@@ -3617,7 +3617,7 @@ function buildIndex(){
   }));
   document.querySelectorAll("#view-basics .b-step").forEach(el => SEARCH_INDEX.push({
     title:el.querySelector("h2").textContent, sec:"Старт с нуля", view:"basics", anchor:el.id,
-    text:el.textContent.replace(/\s+/g, " ").slice(0, 600)
+    text:el.textContent.replace(/\s+/g, " ").slice(0, 1800)
   }));
   document.querySelectorAll("#view-practice .psec").forEach(el => SEARCH_INDEX.push({
     title:el.querySelector("h2").textContent, sec:"Практика", view:"practice", anchor:el.id,
