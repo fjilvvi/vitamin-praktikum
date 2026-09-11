@@ -1,5 +1,5 @@
 /* Витаминный практикум — офлайн-слой */
-const VERSION = "b4e5b7862e";
+const VERSION = "e3a91dbe38";
 const SHELL = "shell-" + VERSION;
 const FONTS = "fonts-v1";
 const ASSETS = [
