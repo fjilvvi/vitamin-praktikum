@@ -1013,7 +1013,7 @@
   .node .ncrowns{display:flex;gap:4px;align-items:center;font-size:var(--t-s);color:var(--text-3);font-family:var(--font-data)}
   .ncrowns .crown{width:16px;height:16px;color:var(--border);fill:none}
   .ncrowns .crown.on{color:var(--fat);fill:color-mix(in oklab,var(--fat) 25%,transparent)}
-  .node.open .nmeta b{color:var(--fat-ink)}
+  .node.open .nmeta b{color:var(--brand-ink)}
 
   .freeplay{margin-top:44px;padding-top:8px}
   .freeplay .decks{margin-top:16px}
@@ -1147,6 +1147,34 @@
   .gs-item .gs-snip{font-size:var(--t-sm);color:var(--text-3);overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
   .gs-empty{padding:26px 18px;color:var(--text-3);font-size:var(--t-base);text-align:center}
 
+
+
+  @keyframes sheetup{from{transform:translateY(100%)}to{transform:translateY(0)}}
+
+  /* ── путь: закрашенная линия, пульс активного узла, кольцо раздела ── */
+  .nodes{--done:0%}
+  .nodes::after{
+    content:"";position:absolute;left:34px;top:16px;width:2px;height:var(--done);
+    background:var(--brand);border-radius:2px;
+    transition:height .6s var(--ease);
+  }
+  .node.open .ncircle{animation:nodepulse 2.6s var(--ease) infinite}
+  @keyframes nodepulse{
+    0%,100%{box-shadow:0 6px 18px -6px color-mix(in oklab,var(--brand) 60%,transparent), 0 0 0 0 color-mix(in oklab,var(--brand) 35%,transparent)}
+    55%{box-shadow:0 6px 18px -6px color-mix(in oklab,var(--brand) 60%,transparent), 0 0 0 10px color-mix(in oklab,var(--brand) 0%,transparent)}
+  }
+  .uring{
+    width:38px;height:38px;flex:none;border-radius:50%;display:grid;place-items:center;
+    background:conic-gradient(var(--brand) calc(var(--p) * 1%), var(--surface-2) 0);
+  }
+  .uring i{
+    width:30px;height:30px;border-radius:50%;background:var(--surface);display:grid;place-items:center;
+    font-family:var(--font-data);font-size:var(--t-cap);font-style:normal;color:var(--text-2);
+    font-variant-numeric:tabular-nums;
+  }
+  .lesson-unit.complete .uring i{color:var(--ok)}
+  .qunit{font-family:var(--font-data);font-size:var(--t-cap);letter-spacing:.1em;text-transform:uppercase;color:var(--text-3)}
+
   /* ═══ ПРОГРЕСС ═══ */
   .pgrid{display:grid;grid-template-columns:1fr;gap:16px;margin-top:26px}
   @media(min-width:760px){.pgrid{grid-template-columns:1.1fr .9fr}}
@@ -1216,6 +1244,26 @@
   @media (max-width:900px){
     body{padding-bottom:calc(var(--tabbar) + 8px)}
     .tabbar{display:block}
+
+    /* урок во весь экран: шторка разбора вместо блока в потоке */
+    .in-lesson .tabbar{display:none}
+    .in-lesson body{padding-bottom:0}
+    .in-lesson .verdict{
+      position:fixed;left:0;right:0;bottom:0;z-index:70;
+      border-top:1px solid var(--border);
+      border-radius:var(--radius-l) var(--radius-l) 0 0;
+      padding:20px 20px calc(20px + env(safe-area-inset-bottom,0px));
+      box-shadow:0 -12px 40px -20px oklch(24% .02 260 / .45);
+      animation:sheetup .32s var(--spring) both;
+    }
+    .in-lesson .verdict.ok{background:var(--ok-soft)}
+    .in-lesson .verdict.no{background:var(--warn-soft)}
+    .in-lesson .verdict .next-row{margin-top:8px}
+    .in-lesson .verdict .next-row .btn{flex:1 1 100%;padding:16px 20px;font-size:var(--t-s)}
+    .in-lesson #scr-play{padding-bottom:24px}
+    .in-lesson .hintkeys{display:none}
+
+
     .menu-btn{display:none}
     .bar{padding-inline:16px;gap:12px}
     .shell{padding-inline:16px}
@@ -2236,7 +2284,7 @@
       <span class="streak" id="streak"><svg class="ico" aria-hidden="true"><use href="#i-flame"/></svg> 0</span>
     </div>
     <div class="qcard" id="qcard">
-      <div class="qhead"><span class="qtype" id="qtype"></span><span class="qpos mono" id="pos"></span></div>
+      <div class="qhead"><span class="qtype" id="qtype"></span><span class="qunit" id="q-unit"></span><span class="qpos mono" id="pos"></span></div>
       <p class="qtext" id="qtext"></p>
       <div id="answer-area"></div>
       <div class="verdict" id="verdict" role="status" aria-live="polite" hidden>
@@ -3036,18 +3084,23 @@ function crownRow(lvl, max){
   for (let i = 0; i < (max || 3); i++) s += `<svg class="ico crown${i < lvl ? " on" : ""}"><use href="#i-crown"/></svg>`;
   return s;
 }
+function lockHint(i){
+  const prev = NODES[i - 1];
+  if (!prev) return "закрыт";
+  return prev.kind === "exam" ? "после экзамена раздела" : "после урока " + prev.n;
+}
 function renderPath(){
   let html = "", i = 0;
   UNITS.forEach(u => {
     const uNodes = NODES.map((n, idx) => ({ n, idx })).filter(x => x.n.unit.id === u.id);
     const doneN = uNodes.filter(x => nodeDone(x.n)).length;
-    html += `<section class="lesson-unit">
+    html += `<section class="lesson-unit${doneN === uNodes.length ? " complete" : ""}">
       <div class="unit-head">
         <span class="uicon">${icon(u.icon)}</span>
         <div class="utitle"><b>${esc(u.title)}</b><span>${esc(u.sub)}</span></div>
-        <span class="ubadge${doneN === uNodes.length ? " full" : ""}">${doneN} / ${uNodes.length}</span>
+        <span class="uring" style="--p:${Math.round(doneN / uNodes.length * 100)}" title="Пройдено ${doneN} из ${uNodes.length}"><i>${doneN}/${uNodes.length}</i></span>
       </div>
-      <div class="nodes">`;
+      <div class="nodes" style="--done:${uNodes.length > 1 ? Math.round(doneN / (uNodes.length - 1) * 100) : 0}%">`;
     uNodes.forEach(({ n, idx }, k) => {
       const st = nodeState(idx), lvl = nodeLevel(n);
       const label = n.kind === "exam" ? "Экзамен" : "Урок " + n.n;
@@ -3055,7 +3108,7 @@ function renderPath(){
       html += `<button class="node ${st} ${n.kind}" data-node="${idx}" style="--k:${k % 4}"
           ${st === "lock" ? "disabled aria-disabled='true'" : ""} aria-label="${esc(label)}">
           <span class="ncircle">${icon(ico)}</span>
-          <span class="nmeta"><b>${label}</b><span class="ncrowns">${st === "lock" ? "закрыт" : crownRow(lvl, n.kind === "exam" ? 1 : 3)}</span></span>
+          <span class="nmeta"><b>${label}</b><span class="ncrowns">${st === "lock" ? lockHint(idx) : crownRow(lvl, n.kind === "exam" ? 1 : 3)}</span></span>
         </button>`;
       i++;
     });
@@ -3082,6 +3135,7 @@ $("decks").addEventListener("click", e => {
 });
 function showScreen(id){
   document.querySelectorAll("#view-trainer .screen").forEach(s => s.classList.toggle("on", s.id === id));
+  document.documentElement.classList.toggle("in-lesson", id === "scr-play");
   window.scrollTo(0, 0);
 }
 function startRound(list){
@@ -3120,6 +3174,9 @@ function renderQ(){
   $("qtype").className = "qtype" + (q.type === "case" ? " case" : "");
   $("pos").textContent = `${idx + 1} / ${queue.length}`;
   $("qtext").textContent = q.q;
+  $("q-unit").textContent = mode.node
+    ? mode.node.unit.title + (mode.kind === "exam" ? " · экзамен" : " · урок " + mode.node.n)
+    : "свободная тренировка";
   $("track-fill").style.width = (idx / queue.length * 100) + "%";
   const st = $("streak");
   st.innerHTML = icon("i-flame") + " " + streak;
@@ -3242,12 +3299,13 @@ function finishAnswer(ok, correctText){
   const v = $("verdict");
   v.hidden = false;
   v.className = "verdict " + (ok ? "ok" : "no");
+  const sheet = window.matchMedia("(max-width:900px)").matches;
   $("vhead").innerHTML = ok
     ? icon("i-check") + " Верно"
     : icon("i-x") + " Неверно — " + esc(correctText || "");
   $("vexpl").textContent = q.e;
   $("next").focus({ preventScroll:true });
-  v.scrollIntoView({ block:"nearest", behavior: reduced() ? "auto" : "smooth" });
+  if (!sheet) v.scrollIntoView({ block:"nearest", behavior: reduced() ? "auto" : "smooth" });
 }
 function nextQ(){
   if (!answered) return;
